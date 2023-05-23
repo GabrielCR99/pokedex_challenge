@@ -1,0 +1,106 @@
+import 'dart:convert';
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/shared/domain/failures/failure.dart';
+import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon_detail.dart';
+import 'package:snapfi_mobile_challenge_pokedex_roveri/src/repositories/pokemon_detail/pokemon_detail_repository.dart';
+import 'package:snapfi_mobile_challenge_pokedex_roveri/src/repositories/pokemon_detail/pokemon_detail_repository_impl.dart';
+
+import '../../core/fixture/fixture_reader.dart';
+import '../../core/rest_client/mock_response.dart';
+import '../../core/rest_client/mock_rest_client.dart';
+import '../../core/rest_client/mock_rest_client_exception.dart';
+
+void main() {
+  late MockRestClient<Map<String, dynamic>> mockRestClient;
+  late MockRestClientException<Map<String, dynamic>> mockException;
+  late PokemonDetailRepository repository;
+
+  setUp(() {
+    mockRestClient = MockRestClient();
+    mockException = MockRestClientException();
+    repository = PokemonDetailRepositoryImpl(restClient: mockRestClient);
+  });
+
+  group('Group test fetchPokemonDetail', () {
+    test('Should return a PokemonDetail', () async {
+      //Arrange
+      final jsonData = FixtureReader.getJsonData(
+        'src/repositories/pokemon_detail/fixtures/fetch_pokemon_detail_success_fixture.json',
+      );
+
+      final data = jsonDecode(jsonData) as Map<String, dynamic>;
+
+      final mockResponse = MockResponse(data: data);
+
+      final expectedPokemonDetail = PokemonDetail.fromJson(data);
+
+      mockRestClient.mockGetSuccess(mockResponse: mockResponse);
+
+      //Act
+      final pokemonDetail = await repository.fetchPokemonDetail('ditto');
+
+      //Assert
+      expect(pokemonDetail, isA<PokemonDetail>());
+      expect(pokemonDetail, expectedPokemonDetail);
+    });
+
+    test('Should throw an Error', () {
+      //Arrange
+      mockException.mockMessage('Error');
+
+      mockRestClient.mockGetException(mockException: mockException);
+
+      //Act
+      final call = repository.fetchPokemonDetail;
+
+      //Assert
+      expect(() => call('ditto'), throwsA(isA<Failure>()));
+    });
+  });
+
+  group('Group test fetchPokemonSpecies', () {
+    test(
+      'Should return a String with the pokemon species description',
+      () async {
+        //Arrange
+        final jsonData = FixtureReader.getJsonData(
+          'src/repositories/pokemon_detail/fixtures/fetch_pokemon_species_success_fixture.json',
+        );
+
+        final data = jsonDecode(jsonData) as Map<String, dynamic>;
+
+        final mockResponse = MockResponse(data: data);
+
+        final expectedPokemonSpecies = (data['flavor_text_entries'] as List)
+            .cast<Map<String, dynamic>>()
+            .where((e) => e['language']['name'] == 'en')
+            .toList()
+            .first['flavor_text'] as String;
+
+        mockRestClient.mockGetSuccess(mockResponse: mockResponse);
+
+        //Act
+        final pokemonSpecies =
+            await repository.fetchPokemonSpecies('bulbasaur');
+
+        //Assert
+        expect(pokemonSpecies, isA<String>());
+        expect(pokemonSpecies, expectedPokemonSpecies);
+      },
+    );
+
+    test('Should throw an Error', () {
+      //Arrange
+      mockException.mockMessage('Error');
+
+      mockRestClient.mockGetException(mockException: mockException);
+
+      //Act
+      final call = repository.fetchPokemonSpecies;
+
+      //Assert
+      expect(() => call('bulbasaur'), throwsA(isA<Failure>()));
+    });
+  });
+}
