@@ -5,6 +5,7 @@ import '../../../core/shared/domain/failures/failure.dart';
 import '../../../models/pokemon.dart';
 import '../../../services/pokemon/pokemon_service.dart';
 import '../helpers/pokemon_helper.dart';
+
 part 'pokemon_state.dart';
 
 final class PokemonController extends Cubit<PokemonState> {

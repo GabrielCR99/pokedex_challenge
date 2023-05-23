@@ -29,7 +29,7 @@ const pokemonDetailList = [
   ),
 ];
 
-class MockPokemonDetailRepository extends Mock
+final class MockPokemonDetailRepository extends Mock
     implements PokemonDetailRepository {
   void mockFetchPokemonDetailSuccess() => when(() => fetchPokemonDetail(any()))
       .thenAnswer((_) async => pokemonDetailList.first);

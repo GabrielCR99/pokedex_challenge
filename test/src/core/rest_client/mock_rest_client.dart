@@ -4,7 +4,8 @@ import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/shared/data/rest
 import 'mock_response.dart';
 import 'mock_rest_client_exception.dart';
 
-class MockRestClient<T extends Object> extends Mock implements DioRestClient {
+final class MockRestClient<T extends Object> extends Mock
+    implements DioRestClient {
   void mockGetSuccess({
     required MockResponse<T> mockResponse,
     Map<String, dynamic>? queryParameters,

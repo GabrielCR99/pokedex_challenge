@@ -8,7 +8,7 @@ import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/logger/app_logge
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/shared/data/rest_client/dio/dio_rest_client.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/shared/data/rest_client/rest_client_exception.dart';
 
-class MockAppLogger extends Mock implements AppLogger {}
+final class MockAppLogger extends Mock implements AppLogger {}
 
 void main() async {
   late DioRestClient restClient;

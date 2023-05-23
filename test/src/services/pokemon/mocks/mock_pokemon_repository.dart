@@ -8,7 +8,7 @@ const pokemonList = [
   Pokemon(name: 'squirtle'),
 ];
 
-class MockPokemonRepository extends Mock implements PokemonRepository {
+final class MockPokemonRepository extends Mock implements PokemonRepository {
   void mockFetchPokemonSuccess() => when(
         () => fetchPokemon(
           limit: any(named: 'limit'),

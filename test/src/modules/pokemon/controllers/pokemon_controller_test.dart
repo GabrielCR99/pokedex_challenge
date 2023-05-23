@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon/controllers/pokemon_controller.dart';
 
-import '../mocks/mock_faq_service.dart';
+import '../mocks/mock_pokemon_service.dart';
 
 void main() {
   const limit = 20;

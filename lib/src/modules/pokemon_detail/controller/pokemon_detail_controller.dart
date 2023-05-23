@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../core/shared/domain/failures/failure.dart';
 import '../../../models/pokemon_detail.dart';
 import '../../../services/pokemon_detail/pokemon_detail_service.dart';

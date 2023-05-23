@@ -1,4 +1,4 @@
-class RestClientResponse<T> {
+interface class RestClientResponse<T> {
   final T? data;
   final int? statusCode;
   final String? statusMessage;

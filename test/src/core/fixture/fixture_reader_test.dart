@@ -6,8 +6,7 @@ import 'fixture_reader.dart';
 
 void main() {
   test('Should return a json', () {
-    final json =
-        FixtureReader.getJsonData('src/core/fixture/fixture_reader_test.json');
+    final json = getJsonData('src/core/fixture/fixture_reader_test.json');
 
     expect(
       json,
@@ -22,7 +21,7 @@ void main() {
     //Arrange
 
     //Act
-    final data = FixtureReader.getData<Map<String, dynamic>>(
+    final data = getData<Map<String, dynamic>>(
       'src/core/fixture/fixture_reader_test.json',
     );
 
@@ -43,9 +42,9 @@ void main() {
     //Arrange
 
     //Act
-    final data = FixtureReader.getData<List<Object?>>(
-      'src/core/fixture/fixture_reader_list_test.json',
-    ).cast<Map<String, dynamic>>();
+    final data =
+        getData<List<Object?>>('src/core/fixture/fixture_reader_list_test.json')
+            .cast<Map<String, dynamic>>();
 
     expect(data, isA<List<Map<String, dynamic>>>());
     expect(data.isNotEmpty, isTrue);
@@ -58,7 +57,7 @@ void main() {
     //Arrange
 
     //Act
-    const call = FixtureReader.getData;
+    const call = getData;
 
     //Assert
     expect(() => call<void>('error.json'), throwsA(isA<FileSystemException>()));

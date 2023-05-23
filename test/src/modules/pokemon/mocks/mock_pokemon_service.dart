@@ -9,7 +9,7 @@ const pokemonList = [
   Pokemon(name: 'squirtle'),
 ];
 
-class MockPokemonService extends Mock implements PokemonService {
+final class MockPokemonService extends Mock implements PokemonService {
   void mockFetchPokemonSuccess() => when(
         () => fetchPokemon(
           limit: any(named: 'limit'),

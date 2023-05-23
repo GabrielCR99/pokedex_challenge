@@ -25,7 +25,7 @@ void main() {
   group('Group test fetchPokemonDetail', () {
     test('Should return a PokemonDetail', () async {
       //Arrange
-      final jsonData = FixtureReader.getJsonData(
+      final jsonData = getJsonData(
         'src/repositories/pokemon_detail/fixtures/fetch_pokemon_detail_success_fixture.json',
       );
 
@@ -64,7 +64,7 @@ void main() {
       'Should return a String with the pokemon species description',
       () async {
         //Arrange
-        final jsonData = FixtureReader.getJsonData(
+        final jsonData = getJsonData(
           'src/repositories/pokemon_detail/fixtures/fetch_pokemon_species_success_fixture.json',
         );
 

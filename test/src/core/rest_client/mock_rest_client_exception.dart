@@ -3,7 +3,7 @@ import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/shared/data/rest
 
 import 'mock_response.dart';
 
-class MockRestClientException<T extends Object> extends Mock
+final class MockRestClientException<T extends Object> extends Mock
     implements RestClientException {
   void mockMessage(String message) =>
       when(() => this.message).thenReturn(message);

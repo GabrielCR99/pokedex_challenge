@@ -28,7 +28,7 @@ void main() {
   group('Group test fetchPokemon', () {
     test('Should return a List<Pokemon>', () async {
       //Arrange
-      final jsonData = FixtureReader.getJsonData(
+      final jsonData = getJsonData(
         'src/repositories/pokemon/fixtures/fetch_pokemon_success_fixture.json',
       );
 
