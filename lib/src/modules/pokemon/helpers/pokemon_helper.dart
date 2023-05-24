@@ -21,5 +21,9 @@ List<Pokemon> filterPokemonBySearchQuery(
   String searchQuery,
 ) =>
     pokemonList
-        .where((pokemon) => pokemon.name.contains(searchQuery.toLowerCase()))
+        .where(
+          (pokemon) =>
+              pokemon.name.contains(searchQuery.toLowerCase()) ||
+              pokemon.sanitizedId.contains(searchQuery),
+        )
         .toList();
