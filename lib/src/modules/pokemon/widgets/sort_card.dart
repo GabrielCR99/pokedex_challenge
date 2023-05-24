@@ -109,13 +109,13 @@ class _SortRadioTile extends StatelessWidget {
   final String label;
   final SortBy value;
   final SortBy groupValue;
-  final ValueChanged<SortBy?>? onChanged;
+  final ValueChanged<SortBy?> onChanged;
 
   const _SortRadioTile({
     required this.label,
     required this.value,
     required this.groupValue,
-    this.onChanged,
+    required this.onChanged,
   });
 
   @override

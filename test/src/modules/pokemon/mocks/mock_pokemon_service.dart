@@ -1,5 +1,5 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/shared/domain/failures/failure.dart';
+import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/exceptions/failure.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/services/pokemon/pokemon_service.dart';
 

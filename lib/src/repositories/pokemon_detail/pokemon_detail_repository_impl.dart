@@ -1,6 +1,6 @@
+import '../../core/exceptions/failure.dart';
 import '../../core/shared/data/rest_client/rest_client.dart';
 import '../../core/shared/data/rest_client/rest_client_exception.dart';
-import '../../core/shared/domain/failures/failure.dart';
 import '../../models/pokemon_detail.dart';
 import 'pokemon_detail_repository.dart';
 

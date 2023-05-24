@@ -4,18 +4,23 @@ import 'package:snapfi_mobile_challenge_pokedex_roveri/src/services/pokemon_deta
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/services/pokemon_detail/pokemon_detail_service_impl.dart';
 
 import '../mocks/mock_pokemon_detail_repository.dart';
+import '../mocks/mock_pokemon_repository.dart';
 
 void main() {
   late MockPokemonDetailRepository mockPokemonDetailRepository;
+  late MockPokemonRepository mockPokemonRepository;
   late PokemonDetailService pokemonDetailService;
 
   setUp(() {
     mockPokemonDetailRepository = MockPokemonDetailRepository();
-    pokemonDetailService =
-        PokemonDetailServiceImpl(repository: mockPokemonDetailRepository);
+    mockPokemonRepository = MockPokemonRepository();
+    pokemonDetailService = PokemonDetailServiceImpl(
+      repository: mockPokemonDetailRepository,
+      pokemonRepository: mockPokemonRepository,
+    );
   });
 
-  group('fetchPokemonDetail', () {
+  group('Group test fetchPokemonDetail', () {
     test('Should return a PokemonDetail', () async {
       // Arrange
       mockPokemonDetailRepository
@@ -31,7 +36,7 @@ void main() {
     });
   });
 
-  group('fetchPokemonSpecies', () {
+  group('Group test fetchPokemonSpecies', () {
     test('Should return a String', () async {
       // Arrange
       mockPokemonDetailRepository.mockFetchPokemonSpeciesSuccess();
@@ -43,6 +48,26 @@ void main() {
       // Assert
       expect(result, isA<String>());
       expect(result, 'species');
+    });
+  });
+
+  group('Group test fetchNextOrPreviousPokemonDetail', () {
+    test('', () async {
+      //Arrange
+      mockPokemonRepository.mockFetchPokemonSuccess();
+      mockPokemonDetailRepository
+        ..mockFetchPokemonDetailSuccess()
+        ..mockFetchPokemonSpeciesSuccess();
+
+      //Act
+      final result =
+          await pokemonDetailService.fetchNextOrPreviousPokemonDetail(
+        offset: 1,
+      );
+
+      //Assert
+      expect(result, isA<PokemonDetail>());
+      expect(result.id, 1);
     });
   });
 }

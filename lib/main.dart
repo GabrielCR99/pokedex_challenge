@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'src/app_module.dart';
 import 'src/app_widget.dart';
+import 'src/core/app_config.dart';
 
-void main() => runApp(AppModule(child: const AppWidget()));
+Future<void> main() async {
+  await configureApp();
+
+  return runApp(AppModule(child: const AppWidget()));
+}

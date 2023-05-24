@@ -1,6 +1,6 @@
+import '../../core/exceptions/failure.dart';
 import '../../core/shared/data/rest_client/rest_client.dart';
 import '../../core/shared/data/rest_client/rest_client_exception.dart';
-import '../../core/shared/domain/failures/failure.dart';
 import '../../models/pokemon.dart';
 import 'pokemon_repository.dart';
 
@@ -21,9 +21,10 @@ final class PokemonRepositoryImpl implements PokemonRepository {
         queryParameters: {'limit': limit, 'offset': offset},
       );
 
-      return (response.data!['results'] as List)
-          .map((e) => Pokemon(name: (e as Map)['name'] as String))
-          .toList();
+      final iterablePokemon = (response.data!['results'] as List)
+          .map((e) => Pokemon(name: (e as Map)['name'] as String));
+
+      return iterablePokemon.toList();
     } on RestClientException catch (e, s) {
       Error.throwWithStackTrace(Failure(message: e.message), s);
     }

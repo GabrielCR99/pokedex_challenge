@@ -3,9 +3,7 @@ part of 'pokemon_detail_controller.dart';
 enum PokemonDetailStatus {
   initial,
   loading,
-  speciesLoading,
   loaded,
-  speciesLoaded,
   error,
 }
 
@@ -30,19 +28,21 @@ final class PokemonDetailState extends Equatable {
             height: 0,
             weight: 0,
             imageUrl: '',
-            moves: [],
+            abilities: [],
             stats: [],
+            types: [],
+            name: '',
           ),
         );
 
   PokemonDetailState copyWith({
-    PokemonDetailStatus? status,
+    required PokemonDetailStatus status,
     String? errorMessage,
     PokemonDetail? pokemonDetail,
     String? speciesDetail,
   }) =>
       PokemonDetailState._(
-        status: status ?? this.status,
+        status: status,
         pokemonDetail: pokemonDetail ?? this.pokemonDetail,
         errorMessage: errorMessage ?? this.errorMessage,
         speciesDetail: speciesDetail ?? this.speciesDetail,

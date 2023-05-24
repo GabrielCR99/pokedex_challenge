@@ -44,6 +44,11 @@ class _PokemonPageState extends State<PokemonPage> {
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      const loader = SvgAssetLoader('assets/images/pokeball.svg');
+      await svg.cache
+          .putIfAbsent(loader.cacheKey(context), () => loader.loadBytes(null));
+    });
   }
 
   @override
@@ -97,7 +102,7 @@ class _PokemonPageState extends State<PokemonPage> {
         child: BlocBuilder<PokemonController, PokemonState>(
           builder: (_, state) => switch (state.status) {
             PokemonStatus.loading =>
-              const Center(child: CircularProgressIndicator()),
+              const Center(child: CircularProgressIndicator.adaptive()),
             PokemonStatus.loaded when state.pokemonList.isEmpty =>
               const Center(child: Text('No pokémon found')),
             PokemonStatus.loaded => PokemonList(

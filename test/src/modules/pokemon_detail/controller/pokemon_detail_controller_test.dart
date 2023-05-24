@@ -54,4 +54,110 @@ void main() {
           verify(() => mockService.fetchPokemonDetail('bulbasaur')).called(1),
     );
   });
+
+  group('Group test fetchNextPokemon', () {
+    blocTest<PokemonDetailController, PokemonDetailState>(
+      'emits [PokemonDetailLoading, PokemonDetailLoaded] when fetchNextPokemon'
+      ' is called successfully',
+      build: () => controller,
+      setUp: () => mockService.mockFetchNextPokemonDetailSuccess(),
+      seed: () => state.copyWith(
+        status: PokemonDetailStatus.loaded,
+        pokemonDetail: pokemonDetailList.first,
+      ),
+      act: (controller) => controller.fetchNextPokemon(),
+      expect: () => <PokemonDetailState>[
+        state.copyWith(
+          status: PokemonDetailStatus.loading,
+          pokemonDetail: pokemonDetailList.first,
+        ),
+        state.copyWith(
+          status: PokemonDetailStatus.loaded,
+          pokemonDetail: pokemonDetailList[1],
+        ),
+      ],
+      verify: (_) =>
+          verify(() => mockService.fetchNextOrPreviousPokemonDetail(offset: 1))
+              .called(1),
+    );
+
+    blocTest<PokemonDetailController, PokemonDetailState>(
+      'emits [PokemonDetailLoading, PokemonDetailError] when fetchNextPokemon'
+      ' is called unsuccessfully',
+      build: () => controller,
+      setUp: () => mockService.mockFetchNextPokemonDetailFailure(),
+      seed: () => state.copyWith(
+        status: PokemonDetailStatus.loaded,
+        pokemonDetail: pokemonDetailList.first,
+      ),
+      act: (controller) => controller.fetchNextPokemon(),
+      expect: () => <PokemonDetailState>[
+        state.copyWith(
+          status: PokemonDetailStatus.loading,
+          pokemonDetail: pokemonDetailList.first,
+        ),
+        state.copyWith(
+          status: PokemonDetailStatus.error,
+          errorMessage: 'Failure',
+          pokemonDetail: pokemonDetailList.first,
+        ),
+      ],
+      verify: (_) =>
+          verify(() => mockService.fetchNextOrPreviousPokemonDetail(offset: 1))
+              .called(1),
+    );
+  });
+
+  group('Group test fetchPreviousPokemon', () {
+    blocTest<PokemonDetailController, PokemonDetailState>(
+      'emits [PokemonDetailLoading, PokemonDetailLoaded] when '
+      'fetchPreviousPokemon is called successfully',
+      build: () => controller,
+      setUp: () => mockService.mockFetchPreviousPokemonDetailSuccess(),
+      seed: () => state.copyWith(
+        status: PokemonDetailStatus.loaded,
+        pokemonDetail: pokemonDetailList[1],
+      ),
+      act: (controller) => controller.fetchPreviousPokemon(),
+      expect: () => <PokemonDetailState>[
+        state.copyWith(
+          status: PokemonDetailStatus.loading,
+          pokemonDetail: pokemonDetailList[1],
+        ),
+        state.copyWith(
+          status: PokemonDetailStatus.loaded,
+          pokemonDetail: pokemonDetailList.first,
+        ),
+      ],
+      verify: (_) =>
+          verify(() => mockService.fetchNextOrPreviousPokemonDetail(offset: 0))
+              .called(1),
+    );
+
+    blocTest<PokemonDetailController, PokemonDetailState>(
+      'emits [PokemonDetailLoading, PokemonDetailError] when '
+      'fetchPreviousPokemon is called unsuccessfully',
+      build: () => controller,
+      setUp: () => mockService.mockFetchPreviousPokemonDetailFailure(),
+      seed: () => state.copyWith(
+        status: PokemonDetailStatus.loaded,
+        pokemonDetail: pokemonDetailList[1],
+      ),
+      act: (controller) => controller.fetchPreviousPokemon(),
+      expect: () => <PokemonDetailState>[
+        state.copyWith(
+          status: PokemonDetailStatus.loading,
+          pokemonDetail: pokemonDetailList[1],
+        ),
+        state.copyWith(
+          status: PokemonDetailStatus.error,
+          errorMessage: 'Failure',
+          pokemonDetail: pokemonDetailList[1],
+        ),
+      ],
+      verify: (_) =>
+          verify(() => mockService.fetchNextOrPreviousPokemonDetail(offset: 0))
+              .called(1),
+    );
+  });
 }

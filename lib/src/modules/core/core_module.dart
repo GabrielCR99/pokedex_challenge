@@ -40,8 +40,10 @@ class CoreModule extends MultiProvider {
               lazy: true,
             ),
             Provider<PokemonDetailService>(
-              create: (context) =>
-                  PokemonDetailServiceImpl(repository: context.read()),
+              create: (context) => PokemonDetailServiceImpl(
+                repository: context.read(),
+                pokemonRepository: context.read(),
+              ),
               lazy: true,
             ),
           ],

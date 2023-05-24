@@ -34,7 +34,7 @@ final class PokemonState extends Equatable {
         );
 
   PokemonState copyWith({
-    PokemonStatus? status,
+    required PokemonStatus status,
     List<Pokemon>? pokemonList,
     bool? hasReachedMax,
     String? searchQuery,
@@ -42,7 +42,7 @@ final class PokemonState extends Equatable {
     String? errorMessage,
   }) =>
       PokemonState._(
-        status: status ?? this.status,
+        status: status,
         pokemonList: pokemonList ?? this.pokemonList,
         hasReachedMax: hasReachedMax ?? this.hasReachedMax,
         searchQuery: searchQuery ?? this.searchQuery,

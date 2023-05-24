@@ -8,12 +8,10 @@ final class PokemonStat extends Equatable {
 
   const PokemonStat({required this.name, required this.value});
 
-  factory PokemonStat.fromMap(Map<String, dynamic> map) {
-    return PokemonStat(
-      name: ((map['stat'] as Map)['name'] ?? '') as String,
-      value: (map['base_stat'] ?? 0) as int,
-    );
-  }
+  factory PokemonStat.fromMap(Map<String, dynamic> map) => PokemonStat(
+        name: ((map['stat'] as Map)['name'] ?? '') as String,
+        value: (map['base_stat'] ?? 0) as int,
+      );
 
   @override
   List<Object?> get props => [name, value];

@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../../core/ui/extensions/navigator_extension.dart';
 import '../../../core/ui/styles/app_colors.dart';
@@ -56,26 +55,10 @@ class PokemonCard extends StatelessWidget {
               top: 10,
               child: Column(
                 children: [
-                  Hero(
-                    tag: pokemon.imageUrl,
-                    child: SizedBox(
-                      width: 70,
-                      height: 70,
-                      child: CachedNetworkImage(
-                        imageUrl: pokemon.imageUrl,
-                        placeholder: (_, __) => Shimmer.fromColors(
-                          baseColor: context.appColors.grayscaleWhite,
-                          highlightColor: context.appColors.grayscaleBackground,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: context.appColors.grayscaleWhite,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(100)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                  SizedBox(
+                    width: 70,
+                    height: 70,
+                    child: CachedNetworkImage(imageUrl: pokemon.imageUrl),
                   ),
                   Text(
                     pokemon.sanitzedName,

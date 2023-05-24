@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/shared/domain/failures/failure.dart';
+import '../../../core/exceptions/failure.dart';
 import '../../../models/pokemon.dart';
 import '../../../services/pokemon/pokemon_service.dart';
 import '../helpers/pokemon_helper.dart';
@@ -54,7 +54,7 @@ final class PokemonController extends Cubit<PokemonState> {
               filterPokemonBySearchQuery(_filteredPokemon, state.searchQuery),
           searchQuery: state.searchQuery,
           sortBy: state.sortBy,
-          hasReachedMax: _filteredPokemon.length >= 1118,
+          hasReachedMax: _filteredPokemon.length >= 1010,
         ),
       );
     } on Failure catch (e) {

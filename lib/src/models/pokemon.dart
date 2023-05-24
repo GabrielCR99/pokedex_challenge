@@ -16,11 +16,12 @@ final class Pokemon extends Equatable {
   String get sanitizedId => '#${id.padLeft(3, '0')}';
   String get sanitzedName => name[0].toUpperCase() + name.substring(1);
 
-  Pokemon copyWith({String? id, String? name, String? imageUrl}) => Pokemon(
-        name: name ?? this.name,
-        id: id ?? this.id,
-        imageUrl: imageUrl ?? this.imageUrl,
-      );
+  Pokemon copyWith({
+    required String id,
+    required String imageUrl,
+    String? name,
+  }) =>
+      Pokemon(name: name ?? this.name, id: id, imageUrl: imageUrl);
 
   factory Pokemon.fromJson(Map<String, dynamic> map) =>
       Pokemon(name: (map['name'] ?? '') as String);

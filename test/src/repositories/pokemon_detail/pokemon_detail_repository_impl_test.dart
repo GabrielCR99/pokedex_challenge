@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/shared/domain/failures/failure.dart';
+import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/exceptions/failure.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon_detail.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/repositories/pokemon_detail/pokemon_detail_repository.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/repositories/pokemon_detail/pokemon_detail_repository_impl.dart';

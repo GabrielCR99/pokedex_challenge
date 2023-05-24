@@ -4,7 +4,7 @@ import 'package:snapfi_mobile_challenge_pokedex_roveri/src/services/pokemon/poke
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/services/pokemon/pokemon_service_impl.dart';
 
 import '../mocks/mock_pokemon_detail_repository.dart';
-import 'mocks/mock_pokemon_repository.dart';
+import '../mocks/mock_pokemon_repository.dart';
 
 void main() {
   const limit = 20;
@@ -23,7 +23,7 @@ void main() {
     );
   });
 
-  group('fetchPokemon', () {
+  group('Group test fetchPokemon', () {
     test('returns a list of Pokemon with details', () async {
       // Arrange
       pokemonRepository.mockFetchPokemonSuccess();

@@ -14,35 +14,41 @@ class PokemonBaseStatsTile extends StatelessWidget {
     return Row(
       children: [
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: pokemonDetail.stats
               .map(
                 (stat) => Text(
                   stat.name.toUpperCase().replaceAll('-', ' '),
-                  style: context.textStyles.textRegular.copyWith(
+                  style: context.textStyles.textBold.copyWith(
                     fontSize: 10,
-                    color: context.appColors.grayscaleDark,
+                    color: pokemonDetail.types.first.color,
                   ),
                 ),
               )
               .toList(),
         ),
-        SizedBox(
-          height: 96,
-          child: VerticalDivider(
-            width: 1,
-            color: context.appColors.grayscaleLight,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: SizedBox(
+            height: 96,
+            child: VerticalDivider(
+              width: 1,
+              color: context.appColors.grayscaleLight,
+            ),
           ),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: pokemonDetail.stats
               .map(
-                (stat) => Text(
-                  stat.value.toString(),
-                  style: context.textStyles.textRegular.copyWith(
-                    fontSize: 10,
-                    color: context.appColors.grayscaleDark,
+                (stat) => Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Text(
+                    stat.value.toString().padLeft(3, '0'),
+                    style: context.textStyles.textRegular.copyWith(
+                      fontSize: 10,
+                      color: context.appColors.grayscaleDark,
+                    ),
                   ),
                 ),
               )
@@ -54,12 +60,15 @@ class PokemonBaseStatsTile extends StatelessWidget {
             children: pokemonDetail.stats
                 .map(
                   (stat) => Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: LinearProgressIndicator(
-                      value: stat.value / 100,
-                      backgroundColor: context.appColors.grayscaleLight,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        context.appColors.primaryColor,
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      child: LinearProgressIndicator(
+                        value: stat.value / 100,
+                        backgroundColor: context.appColors.grayscaleLight,
+                        valueColor: AlwaysStoppedAnimation(
+                          pokemonDetail.types.first.color,
+                        ),
                       ),
                     ),
                   ),
