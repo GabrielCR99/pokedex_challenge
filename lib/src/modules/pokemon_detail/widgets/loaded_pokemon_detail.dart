@@ -206,7 +206,6 @@ class LoadedPokemonDetail extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // PokemonBaseStatsTile(pokemonDetail: pokemonDetail),
                     ],
                   ),
                 ),
