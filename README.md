@@ -22,6 +22,20 @@ Insira um gif ou um link de alguma demonstração
 <p align="center">
       <img src=".github/Pokedex-Challenge-Demo.gif" width="400" alt="Pokédex Challenge Demonstração">
 </p>
+
+## Tecnologias
+
+- [Flutter](https://flutter.dev/)
+- [Dart](https://dart.dev/)
+- [flutter_bloc](https://pub.dev/packages/flutter_bloc)
+- [dio](https://pub.dev/packages/dio)
+- [cached_network_image](https://pub.dev/packages/cached_network_image)
+- [bloc_test](https://pub.dev/packages/bloc_test)
+- [provider](https://pub.dev/packages/provider)
+- [mocktail](https://pub.dev/packages/mocktail)
+- [flutter_svg](https://pub.dev/packages/flutter_svg)
+- [logger](https://pub.dev/packages/logger)
+
 ## Como usar
 
 Para poder executar esse projeto em seu emulador/dispositivo físico, rode
