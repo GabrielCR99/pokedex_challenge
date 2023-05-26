@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -7,12 +9,14 @@ import '../../../core/ui/styles/text_styles.dart';
 class PokemonAttributeInfo extends StatelessWidget {
   final String name;
   final String assetName;
+  final String postFix;
   final double value;
   final bool rotate;
 
   const PokemonAttributeInfo({
     required this.name,
     required this.assetName,
+    required this.postFix,
     required this.value,
     this.rotate = false,
     super.key,
@@ -26,7 +30,7 @@ class PokemonAttributeInfo extends StatelessWidget {
         Row(
           children: [
             Transform.rotate(
-              angle: rotate ? 3.14 / 2 : 0,
+              angle: rotate ? pi / 2 : 0,
               child: SvgPicture.asset(
                 'assets/images/icons/$assetName.svg',
                 width: 16,
@@ -35,7 +39,7 @@ class PokemonAttributeInfo extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             Text(
-              value.toStringAsFixed(1).replaceAll('.', ','),
+              '${value.toStringAsFixed(1).replaceAll('.', ',')} $postFix',
               style: context.textStyles.textRegular.copyWith(
                 fontSize: 10,
                 color: context.appColors.grayscaleDark,

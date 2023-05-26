@@ -15,10 +15,8 @@ final class PokemonDetailModule extends MultiProvider {
                   PokemonDetailController(service: context.read()),
             ),
           ],
-          child: Builder(
-            builder: (context) => PokemonDetailPage(
-              pokemon: ModalRoute.of(context)!.settings.arguments! as Pokemon,
-            ),
+          builder: (context, _) => PokemonDetailPage(
+            pokemon: ModalRoute.of(context)!.settings.arguments! as Pokemon,
           ),
         );
 }

@@ -17,14 +17,13 @@ class PokemonDetailPage extends StatefulWidget {
 }
 
 class _PokemonDetailPageState extends State<PokemonDetailPage> {
-  PokemonDetailController get _controller =>
-      context.read<PokemonDetailController>();
-
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => _controller.fetchPokemonDetail(widget.pokemon.name),
+    Future(
+      () => context
+          .read<PokemonDetailController>()
+          .fetchPokemonDetail(widget.pokemon.name),
     );
   }
 

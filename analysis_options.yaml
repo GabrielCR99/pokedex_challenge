@@ -98,7 +98,9 @@ linter:
     - flutter_style_todos
     - hash_and_equals
     - implicit_call_tearoffs
+    - implicit_reopen
     - implementation_imports
+    - invalid_case_patterns
     - iterable_contains_unrelated_type
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
@@ -178,8 +180,10 @@ linter:
     - throw_in_finally
     - tighten_type_of_initializing_formals
     - type_init_formals
+    - type_literal_in_constant_pattern
     - unnecessary_await_in_return
     - unnecessary_brace_in_string_interps
+    - unnecessary_breaks
     - unnecessary_const
     - unnecessary_constructor_name
     - unnecessary_getters_setters

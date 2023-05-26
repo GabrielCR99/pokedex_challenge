@@ -47,7 +47,7 @@ class _PokemonPageState extends State<PokemonPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       const loader = SvgAssetLoader('assets/images/pokeball.svg');
       await svg.cache
-          .putIfAbsent(loader.cacheKey(context), () => loader.loadBytes(null));
+          .putIfAbsent(loader.cacheKey(null), () => loader.loadBytes(null));
     });
   }
 

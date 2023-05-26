@@ -18,6 +18,7 @@ class PokemonAttributeTile extends StatelessWidget {
         PokemonAttributeInfo(
           name: 'Weight',
           assetName: 'weight',
+          postFix: 'kg',
           value: pokemonDetail.weight,
         ),
         SizedBox(
@@ -30,6 +31,7 @@ class PokemonAttributeTile extends StatelessWidget {
         PokemonAttributeInfo(
           name: 'Height',
           assetName: 'straighten',
+          postFix: 'm',
           value: pokemonDetail.height,
           rotate: true,
         ),
