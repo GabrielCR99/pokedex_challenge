@@ -1,7 +1,7 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon_detail.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/services/pokemon_detail/pokemon_detail_service.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/services/pokemon_detail/pokemon_detail_service_impl.dart';
+import 'package:test/test.dart';
 
 import '../mocks/mock_pokemon_detail_repository.dart';
 import '../mocks/mock_pokemon_repository.dart';

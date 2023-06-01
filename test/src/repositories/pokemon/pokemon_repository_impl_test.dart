@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:flutter_test/flutter_test.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/exceptions/failure.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/repositories/pokemon/pokemon_repository.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/repositories/pokemon/pokemon_repository_impl.dart';
+import 'package:test/test.dart';
 
 import '../../core/fixture/fixture_reader.dart';
 import '../../core/rest_client/mock_response.dart';

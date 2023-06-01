@@ -17,7 +17,7 @@ class PokemonPage extends StatefulWidget {
 }
 
 class _PokemonPageState extends State<PokemonPage> {
-  PokemonController get _controller => context.read<PokemonController>();
+  late final PokemonController _controller;
 
   final _searchEC = TextEditingController();
   final _scrollController = ScrollController();
@@ -43,6 +43,7 @@ class _PokemonPageState extends State<PokemonPage> {
   @override
   void initState() {
     super.initState();
+    _controller = context.read<PokemonController>();
     _scrollController.addListener(_scrollListener);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       const loader = SvgAssetLoader('assets/images/pokeball.svg');

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 extension SizeExtension on BuildContext {
-  Size get _size => MediaQuery.of(this).size;
+  Size get _size => MediaQuery.sizeOf(this);
 
   double get width => _size.width;
   double get height => _size.height;
