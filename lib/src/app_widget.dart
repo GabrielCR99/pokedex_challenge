@@ -21,9 +21,7 @@ class AppWidget extends StatelessWidget {
         },
         title: 'Pokédex Challenge',
         theme: _lightTheme,
-        darkTheme: _darkTheme,
-        locale: const Locale('en'),
-        supportedLocales: const [Locale('en')],
+        locale: const Locale('en', 'US'),
       ),
     );
   }

@@ -16,5 +16,3 @@ final _lightTheme = ThemeData(
         TextStyles.i.textBold.copyWith(fontSize: 16, color: Colors.black),
   ),
 );
-
-final _darkTheme = ThemeData(useMaterial3: true, colorScheme: _darkColorScheme);

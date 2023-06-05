@@ -13,10 +13,20 @@ class LoadingPokemonDetail extends StatefulWidget {
 
 class _LoadingPokemonDetailState extends State<LoadingPokemonDetail>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller =
-      AnimationController(duration: const Duration(seconds: 1), vsync: this)
-        ..repeat(reverse: true)
-        ..forward();
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this)
+          ..forward()
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              _controller.repeat();
+            }
+          });
+  }
 
   @override
   Widget build(BuildContext context) {
