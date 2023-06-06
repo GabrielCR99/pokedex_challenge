@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,7 +47,7 @@ class _PokemonPageState extends State<PokemonPage> {
     super.initState();
     _controller = context.read<PokemonController>();
     _scrollController.addListener(_scrollListener);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    scheduleMicrotask(() async {
       const loader = SvgAssetLoader('assets/images/pokeball.svg');
       await svg.cache
           .putIfAbsent(loader.cacheKey(null), () => loader.loadBytes(null));

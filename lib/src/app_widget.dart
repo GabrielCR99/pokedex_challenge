@@ -17,7 +17,7 @@ class AppWidget extends StatelessWidget {
       child: MaterialApp(
         routes: {
           '/': (_) => PokemonModule(),
-          '/pokemon': (_) => PokemonDetailModule(),
+          '/pokemon': (_) => const PokemonDetailModule(),
         },
         title: 'Pokédex Challenge',
         theme: _lightTheme,

@@ -7,25 +7,10 @@ import 'widgets/loaded_pokemon_detail.dart';
 import 'widgets/loading_pokemon_detail.dart';
 import 'widgets/pokemon_detail_error.dart';
 
-class PokemonDetailPage extends StatefulWidget {
+class PokemonDetailPage extends StatelessWidget {
   final Pokemon pokemon;
 
   const PokemonDetailPage({required this.pokemon, super.key});
-
-  @override
-  State<PokemonDetailPage> createState() => _PokemonDetailPageState();
-}
-
-class _PokemonDetailPageState extends State<PokemonDetailPage> {
-  @override
-  void initState() {
-    super.initState();
-    Future(
-      () => context
-          .read<PokemonDetailController>()
-          .fetchPokemonDetail(widget.pokemon.name),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +20,7 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
         PokemonDetailStatus.error =>
           PokemonDetailError(errorMessage: state.errorMessage),
         PokemonDetailStatus.loaded => LoadedPokemonDetail(
-            pokemon: widget.pokemon,
+            pokemon: pokemon,
             pokemonDetail: state.pokemonDetail,
           ),
         _ => const SizedBox.shrink()

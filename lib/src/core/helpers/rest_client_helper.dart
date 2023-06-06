@@ -8,14 +8,14 @@ const _connectionError =
     ' e tentar novamente.';
 const _unexpectedError = 'Ocorreu um erro inesperado';
 
-RestClientException getRestClientException(DioError dioError) {
+RestClientException getRestClientException(DioException dioError) {
   try {
     final response = dioError.response;
     final statusCode = response?.statusCode;
     final statusMessage = response?.statusMessage;
     final data = response?.data as Map<String, dynamic>?;
 
-    if (dioError.type != DioErrorType.unknown) {
+    if (dioError.type != DioExceptionType.unknown) {
       return RestClientException(
         message: _connectionError,
         response: RestClientResponse(

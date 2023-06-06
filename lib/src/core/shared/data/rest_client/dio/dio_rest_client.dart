@@ -52,7 +52,7 @@ interface class DioRestClient implements RestClient {
       );
 
       return _dioResponseConverter<T>(response);
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       return Error.throwWithStackTrace(getRestClientException(e), s);
     }
   }

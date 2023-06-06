@@ -45,7 +45,7 @@ void main() async {
       test(
         'should return a RestClientResponse with error',
         () {
-          final dioError = DioError(
+          final dioException = DioException(
             requestOptions: RequestOptions(path: '/users'),
             response: Response<Map<String, dynamic>>(
               data: const {'error': 'Internal Server Error'},
@@ -53,12 +53,13 @@ void main() async {
               statusCode: HttpStatus.internalServerError,
               statusMessage: 'Not Found',
             ),
-            type: DioErrorType.badResponse,
+            type: DioExceptionType.badResponse,
           );
 
           adapter.onGet(
             '/users',
-            (server) => server.throws(HttpStatus.internalServerError, dioError),
+            (server) =>
+                server.throws(HttpStatus.internalServerError, dioException),
           );
 
           expect(

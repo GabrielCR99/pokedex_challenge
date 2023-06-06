@@ -60,10 +60,10 @@ final class RestClientLogInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     if (error) {
       _logger
-        ..append('*** DioError ***')
+        ..append('*** DioException ***')
         ..append('uri: ${err.requestOptions.uri}')
         ..append('$err');
 
