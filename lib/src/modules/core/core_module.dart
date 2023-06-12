@@ -13,7 +13,7 @@ import '../../services/pokemon/pokemon_service_impl.dart';
 import '../../services/pokemon_detail/pokemon_detail_service.dart';
 import '../../services/pokemon_detail/pokemon_detail_service_impl.dart';
 
-class CoreModule extends MultiProvider {
+final class CoreModule extends MultiProvider {
   CoreModule({super.key})
       : super(
           providers: [

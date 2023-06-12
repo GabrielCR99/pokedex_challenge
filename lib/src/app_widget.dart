@@ -7,7 +7,7 @@ import 'modules/pokemon_detail/pokemon_detail_module.dart';
 part 'core/ui/themes/theme.dart';
 part 'core/ui/themes/theme.g.dart';
 
-class AppWidget extends StatelessWidget {
+final class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
 
   @override
