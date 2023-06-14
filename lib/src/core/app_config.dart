@@ -4,14 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-Future<void> configureApp() async {
+Future<void> configureApp() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await _cacheAllSvgImages();
-
-  await SystemChrome.setPreferredOrientations(
-    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
-  );
+  return _cacheAllSvgImages();
 }
 
 Future<void> _cacheAllSvgImages() async {

@@ -8,12 +8,12 @@ import '../controllers/pokemon_controller.dart';
 import '../helpers/pokemon_helper.dart';
 
 class SortCard extends StatelessWidget {
-  final PokemonController controller;
-
-  const SortCard({required this.controller, super.key});
+  const SortCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.read<PokemonController>();
+
     return Material(
       type: MaterialType.card,
       elevation: 4,

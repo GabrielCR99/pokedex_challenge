@@ -80,7 +80,7 @@ class _PokemonPageState extends State<PokemonPage> {
               children: [
                 Expanded(child: SearchTextField(controller: _searchEC)),
                 const SizedBox(width: 16),
-                SortCard(controller: _controller),
+                const SortCard(),
               ],
             ),
           ),
