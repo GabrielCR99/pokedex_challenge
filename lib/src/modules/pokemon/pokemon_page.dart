@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../core/ui/styles/app_colors.dart';
 import '../../core/ui/styles/text_styles.dart';
+import '../../core/ui/widgets/spinning_pokeball_animation.dart';
 import 'controllers/pokemon_controller.dart';
 import 'widgets/pokemon_list.dart';
 import 'widgets/search_text_field.dart';
@@ -98,7 +99,7 @@ class _PokemonPageState extends State<PokemonPage> {
         child: BlocBuilder<PokemonController, PokemonState>(
           builder: (_, state) => switch (state.status) {
             PokemonStatus.loading =>
-              const Center(child: CircularProgressIndicator.adaptive()),
+              const Center(child: SpinningPokeballAnimation()),
             PokemonStatus.loaded when state.pokemonList.isEmpty =>
               const Center(child: Text('No pokémon found')),
             PokemonStatus.loaded => PokemonList(
