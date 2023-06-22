@@ -5,16 +5,37 @@ import '../../../core/ui/styles/text_styles.dart';
 
 class PokemonDetailError extends StatelessWidget {
   final String? errorMessage;
+  final VoidCallback onRetry;
 
-  const PokemonDetailError({this.errorMessage, super.key});
+  const PokemonDetailError({
+    required this.onRetry,
+    this.errorMessage,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        errorMessage ?? 'Internal error',
-        style: context.textStyles.textBold
-            .copyWith(color: context.appColors.grayscaleDark),
+    return Material(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              errorMessage ?? 'Internal error',
+              style: context.textStyles.textBold
+                  .copyWith(color: context.appColors.grayscaleDark),
+            ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: onRetry,
+              child: Text(
+                'Retry',
+                style: context.textStyles.textBold
+                    .copyWith(color: context.appColors.primaryColor),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

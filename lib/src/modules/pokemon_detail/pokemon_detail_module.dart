@@ -15,7 +15,7 @@ class PokemonDetailModule extends StatelessWidget {
     return BlocProvider(
       create: (_) => PokemonDetailController(service: context.read())
         ..fetchPokemonDetail(pokemon.name),
-      child: PokemonDetailPage(pokemon: pokemon),
+      child: const PokemonDetailPage(),
     );
   }
 }

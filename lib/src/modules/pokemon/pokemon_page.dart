@@ -18,8 +18,6 @@ class PokemonPage extends StatefulWidget {
 }
 
 class _PokemonPageState extends State<PokemonPage> {
-  late final PokemonController _controller;
-
   final _searchEC = TextEditingController();
   final _scrollController = ScrollController();
 
@@ -37,14 +35,13 @@ class _PokemonPageState extends State<PokemonPage> {
 
   void _scrollListener() {
     if (hasReachedEndScroll) {
-      _controller.fetchMorePokemon();
+      context.read<PokemonController>().fetchMorePokemon();
     }
   }
 
   @override
   void initState() {
     super.initState();
-    _controller = context.read<PokemonController>();
     _scrollController.addListener(_scrollListener);
   }
 
