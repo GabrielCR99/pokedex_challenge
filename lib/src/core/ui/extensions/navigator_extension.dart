@@ -7,7 +7,7 @@ extension NavigatorExtension on BuildContext {
 
   Future<T?> pushNamed<T extends Object?>(
     String routeName, {
-    Object? arguments,
+    required Object arguments,
   }) =>
       _navigator.pushNamed<T>(routeName, arguments: arguments);
 }

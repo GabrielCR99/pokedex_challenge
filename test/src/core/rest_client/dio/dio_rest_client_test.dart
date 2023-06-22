@@ -66,7 +66,7 @@ void main() async {
             () => restClient.get<Map<String, dynamic>>('/users'),
             throwsA(
               isA<RestClientException>().having(
-                (e) => e.response!.data,
+                (e) => e.response.data,
                 'response.data',
                 const {'error': 'Internal Server Error'},
               ),
@@ -76,7 +76,7 @@ void main() async {
             () => restClient.get<Map<String, dynamic>>('/users'),
             throwsA(
               isA<RestClientException>().having(
-                (e) => e.response!.statusCode,
+                (e) => e.response.statusCode,
                 'response.statusCode',
                 HttpStatus.internalServerError,
               ),
@@ -86,7 +86,7 @@ void main() async {
             () => restClient.get<Map<String, dynamic>>('/users'),
             throwsA(
               isA<RestClientException>().having(
-                (e) => e.response!.statusMessage,
+                (e) => e.response.statusMessage,
                 'response.statusMessage',
                 'Not Found',
               ),

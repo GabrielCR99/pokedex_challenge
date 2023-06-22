@@ -21,11 +21,11 @@ final class AppLoggerImpl implements AppLogger {
       _logger.d(message, error, stackTrace);
 
   @override
-  void error(Object? message, [Object? error, StackTrace? stackTrace]) =>
+  void error(Object message, [Object? error, StackTrace? stackTrace]) =>
       _logger.e(message, error, stackTrace);
 
   @override
-  void info(Object? message, [Object? error, StackTrace? stackTrace]) =>
+  void info(Object message, [Object? error, StackTrace? stackTrace]) =>
       _logger.i(message, error, stackTrace);
 
   @override
