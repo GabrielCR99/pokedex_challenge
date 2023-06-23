@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/ui/extensions/navigator_extension.dart';
+import '../../../core/ui/extensions/screen_size_extension.dart';
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
 import '../../../models/pokemon_detail.dart';
@@ -20,11 +21,15 @@ class PokemonDetailAppbar extends StatelessWidget {
       child: AppBar(
         leading: IconButton(
           onPressed: context.pop,
-          icon: SvgPicture.asset(
-            'assets/images/icons/arrow_back.svg',
-            colorFilter: ColorFilter.mode(
-              context.appColors.grayscaleWhite,
-              BlendMode.srcIn,
+          icon: SizedBox(
+            width: 32.w,
+            height: 32.h,
+            child: SvgPicture.asset(
+              'assets/images/icons/arrow_back.svg',
+              colorFilter: ColorFilter.mode(
+                context.appColors.grayscaleWhite,
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ),
@@ -32,7 +37,7 @@ class PokemonDetailAppbar extends StatelessWidget {
         title: Text(
           pokemon.sanitzedName,
           style: context.textStyles.textBold.copyWith(
-            fontSize: 24,
+            fontSize: 24.sp,
             color: context.appColors.grayscaleWhite,
           ),
         ),
@@ -42,7 +47,7 @@ class PokemonDetailAppbar extends StatelessWidget {
             child: Text(
               pokemon.sanitizedId,
               style: context.textStyles.textBold.copyWith(
-                fontSize: 12,
+                fontSize: 12.sp,
                 color: context.appColors.grayscaleWhite,
               ),
             ),

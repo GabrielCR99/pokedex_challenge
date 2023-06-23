@@ -23,10 +23,8 @@ class PokemonDetailPage extends StatelessWidget {
                 .fetchPokemonDetail(pokemon.name),
             errorMessage: state.errorMessage,
           ),
-        PokemonDetailStatus.loaded => LoadedPokemonDetail(
-            pokemon: pokemon,
-            pokemonDetail: state.pokemonDetail,
-          ),
+        PokemonDetailStatus.loaded =>
+          LoadedPokemonDetail(pokemonDetail: state.pokemonDetail),
         _ => const SizedBox.shrink()
       },
     );

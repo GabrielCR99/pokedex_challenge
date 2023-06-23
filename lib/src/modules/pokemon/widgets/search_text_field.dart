@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../core/ui/extensions/screen_size_extension.dart';
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
 import '../controllers/pokemon_controller.dart';
@@ -31,7 +32,7 @@ class SearchTextField extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           hintText: 'Search',
-          hintStyle: context.textStyles.textRegular.copyWith(fontSize: 10),
+          hintStyle: context.textStyles.textRegular.copyWith(fontSize: 10.sp),
           prefixIcon: SvgPicture.asset(
             'assets/images/icons/search.svg',
             width: 16,

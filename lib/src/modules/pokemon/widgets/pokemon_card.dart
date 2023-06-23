@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/ui/extensions/navigator_extension.dart';
+import '../../../core/ui/extensions/screen_size_extension.dart';
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
 import '../../../models/pokemon.dart';
@@ -32,7 +33,8 @@ class PokemonCard extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: Text(
                   pokemon.sanitizedId,
-                  style: context.textStyles.textRegular.copyWith(fontSize: 8),
+                  style:
+                      context.textStyles.textRegular.copyWith(fontSize: 8.sp),
                 ),
               ),
             ),
@@ -63,7 +65,7 @@ class PokemonCard extends StatelessWidget {
                   Text(
                     pokemon.sanitzedName,
                     style: context.textStyles.textRegular.copyWith(
-                      fontSize: 10,
+                      fontSize: 10.sp,
                       color: context.appColors.grayscaleDark,
                     ),
                   ),

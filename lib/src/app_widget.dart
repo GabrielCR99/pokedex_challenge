@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/ui/styles/text_styles.dart';
 import 'modules/pokemon/pokemon_module.dart';
@@ -12,17 +13,20 @@ final class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: MaterialApp(
-        routes: {
-          '/': (_) => PokemonModule(),
-          '/pokemon': (_) => const PokemonDetailModule(),
-        },
-        title: 'Pokédex Challenge',
-        theme: _lightTheme,
-        locale: const Locale('en', 'US'),
+    return ScreenUtilInit(
+      builder: (_, __) => GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: MaterialApp(
+          routes: {
+            '/': (_) => PokemonModule(),
+            '/pokemon': (_) => const PokemonDetailModule(),
+          },
+          title: 'Pokédex Challenge',
+          theme: _lightTheme,
+          locale: const Locale('en', 'US'),
+        ),
       ),
+      designSize: const Size(360, 640),
     );
   }
 }

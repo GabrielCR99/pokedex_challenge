@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../core/ui/extensions/screen_size_extension.dart';
 import '../../core/ui/styles/app_colors.dart';
 import '../../core/ui/styles/text_styles.dart';
 import '../../core/ui/widgets/spinning_pokeball_animation.dart';
@@ -19,31 +20,6 @@ class PokemonPage extends StatefulWidget {
 
 class _PokemonPageState extends State<PokemonPage> {
   final _searchEC = TextEditingController();
-  final _scrollController = ScrollController();
-
-  bool get hasReachedEndScroll {
-    if (!_scrollController.hasClients) {
-      return false;
-    }
-
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.offset;
-    final isScrollOutOfRange = _scrollController.position.outOfRange;
-
-    return currentScroll >= maxScroll && !isScrollOutOfRange;
-  }
-
-  void _scrollListener() {
-    if (hasReachedEndScroll) {
-      context.read<PokemonController>().fetchMorePokemon();
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(_scrollListener);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +29,8 @@ class _PokemonPageState extends State<PokemonPage> {
           children: [
             SvgPicture.asset(
               'assets/images/icons/pokeball.svg',
-              width: 24,
-              height: 24,
+              width: 24.w,
+              height: 24.h,
               colorFilter: ColorFilter.mode(
                 context.appColors.grayscaleWhite,
                 BlendMode.srcIn,
@@ -64,7 +40,7 @@ class _PokemonPageState extends State<PokemonPage> {
             Text(
               'Pokédex',
               style: context.textStyles.textBold.copyWith(
-                fontSize: 24,
+                fontSize: 24.sp,
                 color: context.appColors.grayscaleWhite,
               ),
             ),
@@ -85,6 +61,7 @@ class _PokemonPageState extends State<PokemonPage> {
         ),
         elevation: 0,
         shadowColor: context.appColors.primaryColor,
+        surfaceTintColor: context.appColors.grayscaleWhite,
         backgroundColor: context.appColors.primaryColor,
       ),
       body: Container(
@@ -99,10 +76,7 @@ class _PokemonPageState extends State<PokemonPage> {
               const Center(child: SpinningPokeballAnimation()),
             PokemonStatus.loaded when state.pokemonList.isEmpty =>
               const Center(child: Text('No pokémon found')),
-            PokemonStatus.loaded => PokemonList(
-                scrollController: _scrollController,
-                pokemonList: state.pokemonList,
-              ),
+            PokemonStatus.loaded => PokemonList(pokemonList: state.pokemonList),
             PokemonStatus.error =>
               Center(child: Text(state.errorMessage ?? 'Internal error')),
             _ => const SizedBox.shrink()
@@ -117,9 +91,6 @@ class _PokemonPageState extends State<PokemonPage> {
   @override
   void dispose() {
     _searchEC.dispose();
-    _scrollController
-      ..removeListener(_scrollListener)
-      ..dispose();
     super.dispose();
   }
 }
