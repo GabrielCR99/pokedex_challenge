@@ -6,7 +6,7 @@ import '../controllers/pokemon_controller.dart';
 import 'pokemon_card.dart';
 
 class PokemonList extends StatefulWidget {
-  final List<Pokemon> pokemonList;
+  final Iterable<Pokemon> pokemonList;
 
   const PokemonList({required this.pokemonList, super.key});
 
@@ -54,7 +54,7 @@ class _PokemonListState extends State<PokemonList> {
         mainAxisExtent: 104,
       ),
       itemBuilder: (_, index) =>
-          PokemonCard(pokemon: widget.pokemonList[index]),
+          PokemonCard(pokemon: widget.pokemonList.elementAt(index)),
       itemCount: widget.pokemonList.length,
     );
   }

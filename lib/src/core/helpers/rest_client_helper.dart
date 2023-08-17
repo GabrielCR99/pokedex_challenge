@@ -8,10 +8,8 @@ const _connectionError =
     ' e tentar novamente.';
 
 RestClientException getRestClientException(DioException dioError) {
-  final response = dioError.response;
-  final statusCode = response?.statusCode;
-  final statusMessage = response?.statusMessage;
-  final data = response?.data as Map<String, dynamic>?;
+  final Response(:statusCode, :statusMessage, :data) =
+      dioError.response ?? Response(requestOptions: RequestOptions());
 
   if (dioError.type != DioExceptionType.unknown) {
     return RestClientException(

@@ -8,7 +8,7 @@ import '../helpers/pokemon_helper.dart';
 
 part 'pokemon_state.dart';
 
-final class PokemonController extends Cubit<PokemonState> {
+interface class PokemonController extends Cubit<PokemonState> {
   var _filteredPokemon = const <Pokemon>[];
   static const _limit = 20;
 

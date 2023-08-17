@@ -33,12 +33,12 @@ final class PokemonDetailServiceImpl implements PokemonDetailService {
   }
 
   Future<PokemonDetail> _fetchPokemonDetailFuture(String name) async {
-    final pokemonFuture = await Future.wait([
+    final [pokemonDetail as PokemonDetail, pokemonSpecies as String] =
+        await Future.wait([
       _repository.fetchPokemonDetail(name),
       _repository.fetchPokemonSpecies(name),
     ]);
 
-    return (pokemonFuture.first as PokemonDetail)
-        .copyWith(speciesDescription: pokemonFuture.last as String);
+    return pokemonDetail.copyWith(speciesDescription: pokemonSpecies);
   }
 }

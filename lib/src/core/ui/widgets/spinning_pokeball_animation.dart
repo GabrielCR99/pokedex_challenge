@@ -40,10 +40,8 @@ class _SpinningPokeballAnimationState extends State<SpinningPokeballAnimation>
         'assets/images/pokeball.svg',
         width: 208,
         height: 208,
-        colorFilter: ColorFilter.mode(
-          context.appColors.primaryColor,
-          BlendMode.srcIn,
-        ),
+        colorFilter:
+            ColorFilter.mode(context.appColors.primaryColor, BlendMode.srcIn),
       ),
     );
   }

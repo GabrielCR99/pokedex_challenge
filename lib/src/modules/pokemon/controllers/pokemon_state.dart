@@ -9,7 +9,7 @@ enum PokemonStatus {
 
 final class PokemonState extends Equatable {
   final PokemonStatus status;
-  final List<Pokemon> pokemonList;
+  final Iterable<Pokemon> pokemonList;
   final bool hasReachedMax;
   final String searchQuery;
   final SortBy sortBy;
@@ -35,7 +35,7 @@ final class PokemonState extends Equatable {
 
   PokemonState copyWith({
     required PokemonStatus status,
-    List<Pokemon>? pokemonList,
+    Iterable<Pokemon>? pokemonList,
     bool? hasReachedMax,
     String? searchQuery,
     SortBy? sortBy,

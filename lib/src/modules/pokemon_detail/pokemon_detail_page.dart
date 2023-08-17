@@ -12,19 +12,24 @@ class PokemonDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pokemon = ModalRoute.of(context)!.settings.arguments! as Pokemon;
+    final Pokemon(:name) =
+        ModalRoute.of(context)!.settings.arguments! as Pokemon;
 
     return BlocBuilder<PokemonDetailController, PokemonDetailState>(
       builder: (_, state) => switch (state.status) {
-        PokemonDetailStatus.loading => const LoadingPokemonDetail(),
+        PokemonDetailStatus.loading =>
+          const LoadingPokemonDetail(key: Key('loading_pokemon_detail')),
         PokemonDetailStatus.error => PokemonDetailError(
             onRetry: () => context
                 .read<PokemonDetailController>()
-                .fetchPokemonDetail(pokemon.name),
+                .fetchPokemonDetail(name),
             errorMessage: state.errorMessage,
+            key: const Key('pokemon_detail_error'),
           ),
-        PokemonDetailStatus.loaded =>
-          LoadedPokemonDetail(pokemonDetail: state.pokemonDetail),
+        PokemonDetailStatus.loaded => LoadedPokemonDetail(
+            pokemonDetail: state.pokemonDetail,
+            key: const Key('loaded_pokemon_detail'),
+          ),
         _ => const SizedBox.shrink()
       },
     );

@@ -7,7 +7,7 @@ enum PokemonDetailStatus {
   error,
 }
 
-final class PokemonDetailState extends Equatable {
+interface class PokemonDetailState extends Equatable {
   final PokemonDetailStatus status;
   final String? errorMessage;
   final PokemonDetail pokemonDetail;

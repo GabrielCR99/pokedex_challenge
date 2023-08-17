@@ -16,14 +16,12 @@ List<Pokemon> sortPokemonByType(List<Pokemon> pokemonList, SortBy sortBy) =>
       SortBy.name => pokemonList..sort((a, b) => a.name.compareTo(b.name))
     };
 
-List<Pokemon> filterPokemonBySearchQuery(
+Iterable<Pokemon> filterPokemonBySearchQuery(
   List<Pokemon> pokemonList,
   String searchQuery,
 ) =>
-    pokemonList
-        .where(
-          (pokemon) =>
-              pokemon.name.contains(searchQuery.toLowerCase()) ||
-              pokemon.sanitizedId.contains(searchQuery),
-        )
-        .toList();
+    pokemonList.where(
+      (pokemon) =>
+          pokemon.name.contains(searchQuery.toLowerCase()) ||
+          pokemon.sanitizedId.contains(searchQuery),
+    );

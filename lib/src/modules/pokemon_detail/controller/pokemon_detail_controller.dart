@@ -7,7 +7,7 @@ import '../../../services/pokemon_detail/pokemon_detail_service.dart';
 
 part 'pokemon_detail_state.dart';
 
-final class PokemonDetailController extends Cubit<PokemonDetailState> {
+interface class PokemonDetailController extends Cubit<PokemonDetailState> {
   static const _bulbasaurId = 1;
   final PokemonDetailService _service;
 

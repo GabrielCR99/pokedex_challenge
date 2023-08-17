@@ -76,25 +76,15 @@ class SortCard extends StatelessWidget {
           padding: EdgeInsets.zero,
           icon: BlocSelector<PokemonController, PokemonState, bool>(
             selector: (state) => state.sortBy == SortBy.number,
-            builder: (_, isSortByNumber) => isSortByNumber
-                ? SvgPicture.asset(
-                    'assets/images/icons/tag.svg',
-                    width: 16.w,
-                    height: 16.h,
-                    colorFilter: ColorFilter.mode(
-                      context.appColors.primaryColor,
-                      BlendMode.srcIn,
-                    ),
-                  )
-                : SvgPicture.asset(
-                    'assets/images/icons/text_format.svg',
-                    width: 16.w,
-                    height: 16.h,
-                    colorFilter: ColorFilter.mode(
-                      context.appColors.primaryColor,
-                      BlendMode.srcIn,
-                    ),
-                  ),
+            builder: (_, isSortByNumber) => SvgPicture.asset(
+              'assets/images/icons/${isSortByNumber ? 'tag' : 'text_format'}.svg',
+              width: 16.w,
+              height: 16.h,
+              colorFilter: ColorFilter.mode(
+                context.appColors.primaryColor,
+                BlendMode.srcIn,
+              ),
+            ),
           ),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12)),

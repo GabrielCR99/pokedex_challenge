@@ -27,6 +27,7 @@ class PokemonDetailError extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             TextButton(
+              key: const Key('retry_button'),
               onPressed: onRetry,
               child: Text(
                 'Retry',
