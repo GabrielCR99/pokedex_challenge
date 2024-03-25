@@ -19,13 +19,8 @@ final class LoadedPokemonDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PokemonDetail(
-      :id,
-      :imageUrl,
-      :types,
-      :stats,
-      :sanitizedDescription,
-    ) = pokemonDetail;
+    final PokemonDetail(:id, :imageUrl, :types, :stats, :sanitizedDescription) =
+        pokemonDetail;
 
     return Scaffold(
       body: SafeArea(

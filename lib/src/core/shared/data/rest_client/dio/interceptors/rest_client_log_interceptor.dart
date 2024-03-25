@@ -23,25 +23,33 @@ final class RestClientLogInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    final RequestOptions(
+      :uri,
+      :method,
+      :responseType,
+      :receiveDataWhenStatusError,
+      :headers,
+      :data,
+    ) = options;
     _logger.append('*** Request ***');
 
-    _printKV('uri', options.uri);
+    _printKV('uri', uri);
 
     if (request) {
-      _printKV('method', options.method);
-      _printKV('responseType', '${options.responseType}');
+      _printKV('method', method);
+      _printKV('responseType', '$responseType');
       _printKV(
         'receiveDataWhenStatusError',
-        options.receiveDataWhenStatusError,
+        receiveDataWhenStatusError,
       );
     }
     if (requestHeader) {
       _logger.append('headers:');
-      options.headers.forEach((key, v) => _printKV(' $key', v));
+      headers.forEach((key, v) => _printKV(' $key', v));
     }
     if (requestBody) {
       _logger.append('data:');
-      _printAll(options.data);
+      _printAll(data);
     }
     _logger.closeAppend();
 
@@ -81,12 +89,13 @@ final class RestClientLogInterceptor extends Interceptor {
       msg.toString().split('\n').forEach(_logger.append);
 
   void _printResponse(Response<Object?> response, {bool isError = false}) {
-    _printKV('uri', response.requestOptions.uri);
+    final Response(:requestOptions, :headers, :statusCode) = response;
+    _printKV('uri', requestOptions.uri);
     if (responseHeader) {
-      _printKV('statusCode', response.statusCode);
+      _printKV('statusCode', statusCode);
 
       _logger.append('headers:');
-      response.headers.forEach((key, v) => _printKV(' $key', v.join('\r\n\t')));
+      headers.forEach((key, v) => _printKV(' $key', v.join('\r\n\t')));
     }
     if (responseBody) {
       _logger.append('Response Text:');

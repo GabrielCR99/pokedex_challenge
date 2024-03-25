@@ -5,6 +5,7 @@ import '../../../core/ui/extensions/navigator_extension.dart';
 import '../../../core/ui/extensions/screen_size_extension.dart';
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
+import '../../../core/ui/widgets/spinning_pokeball_animation.dart';
 import '../../../models/pokemon.dart';
 
 final class PokemonCard extends StatelessWidget {
@@ -60,7 +61,10 @@ final class PokemonCard extends StatelessWidget {
                   SizedBox(
                     width: 70,
                     height: 70,
-                    child: CachedNetworkImage(imageUrl: pokemon.imageUrl),
+                    child: CachedNetworkImage(
+                      imageUrl: pokemon.imageUrl,
+                      placeholder: (_, __) => const SpinningPokeballAnimation(),
+                    ),
                   ),
                   Text(
                     pokemon.sanitzedName,

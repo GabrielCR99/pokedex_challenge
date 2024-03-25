@@ -23,8 +23,10 @@ final class Pokemon extends Equatable {
   }) =>
       Pokemon(name: name ?? this.name, id: id, imageUrl: imageUrl);
 
-  factory Pokemon.fromJson(Map<String, dynamic> map) =>
-      Pokemon(name: (map['name'] ?? '') as String);
+  factory Pokemon.fromJson(Map<String, dynamic> map) => switch (map) {
+        {'name': final String name} => Pokemon(name: name),
+        _ => throw FormatException('Invalid Pokemon JSON: $map')
+      };
 
   @override
   List<Object> get props => [id, name, imageUrl];
