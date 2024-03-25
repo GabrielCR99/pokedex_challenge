@@ -7,7 +7,7 @@ import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
 import '../../../models/pokemon.dart';
 
-class PokemonCard extends StatelessWidget {
+final class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;
 
   const PokemonCard({required this.pokemon, super.key});

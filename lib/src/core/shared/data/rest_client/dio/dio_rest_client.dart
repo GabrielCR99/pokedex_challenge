@@ -45,22 +45,19 @@ interface class DioRestClient implements RestClient {
     Map<String, dynamic>? headers,
   }) async {
     try {
-      final response = await _dio.get<T>(
+      final Response<T>(:data, :statusCode, :statusMessage) = await _dio.get<T>(
         path,
         queryParameters: queryParameters,
         options: Options(headers: headers),
       );
 
-      return _dioResponseConverter<T>(response);
+      return RestClientResponse<T>(
+        data: data,
+        statusCode: statusCode,
+        statusMessage: statusMessage,
+      );
     } on DioException catch (e, s) {
       return Error.throwWithStackTrace(getRestClientException(e), s);
     }
   }
-
-  RestClientResponse<T> _dioResponseConverter<T>(Response<T> response) =>
-      RestClientResponse<T>(
-        data: response.data as T,
-        statusCode: response.statusCode,
-        statusMessage: response.statusMessage,
-      );
 }

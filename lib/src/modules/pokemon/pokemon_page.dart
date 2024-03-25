@@ -11,14 +11,14 @@ import 'widgets/pokemon_list.dart';
 import 'widgets/search_text_field.dart';
 import 'widgets/sort_card.dart';
 
-class PokemonPage extends StatefulWidget {
+final class PokemonPage extends StatefulWidget {
   const PokemonPage({super.key});
 
   @override
   State<PokemonPage> createState() => _PokemonPageState();
 }
 
-class _PokemonPageState extends State<PokemonPage> {
+final class _PokemonPageState extends State<PokemonPage> {
   final _searchEC = TextEditingController();
 
   @override

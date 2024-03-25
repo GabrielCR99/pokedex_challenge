@@ -8,7 +8,7 @@ import '../../../core/ui/styles/text_styles.dart';
 import '../controllers/pokemon_controller.dart';
 import '../helpers/pokemon_helper.dart';
 
-class SortCard extends StatelessWidget {
+final class SortCard extends StatelessWidget {
   const SortCard({super.key});
 
   @override
@@ -107,7 +107,7 @@ class SortCard extends StatelessWidget {
   }
 }
 
-class _SortRadioTile extends StatelessWidget {
+final class _SortRadioTile extends StatelessWidget {
   final String label;
   final SortBy value;
   final SortBy groupValue;

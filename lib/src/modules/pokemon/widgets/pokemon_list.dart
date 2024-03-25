@@ -5,7 +5,7 @@ import '../../../models/pokemon.dart';
 import '../controllers/pokemon_controller.dart';
 import 'pokemon_card.dart';
 
-class PokemonList extends StatefulWidget {
+final class PokemonList extends StatefulWidget {
   final List<Pokemon> pokemonList;
 
   const PokemonList({required this.pokemonList, super.key});
@@ -14,7 +14,7 @@ class PokemonList extends StatefulWidget {
   State<PokemonList> createState() => _PokemonListState();
 }
 
-class _PokemonListState extends State<PokemonList> {
+final class _PokemonListState extends State<PokemonList> {
   final _scrollController = ScrollController();
 
   bool get hasReachedEndScroll {

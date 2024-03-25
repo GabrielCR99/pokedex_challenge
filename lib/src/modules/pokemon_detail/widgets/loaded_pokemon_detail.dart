@@ -12,13 +12,21 @@ import 'pokemon_attribute_tile.dart';
 import 'pokemon_detail_appbar.dart';
 import 'pokemon_type_chip.dart';
 
-class LoadedPokemonDetail extends StatelessWidget {
+final class LoadedPokemonDetail extends StatelessWidget {
   final PokemonDetail pokemonDetail;
 
   const LoadedPokemonDetail({required this.pokemonDetail, super.key});
 
   @override
   Widget build(BuildContext context) {
+    final PokemonDetail(
+      :id,
+      :imageUrl,
+      :types,
+      :stats,
+      :sanitizedDescription,
+    ) = pokemonDetail;
+
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -61,7 +69,7 @@ class LoadedPokemonDetail extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if (pokemonDetail.id == 1)
+                        if (id == 1)
                           SizedBox(width: 24.w)
                         else
                           IconButton(
@@ -79,7 +87,7 @@ class LoadedPokemonDetail extends StatelessWidget {
                             ),
                           ),
                         CachedNetworkImage(
-                          imageUrl: pokemonDetail.imageUrl,
+                          imageUrl: imageUrl,
                           width: 200.w,
                           height: 200.h,
                         ),
@@ -99,25 +107,25 @@ class LoadedPokemonDetail extends StatelessWidget {
                         ),
                       ],
                     ),
-                    if (pokemonDetail.types.length > 1)
+                    if (types.length > 1)
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           PokemonTypeChip(
-                            type: pokemonDetail.types.first.capitalizedName,
-                            color: pokemonDetail.types.first.color,
+                            type: types.first.capitalizedName,
+                            color: types.first.color,
                           ),
                           const SizedBox(width: 10),
                           PokemonTypeChip(
-                            type: pokemonDetail.types.last.capitalizedName,
-                            color: pokemonDetail.types.last.color,
+                            type: types.last.capitalizedName,
+                            color: types.last.color,
                           ),
                         ],
                       )
                     else
                       PokemonTypeChip(
-                        type: pokemonDetail.types.first.capitalizedName,
-                        color: pokemonDetail.types.first.color,
+                        type: types.first.capitalizedName,
+                        color: types.first.color,
                       ),
                     const SizedBox(height: 16),
                     Expanded(
@@ -127,7 +135,7 @@ class LoadedPokemonDetail extends StatelessWidget {
                             'About',
                             style: context.textStyles.textBold.copyWith(
                               fontSize: 14.sp,
-                              color: pokemonDetail.types.first.color,
+                              color: types.first.color,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -138,7 +146,7 @@ class LoadedPokemonDetail extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 32),
                               child: Text(
-                                pokemonDetail.sanitizedDescription,
+                                sanitizedDescription,
                                 style: context.textStyles.textRegular.copyWith(
                                   fontSize: 10.sp,
                                   color: context.appColors.grayscaleDark,
@@ -151,12 +159,12 @@ class LoadedPokemonDetail extends StatelessWidget {
                             'Base stats',
                             style: context.textStyles.textBold.copyWith(
                               fontSize: 14.sp,
-                              color: pokemonDetail.types.first.color,
+                              color: types.first.color,
                             ),
                             textAlign: TextAlign.center,
                           ),
                           const SizedBox(height: 16),
-                          ...pokemonDetail.stats.map(
+                          ...stats.map(
                             (stat) => Padding(
                               padding: const EdgeInsets.only(bottom: 8),
                               child: Row(
@@ -170,7 +178,7 @@ class LoadedPokemonDetail extends StatelessWidget {
                                       style:
                                           context.textStyles.textBold.copyWith(
                                         fontSize: 10,
-                                        color: pokemonDetail.types.first.color,
+                                        color: types.first.color,
                                       ),
                                       textAlign: TextAlign.end,
                                     ),
@@ -202,7 +210,7 @@ class LoadedPokemonDetail extends StatelessWidget {
                                         value: stat.value / 100,
                                         backgroundColor:
                                             context.appColors.grayscaleLight,
-                                        color: pokemonDetail.types.first.color,
+                                        color: types.first.color,
                                       ),
                                     ),
                                   ),
@@ -221,7 +229,7 @@ class LoadedPokemonDetail extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: pokemonDetail.types.first.color,
+      backgroundColor: types.first.color,
     );
   }
 }

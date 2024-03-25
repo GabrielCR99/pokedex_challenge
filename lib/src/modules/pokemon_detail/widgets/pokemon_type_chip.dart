@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
 
-class PokemonTypeChip extends StatelessWidget {
+final class PokemonTypeChip extends StatelessWidget {
   final String type;
   final Color color;
 

@@ -5,7 +5,7 @@ import '../../models/pokemon.dart';
 import 'controller/pokemon_detail_controller.dart';
 import 'pokemon_detail_page.dart';
 
-class PokemonDetailModule extends StatelessWidget {
+final class PokemonDetailModule extends StatelessWidget {
   const PokemonDetailModule({super.key});
 
   @override

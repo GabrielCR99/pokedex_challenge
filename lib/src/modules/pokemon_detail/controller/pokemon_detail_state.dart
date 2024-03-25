@@ -4,7 +4,7 @@ enum PokemonDetailStatus {
   initial,
   loading,
   loaded,
-  error,
+  error;
 }
 
 final class PokemonDetailState extends Equatable {

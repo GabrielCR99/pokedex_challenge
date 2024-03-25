@@ -4,7 +4,7 @@ import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
 import '../../../core/ui/widgets/spinning_pokeball_animation.dart';
 
-class LoadingPokemonDetail extends StatelessWidget {
+final class LoadingPokemonDetail extends StatelessWidget {
   const LoadingPokemonDetail({super.key});
 
   @override

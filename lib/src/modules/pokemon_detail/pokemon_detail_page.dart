@@ -7,7 +7,7 @@ import 'widgets/loaded_pokemon_detail.dart';
 import 'widgets/loading_pokemon_detail.dart';
 import 'widgets/pokemon_detail_error.dart';
 
-class PokemonDetailPage extends StatelessWidget {
+final class PokemonDetailPage extends StatelessWidget {
   const PokemonDetailPage({super.key});
 
   @override

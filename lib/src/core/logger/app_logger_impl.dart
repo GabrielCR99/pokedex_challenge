@@ -18,19 +18,19 @@ final class AppLoggerImpl implements AppLogger {
 
   @override
   void debug(Object? message, [Object? error, StackTrace? stackTrace]) =>
-      _logger.d(message, error, stackTrace);
+      _logger.d(message, error: error, stackTrace: stackTrace);
 
   @override
   void error(Object message, [Object? error, StackTrace? stackTrace]) =>
-      _logger.e(message, error, stackTrace);
+      _logger.e(message, error: error, stackTrace: stackTrace);
 
   @override
   void info(Object message, [Object? error, StackTrace? stackTrace]) =>
-      _logger.i(message, error, stackTrace);
+      _logger.i(message, error: error, stackTrace: stackTrace);
 
   @override
   void warning(Object? message, [Object? error, StackTrace? stackTrace]) =>
-      _logger.w(message, error, stackTrace);
+      _logger.w(message, error: error, stackTrace: stackTrace);
 
   @override
   void append(Object? message) => _messages.add(message! as String);

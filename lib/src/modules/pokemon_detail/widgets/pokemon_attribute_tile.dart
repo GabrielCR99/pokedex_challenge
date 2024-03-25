@@ -5,13 +5,15 @@ import '../../../core/ui/styles/text_styles.dart';
 import '../../../models/pokemon_detail.dart';
 import 'pokemon_attribute_info.dart';
 
-class PokemonAttributeTile extends StatelessWidget {
+final class PokemonAttributeTile extends StatelessWidget {
   final PokemonDetail pokemonDetail;
 
   const PokemonAttributeTile({required this.pokemonDetail, super.key});
 
   @override
   Widget build(BuildContext context) {
+    final PokemonDetail(:weight, :height, :abilities) = pokemonDetail;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -19,7 +21,7 @@ class PokemonAttributeTile extends StatelessWidget {
           name: 'Weight',
           assetName: 'weight',
           postFix: 'kg',
-          value: pokemonDetail.weight,
+          value: weight,
         ),
         SizedBox(
           height: 48,
@@ -32,7 +34,7 @@ class PokemonAttributeTile extends StatelessWidget {
           name: 'Height',
           assetName: 'straighten',
           postFix: 'm',
-          value: pokemonDetail.height,
+          value: height,
           rotate: true,
         ),
         SizedBox(
@@ -47,7 +49,7 @@ class PokemonAttributeTile extends StatelessWidget {
           children: [
             Center(
               child: Text(
-                pokemonDetail.abilities.join('\n').split('-').join(' '),
+                abilities.join('\n').split('-').join(' '),
                 style: context.textStyles.textRegular.copyWith(
                   fontSize: 10,
                   color: context.appColors.grayscaleDark,

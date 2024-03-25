@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
 
-class PokemonAttributeInfo extends StatelessWidget {
+final class PokemonAttributeInfo extends StatelessWidget {
   final String name;
   final String assetName;
   final String postFix;

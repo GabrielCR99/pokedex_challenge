@@ -13,10 +13,10 @@ final class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: (_, __) => GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: MaterialApp(
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: ScreenUtilInit(
+        builder: (_, __) => MaterialApp(
           routes: {
             '/': (_) => PokemonModule(),
             '/pokemon': (_) => const PokemonDetailModule(),
@@ -25,8 +25,8 @@ final class AppWidget extends StatelessWidget {
           theme: _lightTheme,
           locale: const Locale('en', 'US'),
         ),
+        designSize: const Size(360, 640),
       ),
-      designSize: const Size(360, 640),
     );
   }
 }

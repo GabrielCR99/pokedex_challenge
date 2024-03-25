@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
 
-class PokemonDetailError extends StatelessWidget {
+final class PokemonDetailError extends StatelessWidget {
   final String? errorMessage;
   final VoidCallback onRetry;
 

@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../styles/app_colors.dart';
 
-class SpinningPokeballAnimation extends StatefulWidget {
+final class SpinningPokeballAnimation extends StatefulWidget {
   const SpinningPokeballAnimation({super.key});
 
   @override
@@ -11,7 +13,8 @@ class SpinningPokeballAnimation extends StatefulWidget {
       _SpinningPokeballAnimationState();
 }
 
-class _SpinningPokeballAnimationState extends State<SpinningPokeballAnimation>
+final class _SpinningPokeballAnimationState
+    extends State<SpinningPokeballAnimation>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
@@ -33,7 +36,7 @@ class _SpinningPokeballAnimationState extends State<SpinningPokeballAnimation>
     return AnimatedBuilder(
       animation: _controller,
       builder: (_, child) => Transform.rotate(
-        angle: _controller.value * 2 * 3.14,
+        angle: _controller.value * 2 * pi,
         child: child,
       ),
       child: SvgPicture.asset(

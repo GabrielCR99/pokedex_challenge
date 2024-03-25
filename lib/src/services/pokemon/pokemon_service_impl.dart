@@ -1,4 +1,5 @@
 import '../../models/pokemon.dart';
+import '../../models/pokemon_detail.dart';
 import '../../repositories/pokemon/pokemon_repository.dart';
 import '../../repositories/pokemon_detail/pokemon_detail_repository.dart';
 import 'pokemon_service.dart';
@@ -24,13 +25,10 @@ final class PokemonServiceImpl implements PokemonService {
     return Future.wait(
       pokemonList.map(
         (pokemon) async {
-          final pokemonDetail =
+          final PokemonDetail(:imageUrl, :id) =
               await _pokemonDetailRepository.fetchPokemonDetail(pokemon.name);
 
-          return pokemon.copyWith(
-            imageUrl: pokemonDetail.imageUrl,
-            id: pokemonDetail.id.toString(),
-          );
+          return pokemon.copyWith(imageUrl: imageUrl, id: '$id');
         },
       ),
     );

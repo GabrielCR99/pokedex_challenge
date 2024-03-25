@@ -1,3 +1,4 @@
+import '../../models/pokemon.dart';
 import '../../models/pokemon_detail.dart';
 import '../../repositories/pokemon/pokemon_repository.dart';
 import '../../repositories/pokemon_detail/pokemon_detail_repository.dart';
@@ -25,20 +26,19 @@ final class PokemonDetailServiceImpl implements PokemonDetailService {
   Future<PokemonDetail> fetchNextOrPreviousPokemonDetail({
     required int offset,
   }) async {
-    final pokemon =
+    final List(first: Pokemon(:name)) =
         await _pokemonRepository.fetchPokemon(limit: 1, offset: offset);
-    final pokemonName = pokemon.first.name;
 
-    return _fetchPokemonDetailFuture(pokemonName);
+    return _fetchPokemonDetailFuture(name);
   }
 
   Future<PokemonDetail> _fetchPokemonDetailFuture(String name) async {
-    final pokemonFuture = await Future.wait([
+    final [pokemonDetail as PokemonDetail, speciesDescription as String] =
+        await Future.wait([
       _repository.fetchPokemonDetail(name),
       _repository.fetchPokemonSpecies(name),
     ]);
 
-    return (pokemonFuture.first as PokemonDetail)
-        .copyWith(speciesDescription: pokemonFuture.last as String);
+    return pokemonDetail.copyWith(speciesDescription: speciesDescription);
   }
 }

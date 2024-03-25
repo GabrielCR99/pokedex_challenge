@@ -7,7 +7,7 @@ import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
 import '../controllers/pokemon_controller.dart';
 
-class SearchTextField extends StatelessWidget {
+final class SearchTextField extends StatelessWidget {
   final TextEditingController controller;
 
   const SearchTextField({required this.controller, super.key});
