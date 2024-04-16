@@ -46,6 +46,8 @@ void main() {
     state = const PokemonDetailState.initial();
   });
 
+  tearDown(() => mockController.close());
+
   testWidgets('pokemon detail page ...', (tester) async {
     when(() => mockController.state)
         .thenReturn(state.copyWith(status: PokemonDetailStatus.loading));
@@ -61,8 +63,8 @@ void main() {
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider(
-              create: (_) => mockController..fetchPokemonDetail(pokemon.name),
+            BlocProvider.value(
+              value: mockController..fetchPokemonDetail(pokemon.name),
             ),
           ],
           child: MaterialApp(
@@ -96,8 +98,8 @@ void main() {
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider(
-              create: (_) => mockController..fetchPokemonDetail(pokemon.name),
+            BlocProvider.value(
+              value: mockController..fetchPokemonDetail(pokemon.name),
             ),
           ],
           child: MaterialApp(
@@ -134,8 +136,8 @@ void main() {
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider(
-              create: (_) => mockController..fetchPokemonDetail(pokemon.name),
+            BlocProvider.value(
+              value: mockController..fetchPokemonDetail(pokemon.name),
             ),
           ],
           child: MaterialApp(
@@ -169,8 +171,8 @@ void main() {
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider(
-              create: (_) => mockController..fetchPokemonDetail(pokemon.name),
+            BlocProvider.value(
+              value: mockController..fetchPokemonDetail(pokemon.name),
             ),
           ],
           child: MaterialApp(

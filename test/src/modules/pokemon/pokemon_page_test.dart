@@ -72,6 +72,8 @@ void main() {
     state = const PokemonState.initial();
   });
 
+  tearDown(() => mockController.close());
+
   testWidgets('pokemon page loading test', (tester) async {
     when(() => mockController.state)
         .thenReturn(state.copyWith(status: PokemonStatus.loading));
@@ -81,15 +83,12 @@ void main() {
       ScreenUtilInit(
         builder: (_, __) => MultiProvider(
           providers: [
-            Provider<AppLogger>(
-              create: (_) => AppLoggerImpl(),
-              lazy: false,
-            ),
+            Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
             Provider<RestClient>(
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider(create: (_) => mockController..fetchPokemon()),
+            BlocProvider.value(value: mockController..fetchPokemon()),
           ],
           child: const MaterialApp(home: PokemonPage()),
         ),
@@ -111,15 +110,12 @@ void main() {
       ScreenUtilInit(
         builder: (_, __) => MultiProvider(
           providers: [
-            Provider<AppLogger>(
-              create: (_) => AppLoggerImpl(),
-              lazy: false,
-            ),
+            Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
             Provider<RestClient>(
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider(create: (_) => mockController..fetchPokemon()),
+            BlocProvider.value(value: mockController..fetchPokemon()),
           ],
           child: const MaterialApp(home: PokemonPage()),
         ),
@@ -147,15 +143,12 @@ void main() {
         ScreenUtilInit(
           builder: (_, __) => MultiProvider(
             providers: [
-              Provider<AppLogger>(
-                create: (_) => AppLoggerImpl(),
-                lazy: false,
-              ),
+              Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
               Provider<RestClient>(
                 create: (context) => DioRestClient(logger: context.read()),
                 lazy: false,
               ),
-              BlocProvider(create: (_) => mockController..fetchPokemon()),
+              BlocProvider.value(value: mockController..fetchPokemon()),
             ],
             child: const MaterialApp(home: PokemonPage()),
           ),
@@ -184,15 +177,12 @@ void main() {
         ScreenUtilInit(
           builder: (_, __) => MultiProvider(
             providers: [
-              Provider<AppLogger>(
-                create: (_) => AppLoggerImpl(),
-                lazy: false,
-              ),
+              Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
               Provider<RestClient>(
                 create: (context) => DioRestClient(logger: context.read()),
                 lazy: false,
               ),
-              BlocProvider(create: (_) => mockController..fetchPokemon()),
+              BlocProvider.value(value: mockController..fetchPokemon()),
             ],
             child: const MaterialApp(home: PokemonPage()),
           ),
