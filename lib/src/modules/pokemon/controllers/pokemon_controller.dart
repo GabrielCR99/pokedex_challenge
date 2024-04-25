@@ -25,9 +25,11 @@ interface class PokemonController extends Cubit<PokemonState> {
       final result = await _service.fetchPokemon(offset: 0, limit: _limit);
       _filteredPokemon = result;
 
-      emit(state.copyWith(status: PokemonStatus.loaded, pokemonList: result));
+      return emit(
+        state.copyWith(status: PokemonStatus.loaded, pokemonList: result),
+      );
     } on Failure catch (e) {
-      emit(
+      return emit(
         state.copyWith(status: PokemonStatus.error, errorMessage: e.message),
       );
     }
@@ -47,7 +49,7 @@ interface class PokemonController extends Cubit<PokemonState> {
       );
       _filteredPokemon = [..._filteredPokemon, ...result];
 
-      emit(
+      return emit(
         state.copyWith(
           status: PokemonStatus.loaded,
           pokemonList:
@@ -58,7 +60,7 @@ interface class PokemonController extends Cubit<PokemonState> {
         ),
       );
     } on Failure catch (e) {
-      emit(
+      return emit(
         state.copyWith(status: PokemonStatus.error, errorMessage: e.message),
       );
     }
@@ -74,17 +76,15 @@ interface class PokemonController extends Cubit<PokemonState> {
         ),
       );
 
-  void sortPokemon(SortBy sortBy) {
-    _filteredPokemon = sortPokemonByType(_filteredPokemon, sortBy);
-
-    emit(
-      state.copyWith(
-        status: PokemonStatus.loaded,
-        pokemonList:
-            filterPokemonBySearchQuery(_filteredPokemon, state.searchQuery),
-        searchQuery: state.searchQuery,
-        sortBy: sortBy,
-      ),
-    );
-  }
+  void sortPokemon(SortBy sortBy) => emit(
+        state.copyWith(
+          status: PokemonStatus.loaded,
+          pokemonList: filterPokemonBySearchQuery(
+            _filteredPokemon = sortPokemonByType(_filteredPokemon, sortBy),
+            state.searchQuery,
+          ),
+          searchQuery: state.searchQuery,
+          sortBy: sortBy,
+        ),
+      );
 }

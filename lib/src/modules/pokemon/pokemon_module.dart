@@ -4,10 +4,9 @@ import 'controllers/pokemon_controller.dart';
 import 'pokemon_page.dart';
 
 final class PokemonModule extends BlocProvider<PokemonController> {
-  PokemonModule({super.key})
+  PokemonModule({super.key, super.child = const PokemonPage()})
       : super(
           create: (context) =>
               PokemonController(service: context.read())..fetchPokemon(),
-          child: const PokemonPage(),
         );
 }

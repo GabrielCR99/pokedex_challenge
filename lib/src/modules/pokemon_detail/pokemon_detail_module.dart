@@ -10,11 +10,12 @@ final class PokemonDetailModule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pokemon = ModalRoute.of(context)!.settings.arguments! as Pokemon;
+    final Pokemon(:name) =
+        ModalRoute.of(context)!.settings.arguments! as Pokemon;
 
     return BlocProvider(
       create: (_) => PokemonDetailController(service: context.read())
-        ..fetchPokemonDetail(pokemon.name),
+        ..fetchPokemonDetail(name),
       child: const PokemonDetailPage(),
     );
   }

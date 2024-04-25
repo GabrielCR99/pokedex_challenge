@@ -16,7 +16,7 @@ final class PokemonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed('/pokemon', arguments: pokemon),
+      onTap: () => context.pushNamed<void>('/pokemon', arguments: pokemon),
       child: Card(
         color: context.appColors.grayscaleWhite,
         shadowColor: context.appColors.grayscaleWhite,

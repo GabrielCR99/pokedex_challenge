@@ -21,14 +21,14 @@ interface class PokemonDetailController extends Cubit<PokemonDetailState> {
     try {
       final pokemonDetail = await _service.fetchPokemonDetail(name);
 
-      emit(
+      return emit(
         state.copyWith(
           status: PokemonDetailStatus.loaded,
           pokemonDetail: pokemonDetail,
         ),
       );
     } on Failure catch (e) {
-      emit(
+      return emit(
         state.copyWith(
           status: PokemonDetailStatus.error,
           errorMessage: e.message,
@@ -47,14 +47,14 @@ interface class PokemonDetailController extends Cubit<PokemonDetailState> {
         offset: nextPokemonId,
       );
 
-      emit(
+      return emit(
         state.copyWith(
           status: PokemonDetailStatus.loaded,
           pokemonDetail: pokemonDetail,
         ),
       );
     } on Failure catch (e) {
-      emit(
+      return emit(
         state.copyWith(
           status: PokemonDetailStatus.error,
           errorMessage: e.message,
@@ -77,14 +77,14 @@ interface class PokemonDetailController extends Cubit<PokemonDetailState> {
         offset: nextPokemonId,
       );
 
-      emit(
+      return emit(
         state.copyWith(
           status: PokemonDetailStatus.loaded,
           pokemonDetail: pokemonDetail,
         ),
       );
     } on Failure catch (e) {
-      emit(
+      return emit(
         state.copyWith(
           status: PokemonDetailStatus.error,
           errorMessage: e.message,

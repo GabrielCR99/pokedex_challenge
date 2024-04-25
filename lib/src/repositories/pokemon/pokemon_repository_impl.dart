@@ -1,7 +1,9 @@
+import 'dart:convert';
+import 'dart:isolate';
+
 import '../../core/exceptions/failure.dart';
 import '../../core/shared/data/rest_client/rest_client.dart';
 import '../../core/shared/data/rest_client/rest_client_exception.dart';
-import '../../core/shared/data/rest_client/rest_client_response.dart';
 import '../../models/pokemon.dart';
 import 'pokemon_repository.dart';
 
@@ -16,16 +18,20 @@ final class PokemonRepositoryImpl implements PokemonRepository {
     required int offset,
   }) async {
     try {
-      final RestClientResponse(data: {'results': List<Object?> results}!) =
-          await restClient.get<Map<String, dynamic>>(
+      final response = await restClient.get<String>(
         '/pokemon',
         queryParameters: {'limit': limit, 'offset': offset},
       );
 
-      final iterablePokemon =
-          results.map((e) => Pokemon(name: (e! as Map)['name'] as String));
+      final results = await Isolate.run(
+        () => jsonDecode(response.data!)['results'] as List<Object?>,
+      );
 
-      return iterablePokemon.toList();
+      final iterablePokemon = results
+          .map((e) => Pokemon(name: (e! as Map)['name'] as String))
+          .toList();
+
+      return iterablePokemon;
     } on RestClientException catch (e, s) {
       Error.throwWithStackTrace(Failure(message: e.message), s);
     }
