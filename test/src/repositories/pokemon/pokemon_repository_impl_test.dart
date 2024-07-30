@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:mocktail/mocktail.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/exceptions/failure.dart';
+import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/shared/data/rest_client/rest_client_response.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/repositories/pokemon/pokemon_repository.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/repositories/pokemon/pokemon_repository_impl.dart';
@@ -15,8 +17,8 @@ void main() {
   const limit = 20;
   const offset = 0;
 
-  late MockRestClient<Map<String, dynamic>> mockRestClient;
-  late MockRestClientException<Map<String, dynamic>> mockException;
+  late MockRestClient mockRestClient;
+  late MockRestClientException mockException;
   late PokemonRepository repository;
 
   setUp(() {
@@ -34,14 +36,14 @@ void main() {
 
       final data = jsonDecode(jsonData) as Map<String, dynamic>;
 
-      final mockResponse = MockResponse(data: data);
+      final mockResponse = MockResponse(data: jsonData);
 
-      final expectedPokemon = (data['results'] as List)
+      final expectedPokemon = (data['results'] as List<Object?>)
           .cast<Map<String, dynamic>>()
           .map(Pokemon.fromJson)
           .toList();
 
-      mockRestClient.mockGetSuccess(mockResponse: mockResponse);
+      mockRestClient.mockGetSuccess<String>(mockResponse: mockResponse);
 
       //Act
       final pokemon =
@@ -52,20 +54,18 @@ void main() {
       expect(pokemon, expectedPokemon);
     });
 
-    test('Should throw an Error', () {
+    test('Should throw an Error', () async {
       //Arrange
+      const response = RestClientResponse(data: <String, dynamic>{});
       mockException.mockMessage('Error');
+      mockRestClient.mockGetException<String>(mockException: mockException);
+      when(() => mockException.response).thenReturn(response);
 
-      mockRestClient.mockGetException(
-        mockException: mockException,
-        queryParameters: {'limit': limit, 'offset': offset},
+      //Act & Assert
+      expect(
+        () => repository.fetchPokemon(limit: limit, offset: offset),
+        throwsA(isA<Failure>()),
       );
-
-      //Act
-      final call = repository.fetchPokemon;
-
-      //Assert
-      expect(() => call(limit: limit, offset: offset), throwsA(isA<Failure>()));
     });
   });
 }

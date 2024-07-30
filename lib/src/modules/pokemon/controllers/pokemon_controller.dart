@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../core/exceptions/failure.dart';
 import '../../../models/pokemon.dart';
@@ -8,7 +8,7 @@ import '../helpers/pokemon_helper.dart';
 
 part 'pokemon_state.dart';
 
-interface class PokemonController extends Cubit<PokemonState> {
+interface class PokemonController extends ValueNotifier<PokemonState> {
   var _filteredPokemon = const <Pokemon>[];
   static const _limit = 20;
 
@@ -19,28 +19,31 @@ interface class PokemonController extends Cubit<PokemonState> {
         super(const PokemonState.initial());
 
   Future<void> fetchPokemon() async {
-    emit(state.copyWith(status: PokemonStatus.loading));
+    value = value.copyWith(status: PokemonStatus.loading);
 
     try {
       final result = await _service.fetchPokemon(offset: 0, limit: _limit);
       _filteredPokemon = result;
 
-      return emit(
-        state.copyWith(status: PokemonStatus.loaded, pokemonList: result),
-      );
+      value = value.copyWith(status: PokemonStatus.loaded, pokemonList: result);
+
+      return;
     } on Failure catch (e) {
-      return emit(
-        state.copyWith(status: PokemonStatus.error, errorMessage: e.message),
+      value = value.copyWith(
+        status: PokemonStatus.error,
+        errorMessage: e.message,
       );
+
+      return;
     }
   }
 
   Future<void> fetchMorePokemon() async {
-    if (state.hasReachedMax) {
+    if (value.hasReachedMax) {
       return;
     }
 
-    emit(state.copyWith(status: PokemonStatus.loading, hasReachedMax: false));
+    value = value.copyWith(status: PokemonStatus.loading, hasReachedMax: false);
 
     try {
       final result = await _service.fetchPokemon(
@@ -49,42 +52,40 @@ interface class PokemonController extends Cubit<PokemonState> {
       );
       _filteredPokemon = [..._filteredPokemon, ...result];
 
-      return emit(
-        state.copyWith(
-          status: PokemonStatus.loaded,
-          pokemonList:
-              filterPokemonBySearchQuery(_filteredPokemon, state.searchQuery),
-          searchQuery: state.searchQuery,
-          sortBy: state.sortBy,
-          hasReachedMax: _filteredPokemon.length >= 1010,
-        ),
+      value = value.copyWith(
+        status: PokemonStatus.loaded,
+        pokemonList:
+            filterPokemonBySearchQuery(_filteredPokemon, value.searchQuery),
+        searchQuery: value.searchQuery,
+        sortBy: value.sortBy,
+        hasReachedMax: _filteredPokemon.length >= 1010,
       );
+
+      return;
     } on Failure catch (e) {
-      return emit(
-        state.copyWith(status: PokemonStatus.error, errorMessage: e.message),
+      value = value.copyWith(
+        status: PokemonStatus.error,
+        errorMessage: e.message,
       );
+
+      return;
     }
   }
 
-  void filterPokemon(String searchQuery) => emit(
-        state.copyWith(
-          status: PokemonStatus.loaded,
-          pokemonList:
-              filterPokemonBySearchQuery(_filteredPokemon, searchQuery),
-          searchQuery: searchQuery,
-          sortBy: state.sortBy,
-        ),
+  void filterPokemon(String searchQuery) => value = value.copyWith(
+        status: PokemonStatus.loaded,
+        pokemonList: filterPokemonBySearchQuery(_filteredPokemon, searchQuery),
+        searchQuery: searchQuery,
+        sortBy: value.sortBy,
       );
 
-  void sortPokemon(SortBy sortBy) => emit(
-        state.copyWith(
-          status: PokemonStatus.loaded,
-          pokemonList: filterPokemonBySearchQuery(
-            _filteredPokemon = sortPokemonByType(_filteredPokemon, sortBy),
-            state.searchQuery,
-          ),
-          searchQuery: state.searchQuery,
-          sortBy: sortBy,
+  void sortPokemon(SortBy sortBy) => value = value.copyWith(
+        status: PokemonStatus.loaded,
+        pokemonList: filterPokemonBySearchQuery(
+          _filteredPokemon = sortPokemonByType(_filteredPokemon, sortBy),
+          value.searchQuery,
         ),
+        searchQuery: value.searchQuery,
+        sortBy: sortBy,
       );
 }

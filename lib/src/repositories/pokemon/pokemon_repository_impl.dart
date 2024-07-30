@@ -4,6 +4,7 @@ import 'dart:isolate';
 import '../../core/exceptions/failure.dart';
 import '../../core/shared/data/rest_client/rest_client.dart';
 import '../../core/shared/data/rest_client/rest_client_exception.dart';
+import '../../core/shared/data/rest_client/rest_client_response.dart';
 import '../../models/pokemon.dart';
 import 'pokemon_repository.dart';
 
@@ -18,13 +19,13 @@ final class PokemonRepositoryImpl implements PokemonRepository {
     required int offset,
   }) async {
     try {
-      final response = await restClient.get<String>(
+      final RestClientResponse(:data) = await restClient.get<String>(
         '/pokemon',
         queryParameters: {'limit': limit, 'offset': offset},
       );
 
       final results = await Isolate.run(
-        () => jsonDecode(response.data!)['results'] as List<Object?>,
+        () => jsonDecode(data!)['results'] as List<Object?>,
       );
 
       final iterablePokemon = results

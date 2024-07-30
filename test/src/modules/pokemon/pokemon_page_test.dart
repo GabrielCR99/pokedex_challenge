@@ -1,6 +1,4 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -15,8 +13,7 @@ import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon/contr
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon/pokemon_page.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon/widgets/sort_card.dart';
 
-final class MockPokemonCubit extends MockCubit<PokemonState>
-    implements PokemonController {}
+final class MockPokemonController extends Mock implements PokemonController {}
 
 void main() {
   void ignoreOverflowErrors(
@@ -68,14 +65,14 @@ void main() {
   late PokemonState state;
 
   setUpAll(() {
-    mockController = MockPokemonCubit();
+    mockController = MockPokemonController();
     state = const PokemonState.initial();
   });
 
-  tearDown(() => mockController.close());
+  tearDown(() => mockController.dispose());
 
   testWidgets('pokemon page loading test', (tester) async {
-    when(() => mockController.state)
+    when(() => mockController.value)
         .thenReturn(state.copyWith(status: PokemonStatus.loading));
     when(mockController.fetchPokemon).thenAnswer((_) async => _);
 
@@ -88,9 +85,9 @@ void main() {
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider.value(value: mockController..fetchPokemon()),
+            ChangeNotifierProvider.value(value: mockController..fetchPokemon()),
           ],
-          child: const MaterialApp(home: PokemonPage()),
+          child: MaterialApp(home: PokemonPage(controller: mockController)),
         ),
         designSize: const Size(360, 640),
       ),
@@ -98,7 +95,7 @@ void main() {
   });
 
   testWidgets('pokemon page error test', (tester) async {
-    when(() => mockController.state).thenReturn(
+    when(() => mockController.value).thenReturn(
       state.copyWith(
         status: PokemonStatus.error,
         errorMessage: 'Failure',
@@ -115,9 +112,9 @@ void main() {
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider.value(value: mockController..fetchPokemon()),
+            ChangeNotifierProvider.value(value: mockController..fetchPokemon()),
           ],
-          child: const MaterialApp(home: PokemonPage()),
+          child: MaterialApp(home: PokemonPage(controller: mockController)),
         ),
         designSize: const Size(360, 640),
       ),
@@ -130,7 +127,7 @@ void main() {
   testWidgets('pokemon page loaded test', (tester) async {
     FlutterError.onError = ignoreOverflowErrors;
 
-    when(() => mockController.state).thenReturn(
+    when(() => mockController.value).thenReturn(
       state.copyWith(
         status: PokemonStatus.loaded,
         pokemonList: pokemonList,
@@ -148,9 +145,11 @@ void main() {
                 create: (context) => DioRestClient(logger: context.read()),
                 lazy: false,
               ),
-              BlocProvider.value(value: mockController..fetchPokemon()),
+              ChangeNotifierProvider.value(
+                value: mockController..fetchPokemon(),
+              ),
             ],
-            child: const MaterialApp(home: PokemonPage()),
+            child: MaterialApp(home: PokemonPage(controller: mockController)),
           ),
           designSize: const Size(360, 640),
         ),
@@ -164,7 +163,7 @@ void main() {
   testWidgets('pokemon page SortCard test', (tester) async {
     FlutterError.onError = ignoreOverflowErrors;
 
-    when(() => mockController.state).thenReturn(
+    when(() => mockController.value).thenReturn(
       state.copyWith(
         status: PokemonStatus.loaded,
         pokemonList: pokemonList,
@@ -182,9 +181,11 @@ void main() {
                 create: (context) => DioRestClient(logger: context.read()),
                 lazy: false,
               ),
-              BlocProvider.value(value: mockController..fetchPokemon()),
+              ChangeNotifierProvider.value(
+                value: mockController..fetchPokemon(),
+              ),
             ],
-            child: const MaterialApp(home: PokemonPage()),
+            child: MaterialApp(home: PokemonPage(controller: mockController)),
           ),
           designSize: const Size(360, 640),
         ),

@@ -1,6 +1,4 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -16,7 +14,7 @@ import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon_type.d
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detail/controller/pokemon_detail_controller.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detail/pokemon_detail_page.dart';
 
-final class MockPokemonDetailCubit extends MockCubit<PokemonDetailState>
+final class MockPokemonDetailController extends Mock
     implements PokemonDetailController {}
 
 void main() {
@@ -42,14 +40,14 @@ void main() {
   late PokemonDetailState state;
 
   setUpAll(() {
-    mockController = MockPokemonDetailCubit();
+    mockController = MockPokemonDetailController();
     state = const PokemonDetailState.initial();
   });
 
-  tearDown(() => mockController.close());
+  tearDown(() => mockController.dispose());
 
   testWidgets('pokemon detail page ...', (tester) async {
-    when(() => mockController.state)
+    when(() => mockController.value)
         .thenReturn(state.copyWith(status: PokemonDetailStatus.loading));
     when(() => mockController.fetchPokemonDetail(pokemon.name))
         .thenAnswer((_) async => _);
@@ -63,13 +61,15 @@ void main() {
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider.value(
+            ChangeNotifierProvider.value(
               value: mockController..fetchPokemonDetail(pokemon.name),
             ),
           ],
           child: MaterialApp(
             onGenerateRoute: (_) => MaterialPageRoute(
-              builder: (_) => const PokemonDetailPage(),
+              builder: (context) => PokemonDetailPage(
+                pokemonDetailController: context.read(),
+              ),
               settings: const RouteSettings(arguments: pokemon),
             ),
           ),
@@ -83,7 +83,7 @@ void main() {
   });
 
   testWidgets('pokemon detail page error ...', (tester) async {
-    when(() => mockController.state).thenReturn(
+    when(() => mockController.value).thenReturn(
       state.copyWith(status: PokemonDetailStatus.error, errorMessage: 'error'),
     );
     when(() => mockController.fetchPokemonDetail(pokemon.name))
@@ -98,13 +98,14 @@ void main() {
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider.value(
+            ChangeNotifierProvider.value(
               value: mockController..fetchPokemonDetail(pokemon.name),
             ),
           ],
           child: MaterialApp(
             onGenerateRoute: (_) => MaterialPageRoute(
-              builder: (_) => const PokemonDetailPage(),
+              builder: (context) =>
+                  PokemonDetailPage(pokemonDetailController: context.read()),
               settings: const RouteSettings(arguments: pokemon),
             ),
           ),
@@ -118,7 +119,7 @@ void main() {
   });
 
   testWidgets('pokemon detail page loaded ...', (tester) async {
-    when(() => mockController.state).thenReturn(
+    when(() => mockController.value).thenReturn(
       state.copyWith(
         status: PokemonDetailStatus.loaded,
         pokemonDetail: bulbasaurDetail,
@@ -136,13 +137,14 @@ void main() {
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider.value(
+            ChangeNotifierProvider.value(
               value: mockController..fetchPokemonDetail(pokemon.name),
             ),
           ],
           child: MaterialApp(
             onGenerateRoute: (_) => MaterialPageRoute(
-              builder: (_) => const PokemonDetailPage(),
+              builder: (context) =>
+                  PokemonDetailPage(pokemonDetailController: context.read()),
               settings: const RouteSettings(arguments: pokemon),
             ),
           ),
@@ -156,7 +158,7 @@ void main() {
   });
 
   testWidgets('pokemon detail page try again button', (tester) async {
-    when(() => mockController.state).thenReturn(
+    when(() => mockController.value).thenReturn(
       state.copyWith(status: PokemonDetailStatus.error, errorMessage: 'error'),
     );
     when(() => mockController.fetchPokemonDetail(pokemon.name))
@@ -171,13 +173,14 @@ void main() {
               create: (context) => DioRestClient(logger: context.read()),
               lazy: false,
             ),
-            BlocProvider.value(
+            ChangeNotifierProvider.value(
               value: mockController..fetchPokemonDetail(pokemon.name),
             ),
           ],
           child: MaterialApp(
             onGenerateRoute: (_) => MaterialPageRoute(
-              builder: (_) => const PokemonDetailPage(),
+              builder: (context) =>
+                  PokemonDetailPage(pokemonDetailController: context.read()),
               settings: const RouteSettings(arguments: pokemon),
             ),
           ),

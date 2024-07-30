@@ -1,9 +1,9 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon/controllers/pokemon_controller.dart';
 import 'package:test/test.dart';
 
+import '../../../shared/notifier_test.dart';
 import '../mocks/mock_pokemon_service.dart';
 
 void main() {
@@ -22,93 +22,93 @@ void main() {
   });
 
   group('Group test fetchPokemon', () {
-    blocTest<PokemonController, PokemonState>(
+    notifierTest<PokemonController, PokemonState>(
       'emits [PokemonLoading, PokemonLoaded] when fetchPokemon is called '
       'successfully',
-      build: () => controller,
+      createController: () => controller,
       setUp: () => mockService.mockFetchPokemonSuccess(),
       seed: () => state,
       act: (controller) => controller.fetchPokemon(),
-      expect: () => <PokemonState>[
+      expectedValues: () => <PokemonState>[
         state.copyWith(status: PokemonStatus.loading),
         state.copyWith(
           status: PokemonStatus.loaded,
           pokemonList: pokemonList,
         ),
       ],
-      verify: (_) =>
+      verify: () =>
           verify(() => mockService.fetchPokemon(limit: limit, offset: 0))
               .called(1),
     );
 
-    blocTest<PokemonController, PokemonState>(
+    notifierTest<PokemonController, PokemonState>(
       'emits [PokemonLoading, PokemonError] when fetchPokemon is called '
       'unsuccessfully',
-      build: () => controller,
+      createController: () => controller,
       setUp: () => mockService.mockFetchPokemonFailure(),
       seed: () => state,
       act: (controller) => controller.fetchPokemon(),
-      expect: () => <PokemonState>[
+      expectedValues: () => <PokemonState>[
         state.copyWith(status: PokemonStatus.loading),
         state.copyWith(
           status: PokemonStatus.error,
           errorMessage: 'Failure',
         ),
       ],
-      verify: (_) =>
+      verify: () =>
           verify(() => mockService.fetchPokemon(limit: limit, offset: offset))
               .called(1),
     );
   });
 
   group('Group test fetchMorePokemon', () {
-    blocTest<PokemonController, PokemonState>(
+    notifierTest<PokemonController, PokemonState>(
       'emits [PokemonLoading, PokemonLoaded] when fetchMorePokemon is called '
       'successfully',
-      build: () => controller,
+      createController: () => controller,
       setUp: () => mockService.mockFetchPokemonSuccess(),
       seed: () => state,
       act: (controller) => controller.fetchMorePokemon(),
-      expect: () => <PokemonState>[
+      expectedValues: () => <PokemonState>[
         state.copyWith(status: PokemonStatus.loading),
         state.copyWith(status: PokemonStatus.loaded, pokemonList: pokemonList),
       ],
-      verify: (_) =>
+      verify: () =>
           verify(() => mockService.fetchPokemon(limit: limit, offset: offset))
               .called(1),
     );
 
-    blocTest<PokemonController, PokemonState>(
+    notifierTest<PokemonController, PokemonState>(
       'emits [PokemonLoading, PokemonError] when fetchMorePokemon is called '
       'unsuccessfully',
-      build: () => controller,
+      createController: () => controller,
       setUp: () => mockService.mockFetchPokemonFailure(),
       seed: () => state,
       act: (controller) => controller.fetchMorePokemon(),
-      expect: () => <PokemonState>[
+      expectedValues: () => <PokemonState>[
         state.copyWith(status: PokemonStatus.loading),
         state.copyWith(
           status: PokemonStatus.error,
           errorMessage: 'Failure',
         ),
       ],
-      verify: (_) =>
+      verify: () =>
           verify(() => mockService.fetchPokemon(limit: limit, offset: offset))
               .called(1),
     );
   });
 
   group('Group test filterPokemon', () {
-    blocTest<PokemonController, PokemonState>(
+    notifierTest<PokemonController, PokemonState>(
       'emits [PokemonLoaded] when filterPokemon is called',
-      build: () => controller,
+      createController: () => controller,
       setUp: () => mockService.mockFetchPokemonSuccess(),
       seed: () => state,
       act: (controller) async {
         await controller.fetchPokemon();
         controller.filterPokemon('bulbasaur');
       },
-      expect: () => <PokemonState>[
+      expectedValues: () => <PokemonState>[
         state.copyWith(status: PokemonStatus.loading),
         state.copyWith(
           status: PokemonStatus.loaded,

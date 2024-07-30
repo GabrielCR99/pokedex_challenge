@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/ui/extensions/screen_size_extension.dart';
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
+import '../../../core/ui/widgets/value_listenable_selector.dart';
 import '../controllers/pokemon_controller.dart';
 import '../helpers/pokemon_helper.dart';
 
 final class SortCard extends StatelessWidget {
-  const SortCard({super.key});
+  const SortCard({required this.controller, super.key});
+
+  final PokemonController controller;
 
   @override
   Widget build(BuildContext context) {
-    final controller = context.read<PokemonController>();
-
     return SizedBox(
       width: 32.w,
       height: 32.h,
@@ -50,12 +50,13 @@ final class SortCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         for (final sortBy in SortBy.values)
-                          BlocSelector<PokemonController, PokemonState, SortBy>(
+                          ValueListenableSelector<PokemonState, SortBy?>(
+                            valueListenable: controller,
                             selector: (state) => switch (state.status) {
                               PokemonStatus.loaded => state.sortBy,
-                              _ => SortBy.number,
+                              _ => null,
                             },
-                            builder: (_, state) => _SortRadioTile(
+                            builder: (_, state, __) => _SortRadioTile(
                               label: sortBy.value,
                               value: sortBy,
                               groupValue: state,
@@ -63,7 +64,6 @@ final class SortCard extends StatelessWidget {
                                   ? controller.sortPokemon(value)
                                   : null,
                             ),
-                            bloc: controller,
                           ),
                       ],
                     ),
@@ -74,10 +74,11 @@ final class SortCard extends StatelessWidget {
           ],
           tooltip: 'Sort by',
           padding: EdgeInsets.zero,
-          icon: BlocSelector<PokemonController, PokemonState, bool>(
+          icon: ValueListenableSelector<PokemonState, bool>(
+            valueListenable: controller,
             selector: (state) => state.sortBy == SortBy.number,
-            builder: (_, isSortByNumber) => SvgPicture.asset(
-              'assets/images/icons/${isSortByNumber ? 'tag' : 'text_format'}.svg',
+            builder: (_, sortBy, __) => SvgPicture.asset(
+              'assets/images/icons/${sortBy ? 'tag' : 'text_format'}.svg',
               width: 16.w,
               height: 16.h,
               colorFilter: ColorFilter.mode(
@@ -100,14 +101,14 @@ final class SortCard extends StatelessWidget {
 final class _SortRadioTile extends StatelessWidget {
   final String label;
   final SortBy value;
-  final SortBy groupValue;
+  final SortBy? groupValue;
   final ValueChanged<SortBy?> onChanged;
 
   const _SortRadioTile({
     required this.label,
     required this.value,
-    required this.groupValue,
     required this.onChanged,
+    this.groupValue,
   });
 
   @override

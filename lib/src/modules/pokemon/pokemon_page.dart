@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../core/ui/extensions/screen_size_extension.dart';
@@ -12,7 +11,9 @@ import 'widgets/search_text_field.dart';
 import 'widgets/sort_card.dart';
 
 final class PokemonPage extends StatefulWidget {
-  const PokemonPage({super.key});
+  const PokemonPage({required this.controller, super.key});
+
+  final PokemonController controller;
 
   @override
   State<PokemonPage> createState() => _PokemonPageState();
@@ -52,9 +53,14 @@ final class _PokemonPageState extends State<PokemonPage> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: [
-                Expanded(child: SearchTextField(controller: _searchEC)),
+                Expanded(
+                  child: SearchTextField(
+                    textEditingController: _searchEC,
+                    controller: widget.controller,
+                  ),
+                ),
                 const SizedBox(width: 16),
-                const SortCard(),
+                SortCard(controller: widget.controller),
               ],
             ),
           ),
@@ -70,8 +76,9 @@ final class _PokemonPageState extends State<PokemonPage> {
           borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         margin: const EdgeInsets.only(left: 4, top: 24, right: 4, bottom: 4),
-        child: BlocBuilder<PokemonController, PokemonState>(
-          builder: (_, state) => switch (state.status) {
+        child: ValueListenableBuilder(
+          valueListenable: widget.controller,
+          builder: (_, state, __) => switch (state.status) {
             PokemonStatus.loading => const Center(
                 child:
                     SpinningPokeballAnimation(key: Key('loading_pokemon_list')),
@@ -79,6 +86,7 @@ final class _PokemonPageState extends State<PokemonPage> {
             PokemonStatus.loaded when state.pokemonList.isEmpty =>
               const Center(child: Text('No pokémon found')),
             PokemonStatus.loaded => PokemonList(
+                controller: widget.controller,
                 pokemonList: state.pokemonList,
                 key: const Key('loaded_pokemon_list'),
               ),

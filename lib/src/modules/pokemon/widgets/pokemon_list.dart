@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../models/pokemon.dart';
 import '../controllers/pokemon_controller.dart';
 import 'pokemon_card.dart';
 
 final class PokemonList extends StatefulWidget {
-  final List<Pokemon> pokemonList;
+  const PokemonList({
+    required this.pokemonList,
+    required this.controller,
+    super.key,
+  });
 
-  const PokemonList({required this.pokemonList, super.key});
+  final PokemonController controller;
+  final List<Pokemon> pokemonList;
 
   @override
   State<PokemonList> createState() => _PokemonListState();
@@ -31,7 +35,7 @@ final class _PokemonListState extends State<PokemonList> {
 
   void _scrollListener() {
     if (hasReachedEndScroll) {
-      context.read<PokemonController>().fetchMorePokemon();
+      widget.controller.fetchMorePokemon();
     }
   }
 

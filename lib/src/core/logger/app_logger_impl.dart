@@ -10,7 +10,7 @@ final class AppLoggerImpl implements AppLogger {
       methodCount: 0,
       lineLength: io.stdout.hasTerminal ? io.stdout.terminalColumns : 140,
       printEmojis: false,
-      printTime: true,
+      dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
     ),
   );
 

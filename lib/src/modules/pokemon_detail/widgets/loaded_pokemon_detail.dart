@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/ui/extensions/screen_size_extension.dart';
@@ -13,9 +12,14 @@ import 'pokemon_detail_appbar.dart';
 import 'pokemon_type_chip.dart';
 
 final class LoadedPokemonDetail extends StatelessWidget {
-  final PokemonDetail pokemonDetail;
+  const LoadedPokemonDetail({
+    required this.pokemonDetail,
+    required this.pokemonDetailController,
+    super.key,
+  });
 
-  const LoadedPokemonDetail({required this.pokemonDetail, super.key});
+  final PokemonDetailController pokemonDetailController;
+  final PokemonDetail pokemonDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +72,8 @@ final class LoadedPokemonDetail extends StatelessWidget {
                           SizedBox(width: 24.w)
                         else
                           IconButton(
-                            onPressed: () => context
-                                .read<PokemonDetailController>()
-                                .fetchPreviousPokemon(),
+                            onPressed:
+                                pokemonDetailController.fetchPreviousPokemon,
                             icon: SvgPicture.asset(
                               'assets/images/icons/chevron_left.svg',
                               width: 24.w,
@@ -87,9 +90,7 @@ final class LoadedPokemonDetail extends StatelessWidget {
                           height: 200.h,
                         ),
                         IconButton(
-                          onPressed: () => context
-                              .read<PokemonDetailController>()
-                              .fetchNextPokemon(),
+                          onPressed: pokemonDetailController.fetchNextPokemon,
                           icon: SvgPicture.asset(
                             'assets/images/icons/chevron_right.svg',
                             width: 24.w,

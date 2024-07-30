@@ -1,12 +1,13 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import 'controllers/pokemon_controller.dart';
 import 'pokemon_page.dart';
 
-final class PokemonModule extends BlocProvider<PokemonController> {
-  PokemonModule({super.key, super.child = const PokemonPage()})
+class PokemonModule extends ChangeNotifierProvider<PokemonController> {
+  PokemonModule({super.key})
       : super(
           create: (context) =>
               PokemonController(service: context.read())..fetchPokemon(),
+          builder: (context, _) => PokemonPage(controller: context.read()),
         );
 }

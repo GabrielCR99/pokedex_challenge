@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/ui/extensions/screen_size_extension.dart';
@@ -8,28 +7,31 @@ import '../../../core/ui/styles/text_styles.dart';
 import '../controllers/pokemon_controller.dart';
 
 final class SearchTextField extends StatelessWidget {
-  final TextEditingController controller;
+  const SearchTextField({
+    required this.controller,
+    required this.textEditingController,
+    super.key,
+  });
 
-  const SearchTextField({required this.controller, super.key});
+  final PokemonController controller;
+  final TextEditingController textEditingController;
 
-  static const _defaultBorder = OutlineInputBorder(
-    borderSide: BorderSide.none,
-    borderRadius: BorderRadius.all(Radius.circular(16)),
-  );
-
-  void _clearSearchQuery(PokemonController pokemonController) {
-    controller.clear();
-    pokemonController.filterPokemon('');
+  void _clearSearchQuery() {
+    textEditingController.clear();
+    controller.filterPokemon('');
   }
 
   @override
   Widget build(BuildContext context) {
-    final pokemonController = context.read<PokemonController>();
+    const defaultBorder = OutlineInputBorder(
+      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+    );
 
     return SizedBox(
       height: 32,
       child: TextFormField(
-        controller: controller,
+        controller: textEditingController,
         decoration: InputDecoration(
           hintText: 'Search',
           hintStyle: context.textStyles.textRegular.copyWith(fontSize: 10.sp),
@@ -43,14 +45,11 @@ final class SearchTextField extends StatelessWidget {
               BlendMode.srcIn,
             ),
           ),
-          suffixIcon: BlocSelector<PokemonController, PokemonState, bool>(
-            selector: (state) => switch (state.status) {
-              PokemonStatus.loaded => state.searchQuery.isNotEmpty,
-              _ => false,
-            },
-            builder: (_, hasText) => hasText
+          suffixIcon: ValueListenableBuilder(
+            valueListenable: textEditingController,
+            builder: (_, textValue, __) => textValue.text.isNotEmpty
                 ? IconButton(
-                    onPressed: () => _clearSearchQuery(pokemonController),
+                    onPressed: _clearSearchQuery,
                     icon: Icon(
                       Icons.clear,
                       size: 16,
@@ -61,11 +60,11 @@ final class SearchTextField extends StatelessWidget {
           ),
           filled: true,
           fillColor: context.appColors.grayscaleWhite,
-          focusedBorder: _defaultBorder,
-          enabledBorder: _defaultBorder,
-          border: _defaultBorder,
+          focusedBorder: defaultBorder,
+          enabledBorder: defaultBorder,
+          border: defaultBorder,
         ),
-        onChanged: pokemonController.filterPokemon,
+        onChanged: controller.filterPokemon,
       ),
     );
   }
