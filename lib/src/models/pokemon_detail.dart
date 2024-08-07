@@ -35,26 +35,15 @@ final class PokemonDetail extends Equatable {
       .replaceAll('\f', ' ')
       .replaceAll('\r', ' ');
 
-  PokemonDetail copyWith({
-    required String speciesDescription,
-    int? id,
-    double? height,
-    double? weight,
-    String? imageUrl,
-    List<String>? abilities,
-    List<PokemonStat>? stats,
-    List<PokemonType>? types,
-    String? name,
-  }) =>
-      PokemonDetail(
-        id: id ?? this.id,
-        height: height ?? this.height,
-        weight: weight ?? this.weight,
-        imageUrl: imageUrl ?? this.imageUrl,
-        abilities: abilities ?? this.abilities,
-        stats: stats ?? this.stats,
-        types: types ?? this.types,
-        name: name ?? this.name,
+  PokemonDetail copyWith({required String speciesDescription}) => PokemonDetail(
+        id: id,
+        height: height,
+        weight: weight,
+        imageUrl: imageUrl,
+        abilities: abilities,
+        stats: stats,
+        types: types,
+        name: name,
         speciesDescription: speciesDescription,
       );
 

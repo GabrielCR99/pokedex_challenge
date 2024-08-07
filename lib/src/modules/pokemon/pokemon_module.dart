@@ -8,6 +8,7 @@ class PokemonModule extends ChangeNotifierProvider<PokemonController> {
       : super(
           create: (context) =>
               PokemonController(service: context.read())..fetchPokemon(),
+          lazy: true,
           builder: (context, _) => PokemonPage(controller: context.read()),
         );
 }

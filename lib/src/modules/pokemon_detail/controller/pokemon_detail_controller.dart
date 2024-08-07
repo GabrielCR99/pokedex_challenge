@@ -7,14 +7,15 @@ import '../../../services/pokemon_detail/pokemon_detail_service.dart';
 
 part 'pokemon_detail_state.dart';
 
+const _bulbasaurId = 1;
+
 interface class PokemonDetailController
     extends ValueNotifier<PokemonDetailState> {
-  static const _bulbasaurId = 1;
-  final PokemonDetailService _service;
-
   PokemonDetailController({required PokemonDetailService service})
       : _service = service,
         super(const PokemonDetailState.initial());
+
+  final PokemonDetailService _service;
 
   Future<void> fetchPokemonDetail(String name) async {
     value = value.copyWith(status: PokemonDetailStatus.loading);

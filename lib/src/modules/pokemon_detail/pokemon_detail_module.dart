@@ -16,6 +16,7 @@ final class PokemonDetailModule extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => PokemonDetailController(service: context.read())
         ..fetchPokemonDetail(name),
+      lazy: true,
       builder: (context, _) =>
           PokemonDetailPage(pokemonDetailController: context.read()),
     );

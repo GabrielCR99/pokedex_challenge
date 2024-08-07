@@ -8,15 +8,15 @@ import '../helpers/pokemon_helper.dart';
 
 part 'pokemon_state.dart';
 
+const _limit = 20;
+
 interface class PokemonController extends ValueNotifier<PokemonState> {
-  var _filteredPokemon = const <Pokemon>[];
-  static const _limit = 20;
-
-  final PokemonService _service;
-
   PokemonController({required PokemonService service})
       : _service = service,
         super(const PokemonState.initial());
+
+  final PokemonService _service;
+  var _filteredPokemon = const <Pokemon>[];
 
   Future<void> fetchPokemon() async {
     value = value.copyWith(status: PokemonStatus.loading);
