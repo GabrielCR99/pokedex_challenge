@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/ui/extensions/screen_size_extension.dart';
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
+import '../../../core/ui/widgets/svg_icon.dart';
 import '../../../core/ui/widgets/value_listenable_selector.dart';
 import '../controllers/pokemon_controller.dart';
 import '../helpers/pokemon_helper.dart';
@@ -77,7 +77,7 @@ final class SortCard extends StatelessWidget {
           icon: ValueListenableSelector<PokemonState, bool>(
             valueListenable: controller,
             selector: (state) => state.sortBy == SortBy.number,
-            builder: (_, sortBy, __) => SvgPicture.asset(
+            builder: (_, sortBy, __) => SvgIcon(
               'assets/images/icons/${sortBy ? 'tag' : 'text_format'}.svg',
               width: 16.w,
               height: 16.h,

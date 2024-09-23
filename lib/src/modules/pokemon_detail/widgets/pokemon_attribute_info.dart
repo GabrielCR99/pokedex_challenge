@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
+import '../../../core/ui/widgets/svg_icon.dart';
 
 final class PokemonAttributeInfo extends StatelessWidget {
   final String name;
@@ -31,7 +31,7 @@ final class PokemonAttributeInfo extends StatelessWidget {
           children: [
             Transform.rotate(
               angle: rotate ? pi / 2 : 0,
-              child: SvgPicture.asset(
+              child: SvgIcon(
                 'assets/images/icons/$assetName.svg',
                 width: 16,
                 height: 16,

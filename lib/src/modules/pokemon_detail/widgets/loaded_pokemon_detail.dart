@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../core/ui/extensions/screen_size_extension.dart';
 import '../../../core/ui/styles/app_colors.dart';
+import '../../../core/ui/widgets/svg_icon.dart';
 import '../../../models/pokemon_detail.dart';
 import '../controller/pokemon_detail_controller.dart';
 import 'pokemon_detail_about_tile.dart';
@@ -45,7 +45,7 @@ final class LoadedPokemonDetail extends StatelessWidget {
               padding: const EdgeInsets.only(right: 8),
               child: Align(
                 alignment: Alignment.topRight,
-                child: SvgPicture.asset(
+                child: SvgIcon(
                   'assets/images/pokeball.svg',
                   width: 208.w,
                   height: 208.h,
@@ -72,7 +72,7 @@ final class LoadedPokemonDetail extends StatelessWidget {
                           IconButton(
                             onPressed:
                                 pokemonDetailController.fetchPreviousPokemon,
-                            icon: SvgPicture.asset(
+                            icon: SvgIcon(
                               'assets/images/icons/chevron_left.svg',
                               width: 24.w,
                               height: 24.h,
@@ -89,7 +89,7 @@ final class LoadedPokemonDetail extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: pokemonDetailController.fetchNextPokemon,
-                          icon: SvgPicture.asset(
+                          icon: SvgIcon(
                             'assets/images/icons/chevron_right.svg',
                             width: 24.w,
                             height: 24.h,

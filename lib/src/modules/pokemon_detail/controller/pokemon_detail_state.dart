@@ -9,9 +9,9 @@ enum PokemonDetailStatus {
 
 interface class PokemonDetailState extends Equatable {
   final PokemonDetailStatus status;
-  final String? errorMessage;
   final PokemonDetail pokemonDetail;
   final String? speciesDetail;
+  final String? errorMessage;
 
   const PokemonDetailState._({
     required this.status,
@@ -21,19 +21,10 @@ interface class PokemonDetailState extends Equatable {
   });
 
   const PokemonDetailState.initial()
-      : this._(
-          status: PokemonDetailStatus.initial,
-          pokemonDetail: const PokemonDetail(
-            id: 0,
-            height: 0,
-            weight: 0,
-            imageUrl: '',
-            abilities: [],
-            stats: [],
-            types: [],
-            name: '',
-          ),
-        );
+      : status = PokemonDetailStatus.initial,
+        pokemonDetail = const PokemonDetail.empty(),
+        speciesDetail = null,
+        errorMessage = null;
 
   PokemonDetailState copyWith({
     required PokemonDetailStatus status,

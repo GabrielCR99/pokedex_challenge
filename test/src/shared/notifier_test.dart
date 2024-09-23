@@ -5,6 +5,8 @@ typedef StateBuilder<S> = ValueNotifier<S> Function();
 typedef Act<C> = Future<void> Function(C controller);
 typedef Verify = Future<void> Function();
 
+void main() {}
+
 Future<void> notifierTest<C extends ValueNotifier<S>, S>(
   String description, {
   required C Function() createController,

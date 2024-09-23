@@ -21,6 +21,8 @@ import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/ui/styles/app_co
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/ui/styles/app_styles.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/ui/styles/text_styles.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/ui/widgets/spinning_pokeball_animation.dart';
+import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/ui/widgets/svg_icon.dart';
+import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/ui/widgets/value_listenable_selector.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon_detail.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon_stat.dart';
@@ -41,6 +43,7 @@ import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detai
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detail/widgets/loading_pokemon_detail.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detail/widgets/pokemon_attribute_info.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detail/widgets/pokemon_attribute_tile.dart';
+import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detail/widgets/pokemon_detail_about_tile.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detail/widgets/pokemon_detail_appbar.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detail/widgets/pokemon_detail_error.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detail/widgets/pokemon_type_chip.dart';

@@ -25,13 +25,12 @@ final class PokemonState extends Equatable {
   });
 
   const PokemonState.initial()
-      : this._(
-          status: PokemonStatus.initial,
-          pokemonList: const [],
-          hasReachedMax: false,
-          searchQuery: '',
-          sortBy: SortBy.number,
-        );
+      : status = PokemonStatus.initial,
+        pokemonList = const [],
+        hasReachedMax = false,
+        searchQuery = '',
+        sortBy = SortBy.number,
+        errorMessage = null;
 
   PokemonState copyWith({
     required PokemonStatus status,

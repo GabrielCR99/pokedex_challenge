@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../core/ui/extensions/navigator_extension.dart';
 import '../../../core/ui/extensions/screen_size_extension.dart';
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
+import '../../../core/ui/widgets/svg_icon.dart';
 import '../../../models/pokemon_detail.dart';
 
 final class PokemonDetailAppbar extends StatelessWidget {
@@ -26,7 +26,7 @@ final class PokemonDetailAppbar extends StatelessWidget {
           icon: SizedBox(
             width: 32.w,
             height: 32.h,
-            child: SvgPicture.asset(
+            child: SvgIcon(
               'assets/images/icons/arrow_back.svg',
               colorFilter: ColorFilter.mode(
                 context.appColors.grayscaleWhite,

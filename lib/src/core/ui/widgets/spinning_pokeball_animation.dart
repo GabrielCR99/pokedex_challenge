@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../styles/app_colors.dart';
+import 'svg_icon.dart';
 
 final class SpinningPokeballAnimation extends StatefulWidget {
   const SpinningPokeballAnimation({super.key});
@@ -39,7 +39,7 @@ final class _SpinningPokeballAnimationState
         angle: _controller.value * 2 * pi,
         child: child,
       ),
-      child: SvgPicture.asset(
+      child: SvgIcon(
         'assets/images/pokeball.svg',
         width: 208,
         height: 208,
