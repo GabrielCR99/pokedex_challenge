@@ -6,7 +6,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.3
+  sdk: ^3.5.4
 
 dependencies:
   cached_network_image: ^3.4.1
@@ -15,7 +15,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.9.3
-  flutter_svg: ^2.0.10
+  flutter_svg: ^2.0.12
   logger: ^2.4.0
   provider: ^6.1.2
 

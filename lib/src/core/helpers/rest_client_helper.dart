@@ -3,13 +3,11 @@ import 'package:dio/dio.dart';
 import '../shared/data/rest_client/rest_client_exception.dart';
 import '../shared/data/rest_client/rest_client_response.dart';
 
-const _connectionError =
-    'Não foi possível obter informações da aplicação. Favor verificar a conexão'
-    ' e tentar novamente.';
+const _connectionError = 'Connection error, please try again later.';
 
 RestClientException getRestClientException(DioException dioError) {
   final Response(:data, :statusCode, :statusMessage) =
-      dioError.response! as Response<Map<String, dynamic>>;
+      dioError.response ?? Response(requestOptions: RequestOptions());
 
   if (dioError.type != DioExceptionType.unknown) {
     return RestClientException(
