@@ -57,7 +57,7 @@ void main() {
       when(() => mockException.response).thenReturn(response);
 
       //Act & Assert
-      expectLater(
+      await expectLater(
         () => repository.fetchPokemonDetail('ditto'),
         throwsA(isA<Failure>()),
       );
@@ -105,7 +105,7 @@ void main() {
       when(() => mockException.response).thenReturn(response);
 
       //Act & Assert
-      expectLater(
+      await expectLater(
         () => repository.fetchPokemonSpecies('bulbasaur'),
         throwsA(isA<Failure>()),
       );

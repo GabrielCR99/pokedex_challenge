@@ -62,7 +62,7 @@ void main() {
       when(() => mockException.response).thenReturn(response);
 
       //Act & Assert
-      expectLater(
+      await expectLater(
         () => repository.fetchPokemon(limit: limit, offset: offset),
         throwsA(isA<Failure>()),
       );
