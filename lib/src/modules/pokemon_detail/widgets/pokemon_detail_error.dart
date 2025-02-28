@@ -22,8 +22,9 @@ final class PokemonDetailError extends StatelessWidget {
           children: [
             Text(
               errorMessage ?? 'Internal error',
-              style: context.textStyles.textBold
-                  .copyWith(color: context.appColors.grayscaleDark),
+              style: context.textStyles.textBold.copyWith(
+                color: context.appColors.grayscaleDark,
+              ),
             ),
             const SizedBox(height: 8),
             TextButton(
@@ -31,8 +32,9 @@ final class PokemonDetailError extends StatelessWidget {
               onPressed: onRetry,
               child: Text(
                 'Retry',
-                style: context.textStyles.textBold
-                    .copyWith(color: context.appColors.primaryColor),
+                style: context.textStyles.textBold.copyWith(
+                  color: context.appColors.primaryColor,
+                ),
               ),
             ),
           ],

@@ -11,26 +11,26 @@ final class PokemonServiceImpl implements PokemonService {
   const PokemonServiceImpl({
     required PokemonRepository pokemonRepository,
     required PokemonDetailRepository pokemonDetailRepository,
-  })  : _pokemonRepository = pokemonRepository,
-        _pokemonDetailRepository = pokemonDetailRepository;
+  }) : _pokemonRepository = pokemonRepository,
+       _pokemonDetailRepository = pokemonDetailRepository;
 
   @override
   Future<List<Pokemon>> fetchPokemon({
     required int limit,
     required int offset,
   }) async {
-    final pokemonList =
-        await _pokemonRepository.fetchPokemon(limit: limit, offset: offset);
+    final pokemonList = await _pokemonRepository.fetchPokemon(
+      limit: limit,
+      offset: offset,
+    );
 
     return Future.wait(
-      pokemonList.map(
-        (pokemon) async {
-          final PokemonDetail(:imageUrl, :id) =
-              await _pokemonDetailRepository.fetchPokemonDetail(pokemon.name);
+      pokemonList.map((pokemon) async {
+        final PokemonDetail(:imageUrl, :id) = await _pokemonDetailRepository
+            .fetchPokemonDetail(pokemon.name);
 
-          return pokemon.copyWith(imageUrl: imageUrl, id: '$id');
-        },
-      ),
+        return pokemon.copyWith(imageUrl: imageUrl, id: '$id');
+      }),
     );
   }
 }

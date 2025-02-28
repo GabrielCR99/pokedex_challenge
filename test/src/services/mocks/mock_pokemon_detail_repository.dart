@@ -57,8 +57,9 @@ const pokemonDetailList = [
 
 final class MockPokemonDetailRepository extends Mock
     implements PokemonDetailRepository {
-  void mockFetchPokemonDetailSuccess() => when(() => fetchPokemonDetail(any()))
-      .thenAnswer((_) async => pokemonDetailList.first);
+  void mockFetchPokemonDetailSuccess() => when(
+    () => fetchPokemonDetail(any()),
+  ).thenAnswer((_) async => pokemonDetailList.first);
   void mockFetchPokemonSpeciesSuccess() =>
       when(() => fetchPokemonSpecies(any())).thenAnswer((_) async => 'species');
 }

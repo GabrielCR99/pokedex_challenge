@@ -47,16 +47,18 @@ final class SearchTextField extends StatelessWidget {
           ),
           suffixIcon: ValueListenableBuilder(
             valueListenable: textEditingController,
-            builder: (_, textValue, __) => textValue.text.isNotEmpty
-                ? IconButton(
-                    onPressed: _clearSearchQuery,
-                    icon: Icon(
-                      Icons.clear,
-                      size: 16,
-                      color: context.appColors.primaryColor,
-                    ),
-                  )
-                : const SizedBox.shrink(),
+            builder:
+                (_, textValue, __) =>
+                    textValue.text.isNotEmpty
+                        ? IconButton(
+                          onPressed: _clearSearchQuery,
+                          icon: Icon(
+                            Icons.clear,
+                            size: 16,
+                            color: context.appColors.primaryColor,
+                          ),
+                        )
+                        : const SizedBox.shrink(),
           ),
           filled: true,
           fillColor: context.appColors.grayscaleWhite,

@@ -35,16 +35,17 @@ final class _SpinningPokeballAnimationState
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller,
-      builder: (_, child) => Transform.rotate(
-        angle: _controller.value * 2 * pi,
-        child: child,
-      ),
+      builder:
+          (_, child) =>
+              Transform.rotate(angle: _controller.value * 2 * pi, child: child),
       child: SvgIcon(
         'assets/images/pokeball.svg',
         width: 208,
         height: 208,
-        colorFilter:
-            ColorFilter.mode(context.appColors.primaryColor, BlendMode.srcIn),
+        colorFilter: ColorFilter.mode(
+          context.appColors.primaryColor,
+          BlendMode.srcIn,
+        ),
       ),
     );
   }

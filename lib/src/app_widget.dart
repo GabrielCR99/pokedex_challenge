@@ -16,15 +16,16 @@ final class AppWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: ScreenUtilInit(
-        builder: (_, __) => MaterialApp(
-          routes: {
-            '/': (_) => PokemonModule(),
-            '/pokemon': (_) => const PokemonDetailModule(),
-          },
-          title: 'Pokédex Challenge',
-          theme: _lightTheme,
-          locale: const Locale('en', 'US'),
-        ),
+        builder:
+            (_, __) => MaterialApp(
+              routes: {
+                '/': (_) => PokemonModule(),
+                '/pokemon': (_) => const PokemonDetailModule(),
+              },
+              title: 'Pokédex Challenge',
+              theme: _lightTheme,
+              locale: const Locale('en', 'US'),
+            ),
         designSize: const Size(360, 640),
       ),
     );

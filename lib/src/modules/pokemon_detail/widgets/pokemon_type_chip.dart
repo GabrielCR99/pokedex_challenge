@@ -20,8 +20,10 @@ final class PokemonTypeChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
         child: Text(
           type,
-          style: context.textStyles.textBold
-              .copyWith(fontSize: 10, color: context.appColors.grayscaleWhite),
+          style: context.textStyles.textBold.copyWith(
+            fontSize: 10,
+            color: context.appColors.grayscaleWhite,
+          ),
         ),
       ),
     );

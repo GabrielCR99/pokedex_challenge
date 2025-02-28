@@ -8,13 +8,7 @@ void main() {
   test('Should return a json', () {
     final json = getJsonData('src/core/fixture/fixture_reader_test.json');
 
-    expect(
-      json,
-      allOf([
-        isNotNull,
-        isNotEmpty,
-      ]),
-    );
+    expect(json, allOf([isNotNull, isNotEmpty]));
   });
 
   test('Should return Map<String, dynamic>', () {
@@ -27,13 +21,7 @@ void main() {
 
     //Assert
 
-    expect(
-      data,
-      allOf([
-        isNotNull,
-        isA<Map<String, dynamic>>(),
-      ]),
-    );
+    expect(data, allOf([isNotNull, isA<Map<String, dynamic>>()]));
 
     expect(data['id'], 1);
   });
@@ -43,8 +31,9 @@ void main() {
 
     //Act
     final data =
-        getData<List<Object?>>('src/core/fixture/fixture_reader_list_test.json')
-            .cast<Map<String, dynamic>>();
+        getData<List<Object?>>(
+          'src/core/fixture/fixture_reader_list_test.json',
+        ).cast<Map<String, dynamic>>();
 
     expect(data, isA<List<Map<String, dynamic>>>());
     expect(data.isNotEmpty, isTrue);

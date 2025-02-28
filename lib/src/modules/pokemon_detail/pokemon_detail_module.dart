@@ -14,11 +14,14 @@ final class PokemonDetailModule extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments! as Pokemon;
 
     return ChangeNotifierProvider(
-      create: (_) => PokemonDetailController(service: context.read())
-        ..fetchPokemonDetail(name),
+      create:
+          (_) =>
+              PokemonDetailController(service: context.read())
+                ..fetchPokemonDetail(name),
       lazy: true,
-      builder: (context, _) =>
-          PokemonDetailPage(pokemonDetailController: context.read()),
+      builder:
+          (context, _) =>
+              PokemonDetailPage(pokemonDetailController: context.read()),
     );
   }
 }

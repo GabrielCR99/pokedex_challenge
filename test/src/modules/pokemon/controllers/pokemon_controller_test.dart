@@ -29,16 +29,18 @@ void main() {
       setUp: () => mockService.mockFetchPokemonSuccess(),
       seed: () => state,
       act: (controller) => controller.fetchPokemon(),
-      expectedValues: () => <PokemonState>[
-        state.copyWith(status: PokemonStatus.loading),
-        state.copyWith(
-          status: PokemonStatus.loaded,
-          pokemonList: pokemonList,
-        ),
-      ],
-      verify: () =>
-          verify(() => mockService.fetchPokemon(limit: limit, offset: 0))
-              .called(1),
+      expectedValues:
+          () => <PokemonState>[
+            state.copyWith(status: PokemonStatus.loading),
+            state.copyWith(
+              status: PokemonStatus.loaded,
+              pokemonList: pokemonList,
+            ),
+          ],
+      verify:
+          () => verify(
+            () => mockService.fetchPokemon(limit: limit, offset: 0),
+          ).called(1),
     );
 
     notifierTest<PokemonController, PokemonState>(
@@ -48,16 +50,18 @@ void main() {
       setUp: () => mockService.mockFetchPokemonFailure(),
       seed: () => state,
       act: (controller) => controller.fetchPokemon(),
-      expectedValues: () => <PokemonState>[
-        state.copyWith(status: PokemonStatus.loading),
-        state.copyWith(
-          status: PokemonStatus.error,
-          errorMessage: 'Failure',
-        ),
-      ],
-      verify: () =>
-          verify(() => mockService.fetchPokemon(limit: limit, offset: offset))
-              .called(1),
+      expectedValues:
+          () => <PokemonState>[
+            state.copyWith(status: PokemonStatus.loading),
+            state.copyWith(
+              status: PokemonStatus.error,
+              errorMessage: 'Failure',
+            ),
+          ],
+      verify:
+          () => verify(
+            () => mockService.fetchPokemon(limit: limit, offset: offset),
+          ).called(1),
     );
   });
 
@@ -69,13 +73,18 @@ void main() {
       setUp: () => mockService.mockFetchPokemonSuccess(),
       seed: () => state,
       act: (controller) => controller.fetchMorePokemon(),
-      expectedValues: () => <PokemonState>[
-        state.copyWith(status: PokemonStatus.loading),
-        state.copyWith(status: PokemonStatus.loaded, pokemonList: pokemonList),
-      ],
-      verify: () =>
-          verify(() => mockService.fetchPokemon(limit: limit, offset: offset))
-              .called(1),
+      expectedValues:
+          () => <PokemonState>[
+            state.copyWith(status: PokemonStatus.loading),
+            state.copyWith(
+              status: PokemonStatus.loaded,
+              pokemonList: pokemonList,
+            ),
+          ],
+      verify:
+          () => verify(
+            () => mockService.fetchPokemon(limit: limit, offset: offset),
+          ).called(1),
     );
 
     notifierTest<PokemonController, PokemonState>(
@@ -85,16 +94,18 @@ void main() {
       setUp: () => mockService.mockFetchPokemonFailure(),
       seed: () => state,
       act: (controller) => controller.fetchMorePokemon(),
-      expectedValues: () => <PokemonState>[
-        state.copyWith(status: PokemonStatus.loading),
-        state.copyWith(
-          status: PokemonStatus.error,
-          errorMessage: 'Failure',
-        ),
-      ],
-      verify: () =>
-          verify(() => mockService.fetchPokemon(limit: limit, offset: offset))
-              .called(1),
+      expectedValues:
+          () => <PokemonState>[
+            state.copyWith(status: PokemonStatus.loading),
+            state.copyWith(
+              status: PokemonStatus.error,
+              errorMessage: 'Failure',
+            ),
+          ],
+      verify:
+          () => verify(
+            () => mockService.fetchPokemon(limit: limit, offset: offset),
+          ).called(1),
     );
   });
 
@@ -108,18 +119,19 @@ void main() {
         await controller.fetchPokemon();
         controller.filterPokemon('bulbasaur');
       },
-      expectedValues: () => <PokemonState>[
-        state.copyWith(status: PokemonStatus.loading),
-        state.copyWith(
-          status: PokemonStatus.loaded,
-          pokemonList: pokemonList,
-        ),
-        state.copyWith(
-          status: PokemonStatus.loaded,
-          pokemonList: [bulbasaur],
-          searchQuery: 'bulbasaur',
-        ),
-      ],
+      expectedValues:
+          () => <PokemonState>[
+            state.copyWith(status: PokemonStatus.loading),
+            state.copyWith(
+              status: PokemonStatus.loaded,
+              pokemonList: pokemonList,
+            ),
+            state.copyWith(
+              status: PokemonStatus.loaded,
+              pokemonList: [bulbasaur],
+              searchQuery: 'bulbasaur',
+            ),
+          ],
     );
   });
 }

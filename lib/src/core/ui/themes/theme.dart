@@ -12,7 +12,9 @@ final _lightTheme = ThemeData(
     surfaceTintColor: _lightColorScheme.onPrimary,
     iconTheme: IconThemeData(color: _lightColorScheme.primary),
     centerTitle: false,
-    titleTextStyle:
-        TextStyles.i.textBold.copyWith(fontSize: 16, color: Colors.black),
+    titleTextStyle: TextStyles.i.textBold.copyWith(
+      fontSize: 16,
+      color: Colors.black,
+    ),
   ),
 );

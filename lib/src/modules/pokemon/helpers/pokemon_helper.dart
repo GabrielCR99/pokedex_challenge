@@ -11,9 +11,9 @@ enum SortBy {
 
 List<Pokemon> sortPokemonByType(List<Pokemon> pokemonList, SortBy sortBy) =>
     switch (sortBy) {
-      SortBy.number => pokemonList
-        ..sort((a, b) => a.sanitizedId.compareTo(b.sanitizedId)),
-      SortBy.name => pokemonList..sort((a, b) => a.name.compareTo(b.name))
+      SortBy.number =>
+        pokemonList..sort((a, b) => a.sanitizedId.compareTo(b.sanitizedId)),
+      SortBy.name => pokemonList..sort((a, b) => a.name.compareTo(b.name)),
     };
 
 List<Pokemon> filterPokemonBySearchQuery(

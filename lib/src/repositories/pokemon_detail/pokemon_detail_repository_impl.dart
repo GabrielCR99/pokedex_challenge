@@ -13,8 +13,8 @@ final class PokemonDetailRepositoryImpl implements PokemonDetailRepository {
   @override
   Future<PokemonDetail> fetchPokemonDetail(String name) async {
     try {
-      final RestClientResponse(:data) =
-          await restClient.get<Map<String, dynamic>>('/pokemon/$name');
+      final RestClientResponse(:data) = await restClient
+          .get<Map<String, dynamic>>('/pokemon/$name');
 
       return PokemonDetail.fromJson(data!);
     } on RestClientException catch (e, s) {
@@ -26,13 +26,14 @@ final class PokemonDetailRepositoryImpl implements PokemonDetailRepository {
   Future<String> fetchPokemonSpecies(String name) async {
     try {
       final RestClientResponse(
-        data: {'flavor_text_entries': List<Object?> response}!
+        data: {'flavor_text_entries': List<Object?> response}!,
       ) = await restClient.get<Map<String, dynamic>>('/pokemon-species/$name');
 
-      final flavorTextEntries = response
-          .cast<Map<String, dynamic>>()
-          .where((e) => e['language']['name'] == 'en')
-          .toList();
+      final flavorTextEntries =
+          response
+              .cast<Map<String, dynamic>>()
+              .where((e) => e['language']['name'] == 'en')
+              .toList();
 
       return flavorTextEntries.isNotEmpty
           ? flavorTextEntries.first['flavor_text'] as String

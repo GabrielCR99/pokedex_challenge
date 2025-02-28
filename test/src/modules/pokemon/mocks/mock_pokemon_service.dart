@@ -11,16 +11,12 @@ const pokemonList = [
 
 final class MockPokemonService extends Mock implements PokemonService {
   void mockFetchPokemonSuccess() => when(
-        () => fetchPokemon(
-          limit: any(named: 'limit'),
-          offset: any(named: 'offset'),
-        ),
-      ).thenAnswer((_) async => pokemonList);
+    () =>
+        fetchPokemon(limit: any(named: 'limit'), offset: any(named: 'offset')),
+  ).thenAnswer((_) async => pokemonList);
 
   void mockFetchPokemonFailure() => when(
-        () => fetchPokemon(
-          limit: any(named: 'limit'),
-          offset: any(named: 'offset'),
-        ),
-      ).thenThrow(const Failure(message: 'Failure'));
+    () =>
+        fetchPokemon(limit: any(named: 'limit'), offset: any(named: 'offset')),
+  ).thenThrow(const Failure(message: 'Failure'));
 }

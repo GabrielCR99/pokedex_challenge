@@ -38,10 +38,7 @@ final class RestClientLogInterceptor extends Interceptor {
     if (request) {
       _printKV('method', method);
       _printKV('responseType', '$responseType');
-      _printKV(
-        'receiveDataWhenStatusError',
-        receiveDataWhenStatusError,
-      );
+      _printKV('receiveDataWhenStatusError', receiveDataWhenStatusError);
     }
     if (requestHeader) {
       _logger.append('headers:');

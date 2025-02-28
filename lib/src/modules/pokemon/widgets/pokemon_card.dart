@@ -34,8 +34,9 @@ final class PokemonCard extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: Text(
                   pokemon.sanitizedId,
-                  style:
-                      context.textStyles.textRegular.copyWith(fontSize: 8.sp),
+                  style: context.textStyles.textRegular.copyWith(
+                    fontSize: 8.sp,
+                  ),
                 ),
               ),
             ),

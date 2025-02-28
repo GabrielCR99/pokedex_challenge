@@ -26,16 +26,17 @@ interface class DioRestClient implements RestClient {
     BaseOptions? baseOptions,
     HttpClientAdapter? httpClientAdapter,
   }) {
-    _dio = Dio(baseOptions ?? _defaultOptions)
-      ..interceptors.addAll([
-        if (kDebugMode)
-          RestClientLogInterceptor(
-            logger: logger,
-            requestBody: true,
-            responseBody: true,
-          ),
-      ])
-      ..httpClientAdapter = httpClientAdapter ?? IOHttpClientAdapter();
+    _dio =
+        Dio(baseOptions ?? _defaultOptions)
+          ..interceptors.addAll([
+            if (kDebugMode)
+              RestClientLogInterceptor(
+                logger: logger,
+                requestBody: true,
+                responseBody: true,
+              ),
+          ])
+          ..httpClientAdapter = httpClientAdapter ?? IOHttpClientAdapter();
   }
 
   @override

@@ -1,11 +1,6 @@
 part of 'pokemon_detail_controller.dart';
 
-enum PokemonDetailStatus {
-  initial,
-  loading,
-  loaded,
-  error;
-}
+enum PokemonDetailStatus { initial, loading, loaded, error }
 
 interface class PokemonDetailState extends Equatable {
   final PokemonDetailStatus status;
@@ -21,25 +16,28 @@ interface class PokemonDetailState extends Equatable {
   });
 
   const PokemonDetailState.initial()
-      : status = PokemonDetailStatus.initial,
-        pokemonDetail = const PokemonDetail.empty(),
-        speciesDetail = null,
-        errorMessage = null;
+    : status = PokemonDetailStatus.initial,
+      pokemonDetail = const PokemonDetail.empty(),
+      speciesDetail = null,
+      errorMessage = null;
 
   PokemonDetailState copyWith({
     required PokemonDetailStatus status,
     String? errorMessage,
     PokemonDetail? pokemonDetail,
     String? speciesDetail,
-  }) =>
-      PokemonDetailState._(
-        status: status,
-        pokemonDetail: pokemonDetail ?? this.pokemonDetail,
-        errorMessage: errorMessage ?? this.errorMessage,
-        speciesDetail: speciesDetail ?? this.speciesDetail,
-      );
+  }) => PokemonDetailState._(
+    status: status,
+    pokemonDetail: pokemonDetail ?? this.pokemonDetail,
+    errorMessage: errorMessage ?? this.errorMessage,
+    speciesDetail: speciesDetail ?? this.speciesDetail,
+  );
 
   @override
-  List<Object?> get props =>
-      [status, errorMessage, pokemonDetail, speciesDetail];
+  List<Object?> get props => [
+    status,
+    errorMessage,
+    pokemonDetail,
+    speciesDetail,
+  ];
 }

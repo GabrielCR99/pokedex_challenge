@@ -50,7 +50,7 @@ final class LoadedPokemonDetail extends StatelessWidget {
                   width: 208.w,
                   height: 208.h,
                   colorFilter: ColorFilter.mode(
-                    context.appColors.grayscaleWhite.withOpacity(0.1),
+                    context.appColors.grayscaleWhite.withValues(alpha: 0.1),
                     BlendMode.srcIn,
                   ),
                 ),

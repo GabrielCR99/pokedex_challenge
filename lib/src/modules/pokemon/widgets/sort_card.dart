@@ -23,69 +23,80 @@ final class SortCard extends StatelessWidget {
         elevation: 4,
         shape: const CircleBorder(),
         child: PopupMenuButton<void>(
-          itemBuilder: (_) => [
-            PopupMenuItem(
-              enabled: false,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 24, top: 16, bottom: 16),
-                    child: Text(
-                      'Sort by:',
-                      style: context.textStyles.textBold.copyWith(
-                        color: context.appColors.grayscaleWhite,
-                        fontSize: 12.sp,
-                      ),
-                    ),
-                  ),
-                  DecoratedBox(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (final sortBy in SortBy.values)
-                          ValueListenableSelector<PokemonState, SortBy?>(
-                            valueListenable: controller,
-                            selector: (state) => switch (state.status) {
-                              PokemonStatus.loaded => state.sortBy,
-                              _ => null,
-                            },
-                            builder: (_, state, __) => _SortRadioTile(
-                              label: sortBy.value,
-                              value: sortBy,
-                              groupValue: state,
-                              onChanged: (value) => value != null
-                                  ? controller.sortPokemon(value)
-                                  : null,
-                            ),
+          itemBuilder:
+              (_) => [
+                PopupMenuItem(
+                  enabled: false,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 24,
+                          top: 16,
+                          bottom: 16,
+                        ),
+                        child: Text(
+                          'Sort by:',
+                          style: context.textStyles.textBold.copyWith(
+                            color: context.appColors.grayscaleWhite,
+                            fontSize: 12.sp,
                           ),
-                      ],
-                    ),
+                        ),
+                      ),
+                      DecoratedBox(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (final sortBy in SortBy.values)
+                              ValueListenableSelector<PokemonState, SortBy?>(
+                                valueListenable: controller,
+                                selector:
+                                    (state) => switch (state.status) {
+                                      PokemonStatus.loaded => state.sortBy,
+                                      _ => null,
+                                    },
+                                builder:
+                                    (_, state, __) => _SortRadioTile(
+                                      label: sortBy.value,
+                                      value: sortBy,
+                                      groupValue: state,
+                                      onChanged:
+                                          (value) =>
+                                              value != null
+                                                  ? controller.sortPokemon(
+                                                    value,
+                                                  )
+                                                  : null,
+                                    ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          ],
+                ),
+              ],
           tooltip: 'Sort by',
           padding: EdgeInsets.zero,
           icon: ValueListenableSelector<PokemonState, bool>(
             valueListenable: controller,
             selector: (state) => state.sortBy == SortBy.number,
-            builder: (_, sortBy, __) => SvgIcon(
-              'assets/images/icons/${sortBy ? 'tag' : 'text_format'}.svg',
-              width: 16.w,
-              height: 16.h,
-              colorFilter: ColorFilter.mode(
-                context.appColors.primaryColor,
-                BlendMode.srcIn,
-              ),
-            ),
+            builder:
+                (_, sortBy, __) => SvgIcon(
+                  'assets/images/icons/${sortBy ? 'tag' : 'text_format'}.svg',
+                  width: 16.w,
+                  height: 16.h,
+                  colorFilter: ColorFilter.mode(
+                    context.appColors.primaryColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
           ),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12)),

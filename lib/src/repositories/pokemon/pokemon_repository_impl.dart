@@ -28,9 +28,10 @@ final class PokemonRepositoryImpl implements PokemonRepository {
         () => jsonDecode(data!)['results'] as List<Object?>,
       );
 
-      final iterablePokemon = results
-          .map((e) => Pokemon(name: (e! as Map)['name'] as String))
-          .toList();
+      final iterablePokemon =
+          results
+              .map((e) => Pokemon(name: (e! as Map)['name'] as String))
+              .toList();
 
       return iterablePokemon;
     } on RestClientException catch (e, s) {

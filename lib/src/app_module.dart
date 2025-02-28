@@ -5,5 +5,5 @@ import 'modules/core/core_module.dart';
 
 final class AppModule extends MultiProvider {
   AppModule({super.key})
-      : super(providers: [CoreModule()], child: const AppWidget());
+    : super(providers: [CoreModule()], child: const AppWidget());
 }

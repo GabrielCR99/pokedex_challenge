@@ -22,78 +22,69 @@ void main() async {
     restClient = DioRestClient(logger: logger, httpClientAdapter: adapter);
   });
 
-  group(
-    'Group test get',
-    () {
-      test('should return a RestClientResponse with data', () async {
-        adapter.onGet(
-          '/users',
-          (server) => server.reply(
-            HttpStatus.ok,
-            const {'title': 'delectus aut autem'},
-            statusMessage: 'OK',
-          ),
-        );
-
-        final response = await restClient.get<Map<String, dynamic>>('/users');
-
-        expect(response.data, const {'title': 'delectus aut autem'});
-        expect(response.statusCode, HttpStatus.ok);
-        expect(response.statusMessage, 'OK');
-      });
-
-      test(
-        'should return a RestClientResponse with error',
-        () {
-          final dioException = DioException(
-            requestOptions: RequestOptions(path: '/users'),
-            response: Response<Map<String, dynamic>>(
-              data: const {'error': 'Internal Server Error'},
-              requestOptions: RequestOptions(path: '/users'),
-              statusCode: HttpStatus.internalServerError,
-              statusMessage: 'Not Found',
-            ),
-            type: DioExceptionType.badResponse,
-          );
-
-          adapter.onGet(
-            '/users',
-            (server) =>
-                server.throws(HttpStatus.internalServerError, dioException),
-          );
-
-          expect(
-            () => restClient.get<Map<String, dynamic>>('/users'),
-            throwsA(
-              isA<RestClientException>().having(
-                (e) => e.response.data,
-                'response.data',
-                const {'error': 'Internal Server Error'},
-              ),
-            ),
-          );
-          expect(
-            () => restClient.get<Map<String, dynamic>>('/users'),
-            throwsA(
-              isA<RestClientException>().having(
-                (e) => e.response.statusCode,
-                'response.statusCode',
-                HttpStatus.internalServerError,
-              ),
-            ),
-          );
-          expect(
-            () => restClient.get<Map<String, dynamic>>('/users'),
-            throwsA(
-              isA<RestClientException>().having(
-                (e) => e.response.statusMessage,
-                'response.statusMessage',
-                'Not Found',
-              ),
-            ),
-          );
-        },
+  group('Group test get', () {
+    test('should return a RestClientResponse with data', () async {
+      adapter.onGet(
+        '/users',
+        (server) => server.reply(HttpStatus.ok, const {
+          'title': 'delectus aut autem',
+        }, statusMessage: 'OK'),
       );
-    },
-  );
+
+      final response = await restClient.get<Map<String, dynamic>>('/users');
+
+      expect(response.data, const {'title': 'delectus aut autem'});
+      expect(response.statusCode, HttpStatus.ok);
+      expect(response.statusMessage, 'OK');
+    });
+
+    test('should return a RestClientResponse with error', () {
+      final dioException = DioException(
+        requestOptions: RequestOptions(path: '/users'),
+        response: Response<Map<String, dynamic>>(
+          data: const {'error': 'Internal Server Error'},
+          requestOptions: RequestOptions(path: '/users'),
+          statusCode: HttpStatus.internalServerError,
+          statusMessage: 'Not Found',
+        ),
+        type: DioExceptionType.badResponse,
+      );
+
+      adapter.onGet(
+        '/users',
+        (server) => server.throws(HttpStatus.internalServerError, dioException),
+      );
+
+      expect(
+        () => restClient.get<Map<String, dynamic>>('/users'),
+        throwsA(
+          isA<RestClientException>().having(
+            (e) => e.response.data,
+            'response.data',
+            const {'error': 'Internal Server Error'},
+          ),
+        ),
+      );
+      expect(
+        () => restClient.get<Map<String, dynamic>>('/users'),
+        throwsA(
+          isA<RestClientException>().having(
+            (e) => e.response.statusCode,
+            'response.statusCode',
+            HttpStatus.internalServerError,
+          ),
+        ),
+      );
+      expect(
+        () => restClient.get<Map<String, dynamic>>('/users'),
+        throwsA(
+          isA<RestClientException>().having(
+            (e) => e.response.statusMessage,
+            'response.statusMessage',
+            'Not Found',
+          ),
+        ),
+      );
+    });
+  });
 }

@@ -47,33 +47,43 @@ void main() {
   tearDown(() => mockController.dispose());
 
   testWidgets('pokemon detail page ...', (tester) async {
-    when(() => mockController.value)
-        .thenReturn(state.copyWith(status: PokemonDetailStatus.loading));
-    when(() => mockController.fetchPokemonDetail(pokemon.name))
-        .thenAnswer((_) async => _);
+    when(
+      () => mockController.value,
+    ).thenReturn(state.copyWith(status: PokemonDetailStatus.loading));
+    when(() => mockController.fetchPokemonDetail(pokemon.name)).thenAnswer((
+      _,
+    ) async {
+      return;
+    });
 
     await tester.pumpWidget(
       ScreenUtilInit(
-        builder: (_, __) => MultiProvider(
-          providers: [
-            Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
-            Provider<RestClient>(
-              create: (context) => DioRestClient(logger: context.read()),
-              lazy: false,
-            ),
-            ChangeNotifierProvider.value(
-              value: mockController..fetchPokemonDetail(pokemon.name),
-            ),
-          ],
-          child: MaterialApp(
-            onGenerateRoute: (_) => MaterialPageRoute(
-              builder: (context) => PokemonDetailPage(
-                pokemonDetailController: context.read(),
+        builder:
+            (_, __) => MultiProvider(
+              providers: [
+                Provider<AppLogger>(
+                  create: (_) => AppLoggerImpl(),
+                  lazy: false,
+                ),
+                Provider<RestClient>(
+                  create: (context) => DioRestClient(logger: context.read()),
+                  lazy: false,
+                ),
+                ChangeNotifierProvider.value(
+                  value: mockController..fetchPokemonDetail(pokemon.name),
+                ),
+              ],
+              child: MaterialApp(
+                onGenerateRoute:
+                    (_) => MaterialPageRoute(
+                      builder:
+                          (context) => PokemonDetailPage(
+                            pokemonDetailController: context.read(),
+                          ),
+                      settings: const RouteSettings(arguments: pokemon),
+                    ),
               ),
-              settings: const RouteSettings(arguments: pokemon),
             ),
-          ),
-        ),
         designSize: const Size(360, 640),
       ),
     );
@@ -86,30 +96,40 @@ void main() {
     when(() => mockController.value).thenReturn(
       state.copyWith(status: PokemonDetailStatus.error, errorMessage: 'error'),
     );
-    when(() => mockController.fetchPokemonDetail(pokemon.name))
-        .thenAnswer((_) async => _);
+    when(() => mockController.fetchPokemonDetail(pokemon.name)).thenAnswer((
+      _,
+    ) async {
+      return;
+    });
 
     await tester.pumpWidget(
       ScreenUtilInit(
-        builder: (_, __) => MultiProvider(
-          providers: [
-            Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
-            Provider<RestClient>(
-              create: (context) => DioRestClient(logger: context.read()),
-              lazy: false,
+        builder:
+            (_, __) => MultiProvider(
+              providers: [
+                Provider<AppLogger>(
+                  create: (_) => AppLoggerImpl(),
+                  lazy: false,
+                ),
+                Provider<RestClient>(
+                  create: (context) => DioRestClient(logger: context.read()),
+                  lazy: false,
+                ),
+                ChangeNotifierProvider.value(
+                  value: mockController..fetchPokemonDetail(pokemon.name),
+                ),
+              ],
+              child: MaterialApp(
+                onGenerateRoute:
+                    (_) => MaterialPageRoute(
+                      builder:
+                          (context) => PokemonDetailPage(
+                            pokemonDetailController: context.read(),
+                          ),
+                      settings: const RouteSettings(arguments: pokemon),
+                    ),
+              ),
             ),
-            ChangeNotifierProvider.value(
-              value: mockController..fetchPokemonDetail(pokemon.name),
-            ),
-          ],
-          child: MaterialApp(
-            onGenerateRoute: (_) => MaterialPageRoute(
-              builder: (context) =>
-                  PokemonDetailPage(pokemonDetailController: context.read()),
-              settings: const RouteSettings(arguments: pokemon),
-            ),
-          ),
-        ),
         designSize: const Size(360, 640),
       ),
     );
@@ -125,30 +145,40 @@ void main() {
         pokemonDetail: bulbasaurDetail,
       ),
     );
-    when(() => mockController.fetchPokemonDetail(pokemon.name))
-        .thenAnswer((_) async => _);
+    when(() => mockController.fetchPokemonDetail(pokemon.name)).thenAnswer((
+      _,
+    ) async {
+      return;
+    });
 
     await tester.pumpWidget(
       ScreenUtilInit(
-        builder: (_, __) => MultiProvider(
-          providers: [
-            Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
-            Provider<RestClient>(
-              create: (context) => DioRestClient(logger: context.read()),
-              lazy: false,
+        builder:
+            (_, __) => MultiProvider(
+              providers: [
+                Provider<AppLogger>(
+                  create: (_) => AppLoggerImpl(),
+                  lazy: false,
+                ),
+                Provider<RestClient>(
+                  create: (context) => DioRestClient(logger: context.read()),
+                  lazy: false,
+                ),
+                ChangeNotifierProvider.value(
+                  value: mockController..fetchPokemonDetail(pokemon.name),
+                ),
+              ],
+              child: MaterialApp(
+                onGenerateRoute:
+                    (_) => MaterialPageRoute(
+                      builder:
+                          (context) => PokemonDetailPage(
+                            pokemonDetailController: context.read(),
+                          ),
+                      settings: const RouteSettings(arguments: pokemon),
+                    ),
+              ),
             ),
-            ChangeNotifierProvider.value(
-              value: mockController..fetchPokemonDetail(pokemon.name),
-            ),
-          ],
-          child: MaterialApp(
-            onGenerateRoute: (_) => MaterialPageRoute(
-              builder: (context) =>
-                  PokemonDetailPage(pokemonDetailController: context.read()),
-              settings: const RouteSettings(arguments: pokemon),
-            ),
-          ),
-        ),
         designSize: const Size(360, 640),
       ),
     );
@@ -161,30 +191,40 @@ void main() {
     when(() => mockController.value).thenReturn(
       state.copyWith(status: PokemonDetailStatus.error, errorMessage: 'error'),
     );
-    when(() => mockController.fetchPokemonDetail(pokemon.name))
-        .thenAnswer((_) async => _);
+    when(() => mockController.fetchPokemonDetail(pokemon.name)).thenAnswer((
+      _,
+    ) async {
+      return;
+    });
 
     await tester.pumpWidget(
       ScreenUtilInit(
-        builder: (_, __) => MultiProvider(
-          providers: [
-            Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
-            Provider<RestClient>(
-              create: (context) => DioRestClient(logger: context.read()),
-              lazy: false,
+        builder:
+            (_, __) => MultiProvider(
+              providers: [
+                Provider<AppLogger>(
+                  create: (_) => AppLoggerImpl(),
+                  lazy: false,
+                ),
+                Provider<RestClient>(
+                  create: (context) => DioRestClient(logger: context.read()),
+                  lazy: false,
+                ),
+                ChangeNotifierProvider.value(
+                  value: mockController..fetchPokemonDetail(pokemon.name),
+                ),
+              ],
+              child: MaterialApp(
+                onGenerateRoute:
+                    (_) => MaterialPageRoute(
+                      builder:
+                          (context) => PokemonDetailPage(
+                            pokemonDetailController: context.read(),
+                          ),
+                      settings: const RouteSettings(arguments: pokemon),
+                    ),
+              ),
             ),
-            ChangeNotifierProvider.value(
-              value: mockController..fetchPokemonDetail(pokemon.name),
-            ),
-          ],
-          child: MaterialApp(
-            onGenerateRoute: (_) => MaterialPageRoute(
-              builder: (context) =>
-                  PokemonDetailPage(pokemonDetailController: context.read()),
-              settings: const RouteSettings(arguments: pokemon),
-            ),
-          ),
-        ),
         designSize: const Size(360, 640),
       ),
     );

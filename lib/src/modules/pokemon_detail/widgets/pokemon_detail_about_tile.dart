@@ -25,8 +25,10 @@ class PokemonDetailAboutTile extends StatelessWidget {
         children: [
           Text(
             'About',
-            style: context.textStyles.textBold
-                .copyWith(fontSize: 14.sp, color: color),
+            style: context.textStyles.textBold.copyWith(
+              fontSize: 14.sp,
+              color: color,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
@@ -47,8 +49,10 @@ class PokemonDetailAboutTile extends StatelessWidget {
           ),
           Text(
             'Base stats',
-            style: context.textStyles.textBold
-                .copyWith(fontSize: 14.sp, color: color),
+            style: context.textStyles.textBold.copyWith(
+              fontSize: 14.sp,
+              color: color,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
@@ -61,8 +65,10 @@ class PokemonDetailAboutTile extends StatelessWidget {
                     flex: 2,
                     child: Text(
                       stat.name.toUpperCase().replaceAll('-', ' '),
-                      style: context.textStyles.textBold
-                          .copyWith(fontSize: 10, color: color),
+                      style: context.textStyles.textBold.copyWith(
+                        fontSize: 10,
+                        color: color,
+                      ),
                       textAlign: TextAlign.end,
                     ),
                   ),

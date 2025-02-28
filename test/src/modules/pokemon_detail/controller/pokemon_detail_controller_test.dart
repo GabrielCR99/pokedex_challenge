@@ -25,15 +25,18 @@ void main() {
       setUp: () => mockService.mockFetchPokemonDetailSuccess(),
       seed: () => state,
       act: (controller) => controller.fetchPokemonDetail('bulbasaur'),
-      expectedValues: () => <PokemonDetailState>[
-        state.copyWith(status: PokemonDetailStatus.loading),
-        state.copyWith(
-          status: PokemonDetailStatus.loaded,
-          pokemonDetail: pokemonDetailList.first,
-        ),
-      ],
-      verify: () =>
-          verify(() => mockService.fetchPokemonDetail('bulbasaur')).called(1),
+      expectedValues:
+          () => <PokemonDetailState>[
+            state.copyWith(status: PokemonDetailStatus.loading),
+            state.copyWith(
+              status: PokemonDetailStatus.loaded,
+              pokemonDetail: pokemonDetailList.first,
+            ),
+          ],
+      verify:
+          () => verify(
+            () => mockService.fetchPokemonDetail('bulbasaur'),
+          ).called(1),
     );
 
     notifierTest<PokemonDetailController, PokemonDetailState>(
@@ -43,15 +46,18 @@ void main() {
       setUp: () => mockService.mockFetchPokemonDetailFailure(),
       seed: () => state,
       act: (controller) => controller.fetchPokemonDetail('bulbasaur'),
-      expectedValues: () => <PokemonDetailState>[
-        state.copyWith(status: PokemonDetailStatus.loading),
-        state.copyWith(
-          status: PokemonDetailStatus.error,
-          errorMessage: 'Failure',
-        ),
-      ],
-      verify: () =>
-          verify(() => mockService.fetchPokemonDetail('bulbasaur')).called(1),
+      expectedValues:
+          () => <PokemonDetailState>[
+            state.copyWith(status: PokemonDetailStatus.loading),
+            state.copyWith(
+              status: PokemonDetailStatus.error,
+              errorMessage: 'Failure',
+            ),
+          ],
+      verify:
+          () => verify(
+            () => mockService.fetchPokemonDetail('bulbasaur'),
+          ).called(1),
     );
   });
 
@@ -61,24 +67,27 @@ void main() {
       ' is called successfully',
       createController: () => controller,
       setUp: () => mockService.mockFetchNextPokemonDetailSuccess(),
-      seed: () => state.copyWith(
-        status: PokemonDetailStatus.loaded,
-        pokemonDetail: pokemonDetailList.first,
-      ),
+      seed:
+          () => state.copyWith(
+            status: PokemonDetailStatus.loaded,
+            pokemonDetail: pokemonDetailList.first,
+          ),
       act: (controller) => controller.fetchNextPokemon(),
-      expectedValues: () => <PokemonDetailState>[
-        state.copyWith(
-          status: PokemonDetailStatus.loading,
-          pokemonDetail: pokemonDetailList.first,
-        ),
-        state.copyWith(
-          status: PokemonDetailStatus.loaded,
-          pokemonDetail: pokemonDetailList[1],
-        ),
-      ],
-      verify: () =>
-          verify(() => mockService.fetchNextOrPreviousPokemonDetail(offset: 1))
-              .called(1),
+      expectedValues:
+          () => <PokemonDetailState>[
+            state.copyWith(
+              status: PokemonDetailStatus.loading,
+              pokemonDetail: pokemonDetailList.first,
+            ),
+            state.copyWith(
+              status: PokemonDetailStatus.loaded,
+              pokemonDetail: pokemonDetailList[1],
+            ),
+          ],
+      verify:
+          () => verify(
+            () => mockService.fetchNextOrPreviousPokemonDetail(offset: 1),
+          ).called(1),
     );
 
     notifierTest<PokemonDetailController, PokemonDetailState>(
@@ -86,25 +95,28 @@ void main() {
       ' is called unsuccessfully',
       createController: () => controller,
       setUp: () => mockService.mockFetchNextPokemonDetailFailure(),
-      seed: () => state.copyWith(
-        status: PokemonDetailStatus.loaded,
-        pokemonDetail: pokemonDetailList.first,
-      ),
+      seed:
+          () => state.copyWith(
+            status: PokemonDetailStatus.loaded,
+            pokemonDetail: pokemonDetailList.first,
+          ),
       act: (controller) => controller.fetchNextPokemon(),
-      expectedValues: () => <PokemonDetailState>[
-        state.copyWith(
-          status: PokemonDetailStatus.loading,
-          pokemonDetail: pokemonDetailList.first,
-        ),
-        state.copyWith(
-          status: PokemonDetailStatus.error,
-          errorMessage: 'Failure',
-          pokemonDetail: pokemonDetailList.first,
-        ),
-      ],
-      verify: () =>
-          verify(() => mockService.fetchNextOrPreviousPokemonDetail(offset: 1))
-              .called(1),
+      expectedValues:
+          () => <PokemonDetailState>[
+            state.copyWith(
+              status: PokemonDetailStatus.loading,
+              pokemonDetail: pokemonDetailList.first,
+            ),
+            state.copyWith(
+              status: PokemonDetailStatus.error,
+              errorMessage: 'Failure',
+              pokemonDetail: pokemonDetailList.first,
+            ),
+          ],
+      verify:
+          () => verify(
+            () => mockService.fetchNextOrPreviousPokemonDetail(offset: 1),
+          ).called(1),
     );
   });
 
@@ -114,24 +126,27 @@ void main() {
       'fetchPreviousPokemon is called successfully',
       createController: () => controller,
       setUp: () => mockService.mockFetchPreviousPokemonDetailSuccess(),
-      seed: () => state.copyWith(
-        status: PokemonDetailStatus.loaded,
-        pokemonDetail: pokemonDetailList[1],
-      ),
+      seed:
+          () => state.copyWith(
+            status: PokemonDetailStatus.loaded,
+            pokemonDetail: pokemonDetailList[1],
+          ),
       act: (controller) => controller.fetchPreviousPokemon(),
-      expectedValues: () => <PokemonDetailState>[
-        state.copyWith(
-          status: PokemonDetailStatus.loading,
-          pokemonDetail: pokemonDetailList[1],
-        ),
-        state.copyWith(
-          status: PokemonDetailStatus.loaded,
-          pokemonDetail: pokemonDetailList.first,
-        ),
-      ],
-      verify: () =>
-          verify(() => mockService.fetchNextOrPreviousPokemonDetail(offset: 0))
-              .called(1),
+      expectedValues:
+          () => <PokemonDetailState>[
+            state.copyWith(
+              status: PokemonDetailStatus.loading,
+              pokemonDetail: pokemonDetailList[1],
+            ),
+            state.copyWith(
+              status: PokemonDetailStatus.loaded,
+              pokemonDetail: pokemonDetailList.first,
+            ),
+          ],
+      verify:
+          () => verify(
+            () => mockService.fetchNextOrPreviousPokemonDetail(offset: 0),
+          ).called(1),
     );
 
     notifierTest<PokemonDetailController, PokemonDetailState>(
@@ -139,25 +154,28 @@ void main() {
       'fetchPreviousPokemon is called unsuccessfully',
       createController: () => controller,
       setUp: () => mockService.mockFetchPreviousPokemonDetailFailure(),
-      seed: () => state.copyWith(
-        status: PokemonDetailStatus.loaded,
-        pokemonDetail: pokemonDetailList[1],
-      ),
+      seed:
+          () => state.copyWith(
+            status: PokemonDetailStatus.loaded,
+            pokemonDetail: pokemonDetailList[1],
+          ),
       act: (controller) => controller.fetchPreviousPokemon(),
-      expectedValues: () => <PokemonDetailState>[
-        state.copyWith(
-          status: PokemonDetailStatus.loading,
-          pokemonDetail: pokemonDetailList[1],
-        ),
-        state.copyWith(
-          status: PokemonDetailStatus.error,
-          errorMessage: 'Failure',
-          pokemonDetail: pokemonDetailList[1],
-        ),
-      ],
-      verify: () =>
-          verify(() => mockService.fetchNextOrPreviousPokemonDetail(offset: 0))
-              .called(1),
+      expectedValues:
+          () => <PokemonDetailState>[
+            state.copyWith(
+              status: PokemonDetailStatus.loading,
+              pokemonDetail: pokemonDetailList[1],
+            ),
+            state.copyWith(
+              status: PokemonDetailStatus.error,
+              errorMessage: 'Failure',
+              pokemonDetail: pokemonDetailList[1],
+            ),
+          ],
+      verify:
+          () => verify(
+            () => mockService.fetchNextOrPreviousPokemonDetail(offset: 0),
+          ).called(1),
     );
   });
 }

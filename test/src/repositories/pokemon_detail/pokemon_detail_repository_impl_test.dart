@@ -65,35 +65,34 @@ void main() {
   });
 
   group('Group test fetchPokemonSpecies', () {
-    test(
-      'Should return a String with the pokemon species description',
-      () async {
-        //Arrange
-        final jsonData = getJsonData(
-          'src/repositories/pokemon_detail/fixtures/fetch_pokemon_species_success_fixture.json',
-        );
+    test('Should return a String with the pokemon species '
+        'description', () async {
+      //Arrange
+      final jsonData = getJsonData(
+        'src/repositories/pokemon_detail/fixtures/fetch_pokemon_species_success_fixture.json',
+      );
 
-        final data = jsonDecode(jsonData) as Map<String, dynamic>;
+      final data = jsonDecode(jsonData) as Map<String, dynamic>;
 
-        final mockResponse = MockResponse(data: data);
+      final mockResponse = MockResponse(data: data);
 
-        final expectedPokemonSpecies = (data['flavor_text_entries'] as List)
-            .cast<Map<String, dynamic>>()
-            .where((e) => e['language']['name'] == 'en')
-            .toList()
-            .first['flavor_text'] as String;
+      final expectedPokemonSpecies =
+          (data['flavor_text_entries'] as List)
+                  .cast<Map<String, dynamic>>()
+                  .where((e) => e['language']['name'] == 'en')
+                  .toList()
+                  .first['flavor_text']
+              as String;
 
-        mockRestClient.mockGetSuccess(mockResponse: mockResponse);
+      mockRestClient.mockGetSuccess(mockResponse: mockResponse);
 
-        //Act
-        final pokemonSpecies =
-            await repository.fetchPokemonSpecies('bulbasaur');
+      //Act
+      final pokemonSpecies = await repository.fetchPokemonSpecies('bulbasaur');
 
-        //Assert
-        expect(pokemonSpecies, isA<String>());
-        expect(pokemonSpecies, expectedPokemonSpecies);
-      },
-    );
+      //Assert
+      expect(pokemonSpecies, isA<String>());
+      expect(pokemonSpecies, expectedPokemonSpecies);
+    });
 
     test('Should throw an Error', () async {
       //Arrange

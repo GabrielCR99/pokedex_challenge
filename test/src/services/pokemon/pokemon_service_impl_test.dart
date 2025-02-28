@@ -30,8 +30,10 @@ void main() {
       pokemonDetailRepository.mockFetchPokemonDetailSuccess();
 
       // Act
-      final result =
-          await pokemonService.fetchPokemon(limit: limit, offset: offset);
+      final result = await pokemonService.fetchPokemon(
+        limit: limit,
+        offset: offset,
+      );
 
       // Assert
       expect(result, isA<List<Pokemon>>());

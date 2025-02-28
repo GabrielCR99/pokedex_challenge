@@ -8,13 +8,12 @@ final class MockRestClient extends Mock implements DioRestClient {
   void mockGetSuccess<T>({
     required MockResponse<T> mockResponse,
     Map<String, dynamic>? queryParameters,
-  }) =>
-      when(
-        () => get<T>(
-          any(),
-          queryParameters: queryParameters ?? any(named: 'queryParameters'),
-        ),
-      ).thenAnswer((_) async => mockResponse);
+  }) => when(
+    () => get<T>(
+      any(),
+      queryParameters: queryParameters ?? any(named: 'queryParameters'),
+    ),
+  ).thenAnswer((_) async => mockResponse);
 
   void mockGetException<T extends Object>({
     MockRestClientException? mockException,

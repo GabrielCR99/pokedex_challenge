@@ -42,8 +42,9 @@ void main() {
       mockPokemonDetailRepository.mockFetchPokemonSpeciesSuccess();
 
       // Act
-      final result =
-          await pokemonDetailService.fetchPokemonSpecies('bulbasaur');
+      final result = await pokemonDetailService.fetchPokemonSpecies(
+        'bulbasaur',
+      );
 
       // Assert
       expect(result, isA<String>());
@@ -60,10 +61,8 @@ void main() {
         ..mockFetchPokemonSpeciesSuccess();
 
       //Act
-      final result =
-          await pokemonDetailService.fetchNextOrPreviousPokemonDetail(
-        offset: 1,
-      );
+      final result = await pokemonDetailService
+          .fetchNextOrPreviousPokemonDetail(offset: 1);
 
       //Assert
       expect(result, isA<PokemonDetail>());

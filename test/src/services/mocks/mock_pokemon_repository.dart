@@ -10,9 +10,7 @@ const pokemonList = [
 
 final class MockPokemonRepository extends Mock implements PokemonRepository {
   void mockFetchPokemonSuccess() => when(
-        () => fetchPokemon(
-          limit: any(named: 'limit'),
-          offset: any(named: 'offset'),
-        ),
-      ).thenAnswer((_) async => pokemonList);
+    () =>
+        fetchPokemon(limit: any(named: 'limit'), offset: any(named: 'offset')),
+  ).thenAnswer((_) async => pokemonList);
 }

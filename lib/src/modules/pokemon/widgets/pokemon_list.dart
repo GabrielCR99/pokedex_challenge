@@ -57,8 +57,9 @@ final class _PokemonListState extends State<PokemonList> {
         crossAxisSpacing: 10,
         mainAxisExtent: 104,
       ),
-      itemBuilder: (_, index) =>
-          PokemonCard(pokemon: widget.pokemonList.elementAt(index)),
+      itemBuilder:
+          (_, index) =>
+              PokemonCard(pokemon: widget.pokemonList.elementAt(index)),
       itemCount: widget.pokemonList.length,
     );
   }

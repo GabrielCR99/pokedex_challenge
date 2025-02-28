@@ -1,11 +1,6 @@
 part of 'pokemon_controller.dart';
 
-enum PokemonStatus {
-  initial,
-  loading,
-  loaded,
-  error;
-}
+enum PokemonStatus { initial, loading, loaded, error }
 
 final class PokemonState extends Equatable {
   final PokemonStatus status;
@@ -25,12 +20,12 @@ final class PokemonState extends Equatable {
   });
 
   const PokemonState.initial()
-      : status = PokemonStatus.initial,
-        pokemonList = const [],
-        hasReachedMax = false,
-        searchQuery = '',
-        sortBy = SortBy.number,
-        errorMessage = null;
+    : status = PokemonStatus.initial,
+      pokemonList = const [],
+      hasReachedMax = false,
+      searchQuery = '',
+      sortBy = SortBy.number,
+      errorMessage = null;
 
   PokemonState copyWith({
     required PokemonStatus status,
@@ -39,17 +34,22 @@ final class PokemonState extends Equatable {
     String? searchQuery,
     SortBy? sortBy,
     String? errorMessage,
-  }) =>
-      PokemonState._(
-        status: status,
-        pokemonList: pokemonList ?? this.pokemonList,
-        hasReachedMax: hasReachedMax ?? this.hasReachedMax,
-        searchQuery: searchQuery ?? this.searchQuery,
-        sortBy: sortBy ?? this.sortBy,
-        errorMessage: errorMessage ?? this.errorMessage,
-      );
+  }) => PokemonState._(
+    status: status,
+    pokemonList: pokemonList ?? this.pokemonList,
+    hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+    searchQuery: searchQuery ?? this.searchQuery,
+    sortBy: sortBy ?? this.sortBy,
+    errorMessage: errorMessage ?? this.errorMessage,
+  );
 
   @override
-  List<Object?> get props =>
-      [pokemonList, hasReachedMax, searchQuery, sortBy, errorMessage, status];
+  List<Object?> get props => [
+    pokemonList,
+    hasReachedMax,
+    searchQuery,
+    sortBy,
+    errorMessage,
+    status,
+  ];
 }

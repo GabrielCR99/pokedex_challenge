@@ -12,13 +12,14 @@ Future<void> configureApp() {
 
 Future<void> _cacheAllSvgImages() async {
   final manifestJson = await rootBundle.loadString('AssetManifest.json');
-  final svgsPaths = (jsonDecode(manifestJson) as Map<String, dynamic>)
-      .keys
+  final svgsPaths = (jsonDecode(manifestJson) as Map<String, dynamic>).keys
       .where((key) => key.startsWith('assets/images/') && key.endsWith('.svg'));
 
   for (final svgPath in svgsPaths) {
     final loader = SvgAssetLoader(svgPath);
-    await svg.cache
-        .putIfAbsent(loader.cacheKey(null), () => loader.loadBytes(null));
+    await svg.cache.putIfAbsent(
+      loader.cacheKey(null),
+      () => loader.loadBytes(null),
+    );
   }
 }

@@ -26,12 +26,14 @@ void main() {
     // Detect overflow error.
     final exception = details.exception;
     if (exception is FlutterError) {
-      isOverflowError = !exception.diagnostics.any(
-        (e) => e.value.toString().startsWith('A RenderFlex overflowed by'),
-      );
-      isUnableToLoadAsset = !exception.diagnostics.any(
-        (e) => e.value.toString().startsWith('Unable to load asset'),
-      );
+      isOverflowError =
+          !exception.diagnostics.any(
+            (e) => e.value.toString().startsWith('A RenderFlex overflowed by'),
+          );
+      isUnableToLoadAsset =
+          !exception.diagnostics.any(
+            (e) => e.value.toString().startsWith('Unable to load asset'),
+          );
     }
 
     // Ignore if is overflow error.
@@ -72,23 +74,32 @@ void main() {
   tearDown(() => mockController.dispose());
 
   testWidgets('pokemon page loading test', (tester) async {
-    when(() => mockController.value)
-        .thenReturn(state.copyWith(status: PokemonStatus.loading));
-    when(mockController.fetchPokemon).thenAnswer((_) async => _);
+    when(
+      () => mockController.value,
+    ).thenReturn(state.copyWith(status: PokemonStatus.loading));
+    when(mockController.fetchPokemon).thenAnswer((_) async {
+      return;
+    });
 
     await tester.pumpWidget(
       ScreenUtilInit(
-        builder: (_, __) => MultiProvider(
-          providers: [
-            Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
-            Provider<RestClient>(
-              create: (context) => DioRestClient(logger: context.read()),
-              lazy: false,
+        builder:
+            (_, __) => MultiProvider(
+              providers: [
+                Provider<AppLogger>(
+                  create: (_) => AppLoggerImpl(),
+                  lazy: false,
+                ),
+                Provider<RestClient>(
+                  create: (context) => DioRestClient(logger: context.read()),
+                  lazy: false,
+                ),
+                ChangeNotifierProvider.value(
+                  value: mockController..fetchPokemon(),
+                ),
+              ],
+              child: MaterialApp(home: PokemonPage(controller: mockController)),
             ),
-            ChangeNotifierProvider.value(value: mockController..fetchPokemon()),
-          ],
-          child: MaterialApp(home: PokemonPage(controller: mockController)),
-        ),
         designSize: const Size(360, 640),
       ),
     );
@@ -96,26 +107,31 @@ void main() {
 
   testWidgets('pokemon page error test', (tester) async {
     when(() => mockController.value).thenReturn(
-      state.copyWith(
-        status: PokemonStatus.error,
-        errorMessage: 'Failure',
-      ),
+      state.copyWith(status: PokemonStatus.error, errorMessage: 'Failure'),
     );
-    when(mockController.fetchPokemon).thenAnswer((_) async => _);
+    when(mockController.fetchPokemon).thenAnswer((_) async {
+      return;
+    });
 
     await tester.pumpWidget(
       ScreenUtilInit(
-        builder: (_, __) => MultiProvider(
-          providers: [
-            Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
-            Provider<RestClient>(
-              create: (context) => DioRestClient(logger: context.read()),
-              lazy: false,
+        builder:
+            (_, __) => MultiProvider(
+              providers: [
+                Provider<AppLogger>(
+                  create: (_) => AppLoggerImpl(),
+                  lazy: false,
+                ),
+                Provider<RestClient>(
+                  create: (context) => DioRestClient(logger: context.read()),
+                  lazy: false,
+                ),
+                ChangeNotifierProvider.value(
+                  value: mockController..fetchPokemon(),
+                ),
+              ],
+              child: MaterialApp(home: PokemonPage(controller: mockController)),
             ),
-            ChangeNotifierProvider.value(value: mockController..fetchPokemon()),
-          ],
-          child: MaterialApp(home: PokemonPage(controller: mockController)),
-        ),
         designSize: const Size(360, 640),
       ),
     );
@@ -128,29 +144,34 @@ void main() {
     FlutterError.onError = ignoreOverflowErrors;
 
     when(() => mockController.value).thenReturn(
-      state.copyWith(
-        status: PokemonStatus.loaded,
-        pokemonList: pokemonList,
-      ),
+      state.copyWith(status: PokemonStatus.loaded, pokemonList: pokemonList),
     );
-    when(mockController.fetchPokemon).thenAnswer((_) async => _);
+    when(mockController.fetchPokemon).thenAnswer((_) async {
+      return;
+    });
 
     await mockNetworkImages(
       () => tester.pumpWidget(
         ScreenUtilInit(
-          builder: (_, __) => MultiProvider(
-            providers: [
-              Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
-              Provider<RestClient>(
-                create: (context) => DioRestClient(logger: context.read()),
-                lazy: false,
+          builder:
+              (_, __) => MultiProvider(
+                providers: [
+                  Provider<AppLogger>(
+                    create: (_) => AppLoggerImpl(),
+                    lazy: false,
+                  ),
+                  Provider<RestClient>(
+                    create: (context) => DioRestClient(logger: context.read()),
+                    lazy: false,
+                  ),
+                  ChangeNotifierProvider.value(
+                    value: mockController..fetchPokemon(),
+                  ),
+                ],
+                child: MaterialApp(
+                  home: PokemonPage(controller: mockController),
+                ),
               ),
-              ChangeNotifierProvider.value(
-                value: mockController..fetchPokemon(),
-              ),
-            ],
-            child: MaterialApp(home: PokemonPage(controller: mockController)),
-          ),
           designSize: const Size(360, 640),
         ),
       ),
@@ -164,29 +185,34 @@ void main() {
     FlutterError.onError = ignoreOverflowErrors;
 
     when(() => mockController.value).thenReturn(
-      state.copyWith(
-        status: PokemonStatus.loaded,
-        pokemonList: pokemonList,
-      ),
+      state.copyWith(status: PokemonStatus.loaded, pokemonList: pokemonList),
     );
-    when(mockController.fetchPokemon).thenAnswer((_) async => _);
+    when(mockController.fetchPokemon).thenAnswer((_) async {
+      return;
+    });
 
     await mockNetworkImages(
       () => tester.pumpWidget(
         ScreenUtilInit(
-          builder: (_, __) => MultiProvider(
-            providers: [
-              Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
-              Provider<RestClient>(
-                create: (context) => DioRestClient(logger: context.read()),
-                lazy: false,
+          builder:
+              (_, __) => MultiProvider(
+                providers: [
+                  Provider<AppLogger>(
+                    create: (_) => AppLoggerImpl(),
+                    lazy: false,
+                  ),
+                  Provider<RestClient>(
+                    create: (context) => DioRestClient(logger: context.read()),
+                    lazy: false,
+                  ),
+                  ChangeNotifierProvider.value(
+                    value: mockController..fetchPokemon(),
+                  ),
+                ],
+                child: MaterialApp(
+                  home: PokemonPage(controller: mockController),
+                ),
               ),
-              ChangeNotifierProvider.value(
-                value: mockController..fetchPokemon(),
-              ),
-            ],
-            child: MaterialApp(home: PokemonPage(controller: mockController)),
-          ),
           designSize: const Size(360, 640),
         ),
       ),

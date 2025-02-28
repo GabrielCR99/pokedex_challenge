@@ -11,8 +11,8 @@ final class PokemonDetailServiceImpl implements PokemonDetailService {
   const PokemonDetailServiceImpl({
     required PokemonDetailRepository repository,
     required PokemonRepository pokemonRepository,
-  })  : _repository = repository,
-        _pokemonRepository = pokemonRepository;
+  }) : _repository = repository,
+       _pokemonRepository = pokemonRepository;
 
   @override
   Future<PokemonDetail> fetchPokemonDetail(String name) async =>
@@ -26,15 +26,19 @@ final class PokemonDetailServiceImpl implements PokemonDetailService {
   Future<PokemonDetail> fetchNextOrPreviousPokemonDetail({
     required int offset,
   }) async {
-    final List(first: Pokemon(:name)) =
-        await _pokemonRepository.fetchPokemon(limit: 1, offset: offset);
+    final List(first: Pokemon(:name)) = await _pokemonRepository.fetchPokemon(
+      limit: 1,
+      offset: offset,
+    );
 
     return _fetchPokemonDetailFuture(name);
   }
 
   Future<PokemonDetail> _fetchPokemonDetailFuture(String name) async {
-    final [pokemonDetail as PokemonDetail, speciesDescription as String] =
-        await Future.wait([
+    final [
+      pokemonDetail as PokemonDetail,
+      speciesDescription as String,
+    ] = await Future.wait([
       _repository.fetchPokemonDetail(name),
       _repository.fetchPokemonSpecies(name),
     ]);

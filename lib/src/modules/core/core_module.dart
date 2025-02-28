@@ -15,37 +15,40 @@ import '../../services/pokemon_detail/pokemon_detail_service_impl.dart';
 
 final class CoreModule extends MultiProvider {
   CoreModule({super.key})
-      : super(
-          providers: [
-            Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
-            Provider<RestClient>(
-              create: (context) => DioRestClient(logger: context.read()),
-              lazy: false,
-            ),
-            Provider<PokemonRepository>(
-              create: (context) =>
-                  PokemonRepositoryImpl(restClient: context.read()),
-              lazy: true,
-            ),
-            Provider<PokemonDetailRepository>(
-              create: (context) =>
-                  PokemonDetailRepositoryImpl(restClient: context.read()),
-              lazy: true,
-            ),
-            Provider<PokemonService>(
-              create: (context) => PokemonServiceImpl(
-                pokemonRepository: context.read(),
-                pokemonDetailRepository: context.read(),
-              ),
-              lazy: true,
-            ),
-            Provider<PokemonDetailService>(
-              create: (context) => PokemonDetailServiceImpl(
-                repository: context.read(),
-                pokemonRepository: context.read(),
-              ),
-              lazy: true,
-            ),
-          ],
-        );
+    : super(
+        providers: [
+          Provider<AppLogger>(create: (_) => AppLoggerImpl(), lazy: false),
+          Provider<RestClient>(
+            create: (context) => DioRestClient(logger: context.read()),
+            lazy: false,
+          ),
+          Provider<PokemonRepository>(
+            create:
+                (context) => PokemonRepositoryImpl(restClient: context.read()),
+            lazy: true,
+          ),
+          Provider<PokemonDetailRepository>(
+            create:
+                (context) =>
+                    PokemonDetailRepositoryImpl(restClient: context.read()),
+            lazy: true,
+          ),
+          Provider<PokemonService>(
+            create:
+                (context) => PokemonServiceImpl(
+                  pokemonRepository: context.read(),
+                  pokemonDetailRepository: context.read(),
+                ),
+            lazy: true,
+          ),
+          Provider<PokemonDetailService>(
+            create:
+                (context) => PokemonDetailServiceImpl(
+                  repository: context.read(),
+                  pokemonRepository: context.read(),
+                ),
+            lazy: true,
+          ),
+        ],
+      );
 }

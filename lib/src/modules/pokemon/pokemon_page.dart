@@ -78,24 +78,26 @@ final class _PokemonPageState extends State<PokemonPage> {
         margin: const EdgeInsets.only(left: 4, top: 24, right: 4, bottom: 4),
         child: ValueListenableBuilder(
           valueListenable: widget.controller,
-          builder: (_, state, __) => switch (state.status) {
-            PokemonStatus.loading => const Center(
-                child:
-                    SpinningPokeballAnimation(key: Key('loading_pokemon_list')),
-              ),
-            PokemonStatus.loaded when state.pokemonList.isEmpty =>
-              const Center(child: Text('No pokémon found')),
-            PokemonStatus.loaded => PokemonList(
-                controller: widget.controller,
-                pokemonList: state.pokemonList,
-                key: const Key('loaded_pokemon_list'),
-              ),
-            PokemonStatus.error => Center(
-                key: const Key('pokemon_list_error'),
-                child: Text(state.errorMessage ?? 'Internal error'),
-              ),
-            _ => const SizedBox.shrink()
-          },
+          builder:
+              (_, state, __) => switch (state.status) {
+                PokemonStatus.loading => const Center(
+                  child: SpinningPokeballAnimation(
+                    key: Key('loading_pokemon_list'),
+                  ),
+                ),
+                PokemonStatus.loaded when state.pokemonList.isEmpty =>
+                  const Center(child: Text('No pokémon found')),
+                PokemonStatus.loaded => PokemonList(
+                  controller: widget.controller,
+                  pokemonList: state.pokemonList,
+                  key: const Key('loaded_pokemon_list'),
+                ),
+                PokemonStatus.error => Center(
+                  key: const Key('pokemon_list_error'),
+                  child: Text(state.errorMessage ?? 'Internal error'),
+                ),
+                _ => const SizedBox.shrink(),
+              },
         ),
       ),
       backgroundColor: context.appColors.primaryColor,

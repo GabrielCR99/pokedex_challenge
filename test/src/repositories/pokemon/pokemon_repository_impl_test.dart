@@ -38,16 +38,19 @@ void main() {
 
       final mockResponse = MockResponse(data: jsonData);
 
-      final expectedPokemon = (data['results'] as List<Object?>)
-          .cast<Map<String, dynamic>>()
-          .map(Pokemon.fromJson)
-          .toList();
+      final expectedPokemon =
+          (data['results'] as List<Object?>)
+              .cast<Map<String, dynamic>>()
+              .map(Pokemon.fromJson)
+              .toList();
 
       mockRestClient.mockGetSuccess<String>(mockResponse: mockResponse);
 
       //Act
-      final pokemon =
-          await repository.fetchPokemon(limit: limit, offset: offset);
+      final pokemon = await repository.fetchPokemon(
+        limit: limit,
+        offset: offset,
+      );
 
       //Assert
       expect(pokemon, isA<List<Pokemon>>());

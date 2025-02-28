@@ -9,10 +9,10 @@ final class PokemonStat extends Equatable {
   const PokemonStat({required this.name, required this.value});
 
   factory PokemonStat.fromMap(Map<String, dynamic> json) => switch (json) {
-        {'stat': {'name': final String name}, 'base_stat': final int value} =>
-          PokemonStat(name: name, value: value),
-        _ => throw const FormatException('Invalid PokemonStat JSON'),
-      };
+    {'stat': {'name': final String name}, 'base_stat': final int value} =>
+      PokemonStat(name: name, value: value),
+    _ => throw const FormatException('Invalid PokemonStat JSON'),
+  };
 
   @override
   List<Object?> get props => [name, value];

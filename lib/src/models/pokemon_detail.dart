@@ -19,15 +19,15 @@ final class PokemonDetail extends Equatable {
   });
 
   const PokemonDetail.empty()
-      : id = 0,
-        height = 0,
-        weight = 0,
-        imageUrl = '',
-        abilities = const [],
-        stats = const [],
-        types = const [],
-        name = '',
-        speciesDescription = '';
+    : id = 0,
+      height = 0,
+      weight = 0,
+      imageUrl = '',
+      abilities = const [],
+      stats = const [],
+      types = const [],
+      name = '',
+      speciesDescription = '';
 
   final int id;
   final double height;
@@ -47,63 +47,60 @@ final class PokemonDetail extends Equatable {
       .replaceAll('\r', ' ');
 
   PokemonDetail copyWith({required String speciesDescription}) => PokemonDetail(
-        id: id,
-        height: height,
-        weight: weight,
-        imageUrl: imageUrl,
-        abilities: abilities,
-        stats: stats,
-        types: types,
-        name: name,
-        speciesDescription: speciesDescription,
-      );
+    id: id,
+    height: height,
+    weight: weight,
+    imageUrl: imageUrl,
+    abilities: abilities,
+    stats: stats,
+    types: types,
+    name: name,
+    speciesDescription: speciesDescription,
+  );
 
   factory PokemonDetail.fromJson(Map<String, dynamic> map) => switch (map) {
-        {
-          'abilities': final List<Object?> abilities,
-          'stats': final List<Object?> stats,
-          'types': final List<Object?> types,
-          'name': final String name,
-          'id': final int id,
-          'height': final num height,
-          'weight': final num weight,
-          'sprites': {
-            'other': {
-              'official-artwork': {'front_default': final String imageUrl}
-            }
-          },
-        } =>
-          PokemonDetail(
-            id: id,
-            height: height.toDouble(),
-            weight: weight.toDouble(),
-            imageUrl: imageUrl,
-            abilities: abilities
-                .cast<Map<String, dynamic>>()
-                .map((e) => (e['ability'] as Map)['name'] as String)
-                .map(
-                  (e) =>
-                      e[0].toUpperCase() + e.substring(1).replaceAll('-', ' '),
-                ),
-            stats: stats.cast<Map<String, dynamic>>().map(PokemonStat.fromMap),
-            types: types
-                .cast<Map<String, dynamic>>()
-                .map((e) => PokemonType.parse(e['type']['name'] as String)),
-            name: name,
-          ),
-        _ => throw FormatException('Invalid PokemonDetail JSON: $map'),
-      };
+    {
+      'abilities': final List<Object?> abilities,
+      'stats': final List<Object?> stats,
+      'types': final List<Object?> types,
+      'name': final String name,
+      'id': final int id,
+      'height': final num height,
+      'weight': final num weight,
+      'sprites': {
+        'other': {'official-artwork': {'front_default': final String imageUrl}},
+      },
+    } =>
+      PokemonDetail(
+        id: id,
+        height: height.toDouble(),
+        weight: weight.toDouble(),
+        imageUrl: imageUrl,
+        abilities: abilities
+            .cast<Map<String, dynamic>>()
+            .map((e) => (e['ability'] as Map)['name'] as String)
+            .map(
+              (e) => e[0].toUpperCase() + e.substring(1).replaceAll('-', ' '),
+            ),
+        stats: stats.cast<Map<String, dynamic>>().map(PokemonStat.fromMap),
+        types: types.cast<Map<String, dynamic>>().map(
+          (e) => PokemonType.parse(e['type']['name'] as String),
+        ),
+        name: name,
+      ),
+    _ => throw FormatException('Invalid PokemonDetail JSON: $map'),
+  };
 
   @override
   List<Object?> get props => [
-        id,
-        height,
-        weight,
-        imageUrl,
-        speciesDescription,
-        abilities,
-        stats,
-        name,
-        types,
-      ];
+    id,
+    height,
+    weight,
+    imageUrl,
+    speciesDescription,
+    abilities,
+    stats,
+    name,
+    types,
+  ];
 }

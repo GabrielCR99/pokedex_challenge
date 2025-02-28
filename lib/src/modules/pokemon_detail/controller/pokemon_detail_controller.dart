@@ -12,8 +12,8 @@ const _bulbasaurId = 1;
 interface class PokemonDetailController
     extends ValueNotifier<PokemonDetailState> {
   PokemonDetailController({required PokemonDetailService service})
-      : _service = service,
-        super(const PokemonDetailState.initial());
+    : _service = service,
+      super(const PokemonDetailState.initial());
 
   final PokemonDetailService _service;
 

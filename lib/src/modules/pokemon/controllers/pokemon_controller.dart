@@ -12,8 +12,8 @@ const _limit = 20;
 
 interface class PokemonController extends ValueNotifier<PokemonState> {
   PokemonController({required PokemonService service})
-      : _service = service,
-        super(const PokemonState.initial());
+    : _service = service,
+      super(const PokemonState.initial());
 
   final PokemonService _service;
   var _filteredPokemon = const <Pokemon>[];
@@ -54,8 +54,10 @@ interface class PokemonController extends ValueNotifier<PokemonState> {
 
       value = value.copyWith(
         status: PokemonStatus.loaded,
-        pokemonList:
-            filterPokemonBySearchQuery(_filteredPokemon, value.searchQuery),
+        pokemonList: filterPokemonBySearchQuery(
+          _filteredPokemon,
+          value.searchQuery,
+        ),
         searchQuery: value.searchQuery,
         sortBy: value.sortBy,
         hasReachedMax: _filteredPokemon.length >= 1010,
@@ -72,14 +74,16 @@ interface class PokemonController extends ValueNotifier<PokemonState> {
     }
   }
 
-  void filterPokemon(String searchQuery) => value = value.copyWith(
+  void filterPokemon(String searchQuery) =>
+      value = value.copyWith(
         status: PokemonStatus.loaded,
         pokemonList: filterPokemonBySearchQuery(_filteredPokemon, searchQuery),
         searchQuery: searchQuery,
         sortBy: value.sortBy,
       );
 
-  void sortPokemon(SortBy sortBy) => value = value.copyWith(
+  void sortPokemon(SortBy sortBy) =>
+      value = value.copyWith(
         status: PokemonStatus.loaded,
         pokemonList: filterPokemonBySearchQuery(
           _filteredPokemon = sortPokemonByType(_filteredPokemon, sortBy),

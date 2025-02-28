@@ -18,21 +18,23 @@ final class PokemonDetailPage extends StatelessWidget {
 
     return ValueListenableBuilder<PokemonDetailState>(
       valueListenable: pokemonDetailController,
-      builder: (_, state, __) => switch (state.status) {
-        PokemonDetailStatus.loading =>
-          const LoadingPokemonDetail(key: Key('loading_pokemon_detail')),
-        PokemonDetailStatus.error => PokemonDetailError(
-            onRetry: () => pokemonDetailController.fetchPokemonDetail(name),
-            errorMessage: state.errorMessage,
-            key: const Key('pokemon_detail_error'),
-          ),
-        PokemonDetailStatus.loaded => LoadedPokemonDetail(
-            pokemonDetailController: pokemonDetailController,
-            pokemonDetail: state.pokemonDetail,
-            key: const Key('loaded_pokemon_detail'),
-          ),
-        _ => const SizedBox.shrink()
-      },
+      builder:
+          (_, state, __) => switch (state.status) {
+            PokemonDetailStatus.loading => const LoadingPokemonDetail(
+              key: Key('loading_pokemon_detail'),
+            ),
+            PokemonDetailStatus.error => PokemonDetailError(
+              onRetry: () => pokemonDetailController.fetchPokemonDetail(name),
+              errorMessage: state.errorMessage,
+              key: const Key('pokemon_detail_error'),
+            ),
+            PokemonDetailStatus.loaded => LoadedPokemonDetail(
+              pokemonDetailController: pokemonDetailController,
+              pokemonDetail: state.pokemonDetail,
+              key: const Key('loaded_pokemon_detail'),
+            ),
+            _ => const SizedBox.shrink(),
+          },
     );
   }
 }
