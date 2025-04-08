@@ -9,7 +9,6 @@ import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/shared/data/rest
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/shared/data/rest_client/rest_client.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon_detail.dart';
-import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon_stat.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon_type.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detail/controller/pokemon_detail_controller.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/modules/pokemon_detail/pokemon_detail_page.dart';
@@ -30,7 +29,7 @@ void main() {
     imageUrl:
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
     abilities: ['overgrow', 'chlorophyll'],
-    stats: [PokemonStat(name: 'hp', value: 45)],
+    stats: [(name: 'hp', value: 45)],
     types: [PokemonType.grass, PokemonType.poison],
     name: 'bulbasaur',
   );

@@ -1,3 +1,4 @@
+import '../../adapters/pokemon_detail_adapter.dart';
 import '../../core/exceptions/failure.dart';
 import '../../core/shared/data/rest_client/rest_client.dart';
 import '../../core/shared/data/rest_client/rest_client_exception.dart';
@@ -16,7 +17,7 @@ final class PokemonDetailRepositoryImpl implements PokemonDetailRepository {
       final RestClientResponse(:data) = await restClient
           .get<Map<String, dynamic>>('/pokemon/$name');
 
-      return PokemonDetail.fromJson(data!);
+      return PokemonDetailAdapter.fromJson(data!);
     } on RestClientException catch (e, s) {
       Error.throwWithStackTrace(Failure(message: e.message), s);
     }

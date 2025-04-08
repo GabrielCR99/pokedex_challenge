@@ -17,7 +17,7 @@ final class AppWidget extends StatelessWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: ScreenUtilInit(
         builder:
-            (_, __) => MaterialApp(
+            (_, _) => MaterialApp(
               routes: {
                 '/': (_) => PokemonModule(),
                 '/pokemon': (_) => const PokemonDetailModule(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../adapters/pokemon_detail_adapter.dart';
 import '../../../core/ui/extensions/screen_size_extension.dart';
 import '../../../core/ui/styles/app_colors.dart';
 import '../../../core/ui/styles/text_styles.dart';
@@ -14,11 +15,11 @@ class PokemonDetailAboutTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PokemonDetail(
-      types: Iterable<PokemonType>(first: PokemonType(:color)),
+    final PokemonDetailAdapter(
+      types: Iterable(first: PokemonType(:color)),
       :stats,
       :sanitizedDescription,
-    ) = pokemonDetail;
+    ) = pokemonDetail as PokemonDetailAdapter;
 
     return Expanded(
       child: ListView(

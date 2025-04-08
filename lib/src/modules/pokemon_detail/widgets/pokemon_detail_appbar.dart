@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../adapters/pokemon_detail_adapter.dart';
 import '../../../core/ui/extensions/navigator_extension.dart';
 import '../../../core/ui/extensions/screen_size_extension.dart';
 import '../../../core/ui/styles/app_colors.dart';
@@ -14,7 +15,8 @@ final class PokemonDetailAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PokemonDetail(:sanitzedName, :sanitizedId) = pokemon;
+    final PokemonDetailAdapter(:sanitzedName, :sanitizedId) =
+        pokemon as PokemonDetailAdapter;
 
     return Positioned(
       left: 0,

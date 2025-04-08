@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:mocktail/mocktail.dart';
+import 'package:snapfi_mobile_challenge_pokedex_roveri/src/adapters/pokemon_detail_adapter.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/exceptions/failure.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/core/shared/data/rest_client/rest_client_response.dart';
 import 'package:snapfi_mobile_challenge_pokedex_roveri/src/models/pokemon_detail.dart';
@@ -24,6 +25,11 @@ void main() {
     repository = PokemonDetailRepositoryImpl(restClient: mockRestClient);
   });
 
+  tearDown(() {
+    reset(mockRestClient);
+    reset(mockException);
+  });
+
   group('Group test fetchPokemonDetail', () {
     test('Should return a PokemonDetail', () async {
       //Arrange
@@ -35,7 +41,7 @@ void main() {
 
       final mockResponse = MockResponse(data: data);
 
-      final expectedPokemonDetail = PokemonDetail.fromJson(data);
+      final expectedPokemonDetail = PokemonDetailAdapter.fromJson(data);
 
       mockRestClient.mockGetSuccess(mockResponse: mockResponse);
 
