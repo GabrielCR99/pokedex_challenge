@@ -95,3 +95,6 @@ app.*.map.json
 
 # FVM
 .fvm/
+
+# Coverage
+coverage/
